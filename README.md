@@ -1,26 +1,27 @@
 # aeplots
 Package to create tables and plots for analysing adverse event data in clinical trials
 
+## Sample dataset used to produce table to summarise AEs
 <table style="width: 587px;" border="1" cellspacing="0" cellpadding="0">
 <tbody>
 <tr>
 <td valign="top" width="151">
-<p>adverse_event</p>
+<p><strong>adverse_event</strong></p>
 </td>
 <td valign="top" nowrap="nowrap" width="132">
-<p>body_system_class</p>
+<p><strong>body_system_class</strong></p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>id</p>
+<p><strong>id</strong></p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>arm</p>
+<p><strong>arm</strong></p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
-<p>date_rand</p>
+<p><strong>date_rand</strong></p>
 </td>
 <td valign="top" nowrap="nowrap" width="95">
-<p>last_visit</p>
+<p><strong>last_visit</strong></p>
 </td>
 </tr>
 <tr>
@@ -426,6 +427,8 @@ Package to create tables and plots for analysing adverse event data in clinical 
 </tbody>
 </table>
 <p>&nbsp;</p>
+
+## Variable description for sample dataset
 <table border="1" cellspacing="0" cellpadding="0">
 <tbody>
 <tr>
