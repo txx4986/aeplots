@@ -125,5 +125,6 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
     bg(part="header", bg="gray80") %>%
     bg(part="body", bg="white")
 
+  return(Table1)
   plot(Table1_print)
 }
