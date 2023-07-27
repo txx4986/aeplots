@@ -16,3 +16,7 @@ Imports:
   tidyverse,
   flextable,
   common
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
