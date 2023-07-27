@@ -6,33 +6,33 @@
 #' @param arm Name of arm column
 #' @param date_rand Name of date_rand column
 #' @param last_visit Name of last_visit column
-#' 
+#'
 #' @return Flextable of AE summary by body system class
-#' 
+#'
 #' @import dplyr
 #' @import tidyr
 #' @import tidyverse
 #' @import flextable
 #' @import common
-#' 
+#'
 #' @export
 aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand", last_visit = "last_visit"){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand, "last_visit" = last_visit)
-  
+
   # checks if the variable type for each column is correct
   stopifnot(is.factor(dataset[["body_system_class"]]))
-  stopifnot(is.numeric(dataset[["id"]]))
+  stopifnot(is.numeric(dataset[["id"]]) | is.factor(dataset[["id"]]))
   stopifnot(is.factor(dataset[["arm"]]))
   stopifnot(is.Date(dataset[["date_rand"]]))
   stopifnot(is.Date(dataset[["last_visit"]]))
-  
+
   # number of participants at risk per arm
   N1 <- length(unique((dataset %>% filter(arm=="I"))$id))
   N2 <- length(unique((dataset %>% filter(arm=="C"))$id))
-  
-  Table1 <- dataset %>% 
+
+  Table1 <- dataset %>%
     # follow up time is computed as difference between randomisation date and last visit date (units=weeks)
     mutate(follow_up_time = as.numeric(difftime(last_visit, date_rand, units="weeks"))) %>%
     group_by(body_system_class, id, arm, follow_up_time) %>%
@@ -85,14 +85,14 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       -c(Total_Time_Intervention, SD_Intervention, Total_Time_Control, SD_Control, IR_Intervention,
          Proportions_Intervention, IR_Control, Proportions_Control)
     )
-  
+
   # to produce nice table
   name1 <- "N" %p% subsc("1")
   name2 <- "N" %p% subsc("2")
   border <- fp_border_default(width=1.5)
-    
+
   Table1_print <- Table1 %>%
-    flextable() %>% 
+    flextable() %>%
     add_header(
       values = c(Frequency_Intervention="At least one event",
                  Events_Intervention="Number of events",
@@ -102,22 +102,22 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                  Mean_Control="Number of events")) %>%
     add_header_row(
       values=c("", str_glue("Intervention ({name1}={N1})"), str_glue("Control ({name2}={N2})")),
-      colwidths = c(1, 3, 3)) %>% 
+      colwidths = c(1, 3, 3)) %>%
     set_header_labels(
       body_system_class="Body system class", Frequency_Intervention="N (%)", Events_Intervention="n (IR)",
       Mean_Intervention="Mean number of events per participant (SD)", Frequency_Control="N (%)",
-      Events_Control="n (IR)", Mean_Control="Mean number of events per participant (SD)") %>% 
-    merge_h(part="header") %>% 
-    flextable::align(align="center", j = c(2:7), part="all") %>% 
-    autofit() %>% 
-    width(j=c(2, 3, 5, 6), width=2) %>% 
-    vline(j=c(1, 4), border=border, part="all") %>% 
-    vline(i=c(2, 3), j=c(2, 5), border=border, part="header") %>% 
-    vline(i=3, j=c(3, 6), border=border, part="header") %>% 
-    vline(j=c(2, 3, 5, 6), border=border, part="body") %>% 
-    bold(i=1, bold=TRUE, part="header") %>% 
-    bg(part="header", bg="gray80") %>% 
+      Events_Control="n (IR)", Mean_Control="Mean number of events per participant (SD)") %>%
+    merge_h(part="header") %>%
+    flextable::align(align="center", j = c(2:7), part="all") %>%
+    autofit() %>%
+    width(j=c(2, 3, 5, 6), width=2) %>%
+    vline(j=c(1, 4), border=border, part="all") %>%
+    vline(i=c(2, 3), j=c(2, 5), border=border, part="header") %>%
+    vline(i=3, j=c(3, 6), border=border, part="header") %>%
+    vline(j=c(2, 3, 5, 6), border=border, part="body") %>%
+    bold(i=1, bold=TRUE, part="header") %>%
+    bg(part="header", bg="gray80") %>%
     bg(part="body", bg="white")
-  
+
   plot(Table1_print)
 }
