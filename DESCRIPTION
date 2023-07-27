@@ -2,7 +2,7 @@ Package: aeplots
 Type: Package
 Title: Create Tables and Plots for Analysing Adverse Event Data in Clinical Trials
 Version: 0.1.0
-Authors@R: person("Xiao Xuan", "Tan", email="txx4986@gmail.com", rold=c("aut", "cre")) 
+Authors@R: person("Xiao Xuan", "Tan", email="txx4986@gmail.com", role=c("aut", "cre")) 
 Description: You provide the data, tell 'aeplots' to plot summary tables, dot plots, bar charts etc.
     Use four spaces when indenting paragraphs within the Description.
 License: use_gpl3_license()
