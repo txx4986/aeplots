@@ -126,5 +126,5 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
     bg(part="body", bg="white")
 
   return(Table1)
-  plot(Table1_print)
+  print(plot(Table1_print))
 }
