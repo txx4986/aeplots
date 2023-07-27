@@ -32,3 +32,6 @@ Flextable of AE summary by body system class
 \description{
 Table of AE summary by body system class
 }
+\examples{
+aetable(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm", date_rand="randomisation_date", last_visit="date_of_last_visit")
+}

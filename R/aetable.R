@@ -16,6 +16,9 @@
 #' @import common
 #'
 #' @export
+#'
+#' @examples
+#' aetable(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm", date_rand="randomisation_date", last_visit="date_of_last_visit")
 aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand", last_visit = "last_visit"){
   # change the column names
   dataset <- data %>%
