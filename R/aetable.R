@@ -19,17 +19,18 @@
 #'
 #' @examples
 #' aetable(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm", date_rand="randomisation_date", last_visit="date_of_last_visit")
-aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand", last_visit = "last_visit"){
+aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand",
+                    last_visit = "last_visit"){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand, "last_visit" = last_visit)
 
   # checks if the variable type for each column is correct
-  stopifnot(is.factor(dataset[["body_system_class"]]))
-  stopifnot(is.numeric(dataset[["id"]]) | is.factor(dataset[["id"]]))
-  stopifnot(is.factor(dataset[["arm"]]))
-  stopifnot(is.Date(dataset[["date_rand"]]))
-  stopifnot(is.Date(dataset[["last_visit"]]))
+  stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
+  stopifnot("id variable type is not numeric or factor!" = is.numeric(dataset[["id"]]) | is.factor(dataset[["id"]]))
+  stopifnot("arm variable type is not factor!" = is.factor(dataset[["arm"]]))
+  stopifnot("date_rand variable type is not Date!" = is.Date(dataset[["date_rand"]]))
+  stopifnot("last_visit variable type is not Date!" = is.Date(dataset[["last_visit"]]))
 
   # number of participants at risk per arm
   N1 <- length(unique((dataset %>% filter(arm=="I"))$id))
