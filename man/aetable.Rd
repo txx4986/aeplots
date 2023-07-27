@@ -10,7 +10,9 @@ aetable(
   id = "id",
   arm = "arm",
   date_rand = "date_rand",
-  last_visit = "last_visit"
+  last_visit = "last_visit",
+  intervention_name = "Intervention",
+  control_name = "Control"
 )
 }
 \arguments{
@@ -25,6 +27,10 @@ aetable(
 \item{date_rand}{Name of date_rand column}
 
 \item{last_visit}{Name of last_visit column}
+
+\item{intervention_name}{Name of intervention}
+
+\item{control_name}{Name of control}
 }
 \value{
 Flextable of AE summary by body system class

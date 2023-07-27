@@ -6,6 +6,8 @@
 #' @param arm Name of arm column
 #' @param date_rand Name of date_rand column
 #' @param last_visit Name of last_visit column
+#' @param intervention_name Name of intervention
+#' @param control_name Name of control
 #'
 #' @return Flextable of AE summary by body system class
 #'
@@ -20,7 +22,7 @@
 #' @examples
 #' aetable(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm", date_rand="randomisation_date", last_visit="date_of_last_visit")
 aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand",
-                    last_visit = "last_visit"){
+                    last_visit = "last_visit", intervention_name="Intervention", control_name="Control"){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand, "last_visit" = last_visit)
@@ -105,7 +107,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                  Events_Control="Number of events",
                  Mean_Control="Number of events")) %>%
     add_header_row(
-      values=c("", str_glue("Intervention ({name1}={N1})"), str_glue("Control ({name2}={N2})")),
+      values=c("", str_glue("{intervention_name} ({name1}={N1})"), str_glue("{control_name} ({name2}={N2})")),
       colwidths = c(1, 3, 3)) %>%
     set_header_labels(
       body_system_class="Body system class", Frequency_Intervention="N (%)", Events_Intervention="n (IR)",
