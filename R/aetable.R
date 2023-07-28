@@ -136,6 +136,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:7), part="all") %>%
       autofit() %>%
+      width(j=c(2, 3, 5, 6), width=2) %>%
       vline(j=c(1, 4), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5), border=border, part="header") %>%
       vline(i=3, j=c(3, 6), border=border, part="header") %>%
@@ -145,7 +146,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       bg(part="body", bg="white")
   } else if (arm_number==3){
     Table1_print <- Table1 %>%
-      select(Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_C, Events_C, Mean_C) %>%
+      select(body_system_class,Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_C,
+             Events_C, Mean_C) %>%
       flextable() %>%
       add_header(
         values = c(Frequency_I1="At least one event",
@@ -169,6 +171,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:10), part="all") %>%
       autofit() %>%
+      width(j=c(2, 3, 5, 6, 8, 9), width=2) %>%
       vline(j=c(1, 4, 7), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5, 8), border=border, part="header") %>%
       vline(i=3, j=c(3, 6, 9), border=border, part="header") %>%
@@ -178,8 +181,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       bg(part="body", bg="white")
   } else {
     Table1_print <- Table1 %>%
-      select(Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_I3, Events_I3, Mean_I3,
-             Frequency_C, Events_C, Mean_C) %>%
+      select(body_system_class, Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_I3,
+             Events_I3, Mean_I3, Frequency_C, Events_C, Mean_C) %>%
       flextable() %>%
       add_header(
         values = c(Frequency_I1="At least one event",
@@ -207,6 +210,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:13), part="all") %>%
       autofit() %>%
+      width(j=c(2, 3, 5, 6, 8, 9, 11, 12), width=2) %>%
       vline(j=c(1, 4, 7, 10), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5, 8, 11), border=border, part="header") %>%
       vline(i=3, j=c(3, 6, 9, 12), border=border, part="header") %>%
