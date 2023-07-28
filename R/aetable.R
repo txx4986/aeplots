@@ -56,12 +56,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   # number of participants at risk per arm
   N0 <- length(unique((dataset %>% filter(arm=="C"))$id))
   N1 <- length(unique((dataset %>% filter(arm=="I1"))$id))
-  if (arm_number==3 | 4){
-    N2 <- length(unique((dataset %>% filter(arm=="I2"))$id))
-  }
-  if (arm_number==4){
-    N3 <- length(unique((dataset %>% filter(arm=="I3"))$id))
-  }
+  N2 <- length(unique((dataset %>% filter(arm=="I2"))$id))
+  N3 <- length(unique((dataset %>% filter(arm=="I3"))$id))
 
   Table1 <- dataset %>%
     # follow up time is computed as difference between randomisation date and last visit date (units=weeks)
