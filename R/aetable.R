@@ -91,7 +91,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
         case_when(arm=="C" ~ scales::percent(Frequency / N0, 0.1),
                   arm=="I1" ~ scales::percent(Frequency / N1, 0.1),
                   arm=="I2" ~ scales::percent(Frequency / N2, 0.1),
-                  arm=="I3" ~ scaless::percent(Frequency) / N3, 0.1)) %>%
+                  arm=="I3" ~ scaless::percent(Frequency / N3, 0.1))) %>%
     mutate(
       # one decimal place for mean and SD
       across(c(Mean, SD), \(x) format(x, nsmall=1))) %>%
