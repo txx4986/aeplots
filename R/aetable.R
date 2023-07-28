@@ -52,7 +52,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                   arm_number==3 ~ recode_factor(arm, control="C", intervention1="I1", intervention2="I2"),
                   arm_number==4 ~ recode_factor(arm, control="C", intervention1="I1", intervention2="I2",
                                                 intervention3="I3")))
-  print(dataset)
+  print(arm_number)
   # # number of participants at risk per arm
   # N0 <- length(unique((dataset %>% filter(arm=="C"))$id))
   # N1 <- length(unique((dataset %>% filter(arm=="I1"))$id))
