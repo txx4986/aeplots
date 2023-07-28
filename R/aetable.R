@@ -57,7 +57,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   dataset$arm[which(dataset$arm==intervention1)] <- "I1"
   dataset$arm[which(dataset$arm==intervention2)] <- "I2"
   dataset$arm[which(dataset$arm==intervention3)] <- "I3"
-  dataset$arm <- as.factor(dataset$arm, levels=c("I1", "I2", "I3", "C"))
+  dataset$arm <- as.factor(dataset$arm)
 
   # number of participants at risk per arm
   N0 <- length(unique((dataset %>% filter(arm=="C"))$id))
@@ -114,6 +114,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   border <- fp_border_default(width=1.5)
 
   Table1_print <- Table1 %>%
+    relocate(Frequency_I1, .before = Frequency_C) %>%
     relocate(Events_I1, Mean_I1, .after = Frequency_I1) %>%
     flextable() %>%
     add_header(
