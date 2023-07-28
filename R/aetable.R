@@ -57,7 +57,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   dataset$arm[which(dataset$arm==intervention1)] <- "I1"
   dataset$arm[which(dataset$arm==intervention2)] <- "I2"
   dataset$arm[which(dataset$arm==intervention3)] <- "I3"
-  dataset$arm <- as.factor(dataset$arm)
+  dataset$arm <- as.factor(dataset$arm, levels=c("I1", "I2", "I3", "C"))
 
   # number of participants at risk per arm
   N0 <- length(unique((dataset %>% filter(arm=="C"))$id))
