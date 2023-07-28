@@ -139,7 +139,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:7), part="all") %>%
       autofit() %>%
-      width(j=1, width=1.5) %>%
+      width(j=1, width=1.1) %>%
       width(j=c(2:7), width=0.75) %>%
       vline(j=c(1, 4), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5), border=border, part="header") %>%
@@ -176,7 +176,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:10), part="all") %>%
       autofit() %>%
-      width(j=1, width=1.5) %>%
+      width(j=1, width=1.1) %>%
       width(j=c(2:10), width=0.75) %>%
       vline(j=c(1, 4, 7), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5, 8), border=border, part="header") %>%
@@ -217,7 +217,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:13), part="all") %>%
       autofit() %>%
-      width(j=1, width=1.5) %>%
+      width(j=1, width=1.1) %>%
       width(j=c(2:13), width=0.75) %>%
       vline(j=c(1, 4, 7, 10), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5, 8, 11), border=border, part="header") %>%
