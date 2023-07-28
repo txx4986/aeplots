@@ -136,14 +136,16 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:7), part="all") %>%
       autofit() %>%
-      width(j=c(2, 3, 5, 6), width=2) %>%
+      width(j=1, width=3) %>%
+      width(j=c(2:7), width=2) %>%
       vline(j=c(1, 4), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5), border=border, part="header") %>%
       vline(i=3, j=c(3, 6), border=border, part="header") %>%
       vline(j=c(2, 3, 5, 6), border=border, part="body") %>%
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
-      bg(part="body", bg="white")
+      bg(part="body", bg="white") %>%
+      fontsize(size=16, part="all")
   } else if (arm_number==3){
     Table1_print <- Table1 %>%
       select(body_system_class,Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_C,
@@ -171,14 +173,16 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:10), part="all") %>%
       autofit() %>%
-      width(j=c(2, 3, 5, 6, 8, 9), width=2) %>%
+      width(j=1, width=3) %>%
+      width(j=c(2:10), width=2) %>%
       vline(j=c(1, 4, 7), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5, 8), border=border, part="header") %>%
       vline(i=3, j=c(3, 6, 9), border=border, part="header") %>%
       vline(j=c(2, 3, 5, 6, 8, 9), border=border, part="body") %>%
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
-      bg(part="body", bg="white")
+      bg(part="body", bg="white") %>%
+      fontsize(size=16, part="all")
   } else {
     Table1_print <- Table1 %>%
       select(body_system_class, Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_I3,
@@ -210,14 +214,16 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:13), part="all") %>%
       autofit() %>%
-      width(j=c(2, 3, 5, 6, 8, 9, 11, 12), width=2) %>%
+      width(j=1, width=3) %>%
+      width(j=c(2:13), width=2) %>%
       vline(j=c(1, 4, 7, 10), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5, 8, 11), border=border, part="header") %>%
       vline(i=3, j=c(3, 6, 9, 12), border=border, part="header") %>%
       vline(j=c(2, 3, 5, 6, 8, 9, 11, 12), border=border, part="body") %>%
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
-      bg(part="body", bg="white")
+      bg(part="body", bg="white") %>%
+      fontsize(size=16, part="all")
   }
 
   plot(Table1_print)
