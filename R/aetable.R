@@ -14,6 +14,8 @@
 #' @param intervention1_name Name of intervention 1
 #' @param intervention2_name Name of intervention 2
 #' @param intervention3_name Name of intervention 3
+#' @param save_image_path file path to save table as image
+#' @param save_docx_path file path to save table as docx
 #'
 #' @return Flextable of AE summary by body system class
 #'
@@ -30,7 +32,8 @@
 aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand",
                     last_visit = "last_visit", control = "C", intervention1 = "I1", intervention2 = "I2",
                     intervention3 = "I3", control_name="Control", intervention1_name="Intervention 1",
-                    intervention2_name = "Intervention 2", intervention3_name = "Intervention 3"){
+                    intervention2_name = "Intervention 2", intervention3_name = "Intervention 3",
+                    save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand,
@@ -136,8 +139,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:7), part="all") %>%
       autofit() %>%
-      width(j=1, width=3) %>%
-      width(j=c(2:7), width=2) %>%
+      width(j=1, width=1.5) %>%
+      width(j=c(2:7), width=0.75) %>%
       vline(j=c(1, 4), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5), border=border, part="header") %>%
       vline(i=3, j=c(3, 6), border=border, part="header") %>%
@@ -145,7 +148,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
       bg(part="body", bg="white") %>%
-      fontsize(size=16, part="all")
+      fontsize(size=6.5, part="all")
   } else if (arm_number==3){
     Table1_print <- Table1 %>%
       select(body_system_class,Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_C,
@@ -173,8 +176,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:10), part="all") %>%
       autofit() %>%
-      width(j=1, width=3) %>%
-      width(j=c(2:10), width=2) %>%
+      width(j=1, width=1.5) %>%
+      width(j=c(2:10), width=0.75) %>%
       vline(j=c(1, 4, 7), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5, 8), border=border, part="header") %>%
       vline(i=3, j=c(3, 6, 9), border=border, part="header") %>%
@@ -182,7 +185,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
       bg(part="body", bg="white") %>%
-      fontsize(size=16, part="all")
+      fontsize(size=6.5, part="all")
   } else {
     Table1_print <- Table1 %>%
       select(body_system_class, Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_I3,
@@ -214,8 +217,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:13), part="all") %>%
       autofit() %>%
-      width(j=1, width=3) %>%
-      width(j=c(2:13), width=2) %>%
+      width(j=1, width=1.5) %>%
+      width(j=c(2:13), width=0.75) %>%
       vline(j=c(1, 4, 7, 10), border=border, part="all") %>%
       vline(i=c(2, 3), j=c(2, 5, 8, 11), border=border, part="header") %>%
       vline(i=3, j=c(3, 6, 9, 12), border=border, part="header") %>%
@@ -223,8 +226,16 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
       bg(part="body", bg="white") %>%
-      fontsize(size=16, part="all")
+      fontsize(size=6.5, part="all")
   }
 
   plot(Table1_print)
+
+  if (!is.null(save_image_path)){
+    save_as_image(Table1_print, path=save_image_path)
+  }
+
+  if(!is.null(save_docx_path)){
+    save_as_docx(Table1_print, path=save_docx_path)
+  }
 }

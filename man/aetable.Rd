@@ -18,7 +18,9 @@ aetable(
   control_name = "Control",
   intervention1_name = "Intervention 1",
   intervention2_name = "Intervention 2",
-  intervention3_name = "Intervention 3"
+  intervention3_name = "Intervention 3",
+  save_image_path = NULL,
+  save_docx_path = NULL
 )
 }
 \arguments{
@@ -49,6 +51,10 @@ aetable(
 \item{intervention2_name}{Name of intervention 2}
 
 \item{intervention3_name}{Name of intervention 3}
+
+\item{save_image_path}{file path to save table as image}
+
+\item{save_docx_path}{file path to save table as docx}
 }
 \value{
 Flextable of AE summary by body system class
