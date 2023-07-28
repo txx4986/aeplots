@@ -11,8 +11,14 @@ aetable(
   arm = "arm",
   date_rand = "date_rand",
   last_visit = "last_visit",
-  intervention_name = "Intervention",
-  control_name = "Control"
+  control = "C",
+  intervention1 = "I1",
+  intervention2 = "I2",
+  intervention3 = "I3",
+  control_name = "Control",
+  intervention1_name = "Intervention 1",
+  intervention2_name = "Intervention 2",
+  intervention3_name = "Intervention 3"
 )
 }
 \arguments{
@@ -28,9 +34,21 @@ aetable(
 
 \item{last_visit}{Name of last_visit column}
 
-\item{intervention_name}{Name of intervention}
+\item{control}{Factor level of control arm}
+
+\item{intervention1}{Factor level of intervention 1 arm}
+
+\item{intervention2}{Factor level of intervention 2 arm}
+
+\item{intervention3}{Factor level of intervention 3 arm}
 
 \item{control_name}{Name of control}
+
+\item{intervention1_name}{Name of intervention 1}
+
+\item{intervention2_name}{Name of intervention 2}
+
+\item{intervention3_name}{Name of intervention 3}
 }
 \value{
 Flextable of AE summary by body system class
