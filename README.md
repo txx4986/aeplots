@@ -35,7 +35,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1001</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -55,7 +55,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1001</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -75,7 +75,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1001</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -95,7 +95,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1001</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -115,7 +115,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1001</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -135,7 +135,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1001</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -155,7 +155,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1001</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -175,7 +175,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1002</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>I</p>
+<p>A1</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -195,7 +195,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1002</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>I</p>
+<p>A1</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -215,7 +215,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1002</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>I</p>
+<p>A1</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-15</p>
@@ -235,7 +235,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1004</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-16</p>
@@ -255,7 +255,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1004</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-16</p>
@@ -275,7 +275,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1004</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-16</p>
@@ -295,7 +295,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1004</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-01-16</p>
@@ -315,7 +315,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1005</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-02-18</p>
@@ -335,7 +335,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1005</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-02-18</p>
@@ -355,7 +355,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1007</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>C</p>
+<p>A2</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-02-12</p>
@@ -375,7 +375,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1008</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>I</p>
+<p>A1</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-02-06</p>
@@ -395,7 +395,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1008</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>I</p>
+<p>A1</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-02-06</p>
@@ -415,7 +415,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>1008</p>
 </td>
 <td valign="top" nowrap="nowrap" width="57">
-<p>I</p>
+<p>A1</p>
 </td>
 <td valign="top" nowrap="nowrap" width="94">
 <p>2015-02-06</p>
@@ -472,7 +472,7 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>Participant ID</p>
 </td>
 <td valign="top" width="237">
-<p>Numeric</p>
+<p>Numeric / Factor</p>
 </td>
 </tr>
 <tr>
@@ -480,10 +480,10 @@ Package to create tables and plots for analysing adverse event data in clinical 
 <p>arm</p>
 </td>
 <td valign="top" width="243">
-<p>Treatment arm of participant</p>
+<p>Treatment arm of participant (2, 3 or 4 arms)</p>
 </td>
 <td valign="top" width="237">
-<p>Factor (I: Intervention, C: Control)</p>
+<p>Factor / Character / Numeric</p>
 </td>
 </tr>
 <tr>

@@ -49,10 +49,9 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   # dataset <- dataset %>%
   #   mutate(
   #     arm =
-  #       case_when(arm_number==2 ~ recode_factor(arm, control="C", intervention1="I1"),
-  #                 arm_number==3 ~ recode_factor(arm, control="C", intervention1="I1", intervention2="I2"),
-  #                 arm_number==4 ~ recode_factor(arm, control="C", intervention1="I1", intervention2="I2",
-  #                                               intervention3="I3")))
+  #       case_when(arm_number==2 ~ recode_factor(arm, arm1="A1", arm2="A2),
+  #                 arm_number==3 ~ recode_factor(arm, arm1="A1", arm2="A2, arm3="A3"),
+  #                 arm_number==4 ~ recode_factor(arm, arm1="A1", arm2="A2, arm3="A3", arm4="arm4")))
   dataset$arm <- as.character(dataset$arm)
   dataset$arm[which(dataset$arm==arm1)] <- "A1"
   dataset$arm[which(dataset$arm==arm2)] <- "A2"
