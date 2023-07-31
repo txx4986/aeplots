@@ -68,11 +68,9 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   Table1 <- dataset %>%
     # follow up time is computed as difference between randomisation date and last visit date (units=weeks)
     mutate(follow_up_time = as.numeric(difftime(last_visit, date_rand, units="weeks"))) %>%
-    group_by(body_system_class, id, arm) %>%
+    group_by(body_system_class, id, arm, follow_up_time) %>%
     # count total number of adverse events of each participant for each body system class
-    summarise(
-      sum_follow_up_time = sum(follow_up_time),
-      n = n()) %>%
+    count() %>%
     group_by(body_system_class, arm) %>%
     summarise(
       # number of participants with at least one adverse event for each body system class and arm
@@ -80,7 +78,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       # total number of adverse events for each body system class and arm
       Events = sum(n),
       # total length of follow up time for each body system class and arm
-      Total_Time = sum(sum_follow_up_time),
+      Total_Time = sum(follow_up_time),
       # mean number of adverse events for each participant for each body system class and arm
       Mean = round(mean(n), 1),
       # standard deviation of number of adverse events for each participant for each body system class and arm

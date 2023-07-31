@@ -1,5 +1,5 @@
 # aeplots
-Package to create tables and plots for analysing adverse event data in clinical trials
+R package to create tables and plots for analysing adverse event data in clinical trials
 
 ## How to install
 ```
