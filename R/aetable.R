@@ -24,6 +24,7 @@
 #' @import tidyverse
 #' @import flextable
 #' @import common
+#' @import here
 #'
 #' @export
 #'
