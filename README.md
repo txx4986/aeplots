@@ -1,6 +1,11 @@
 # aeplots
 Package to create tables and plots for analysing adverse event data in clinical trials
 
+## How to install
+```
+devtools::install_github("https://github.com/txx4986/aeplots.git")
+```
+
 ## Sample dataset used to produce table to summarise AEs
 <table style="width: 587px;" border="1" cellspacing="0" cellpadding="0">
 <tbody>
