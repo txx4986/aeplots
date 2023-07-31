@@ -11,14 +11,14 @@ aetable(
   arm = "arm",
   date_rand = "date_rand",
   last_visit = "last_visit",
-  control = "C",
-  intervention1 = "I1",
-  intervention2 = "I2",
-  intervention3 = "I3",
-  control_name = "Control",
-  intervention1_name = "Intervention 1",
-  intervention2_name = "Intervention 2",
-  intervention3_name = "Intervention 3",
+  arm1 = "A1",
+  arm2 = "A2",
+  arm3 = "A3",
+  arm4 = "A4",
+  arm1_name = "Arm 1",
+  arm2_name = "Arm 2",
+  arm3_name = "Arm 3",
+  arm4_name = "Arm 4",
   save_image_path = NULL,
   save_docx_path = NULL
 )
@@ -36,21 +36,21 @@ aetable(
 
 \item{last_visit}{Name of last_visit column}
 
-\item{control}{Factor level of control arm}
+\item{arm1}{Factor level of arm 1}
 
-\item{intervention1}{Factor level of intervention 1 arm}
+\item{arm2}{Factor level of arm 2}
 
-\item{intervention2}{Factor level of intervention 2 arm}
+\item{arm3}{Factor level of arm 3}
 
-\item{intervention3}{Factor level of intervention 3 arm}
+\item{arm4}{Factor level of arm 4}
 
-\item{control_name}{Name of control}
+\item{arm1_name}{Name of arm 1}
 
-\item{intervention1_name}{Name of intervention 1}
+\item{arm2_name}{Name of arm 2}
 
-\item{intervention2_name}{Name of intervention 2}
+\item{arm3_name}{Name of arm 3}
 
-\item{intervention3_name}{Name of intervention 3}
+\item{arm4_name}{Name of arm 4}
 
 \item{save_image_path}{file path to save table as image}
 
