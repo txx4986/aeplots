@@ -92,7 +92,7 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
       bg(part="body", bg="white") %>%
-      fontsize(size=6.5, part="all")
+      fontsize(size=8, part="all")
 
   } else if (arm_number==3){
     Table2_print <- Table2 %>%
@@ -118,7 +118,7 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
       bg(part="body", bg="white") %>%
-      fontsize(size=6.5, part="all")
+      fontsize(size=8, part="all")
   } else {
     Table2_print <- Table2 %>%
       mutate(
@@ -145,7 +145,7 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
       bold(i=1, bold=TRUE, part="header") %>%
       bg(part="header", bg="gray80") %>%
       bg(part="body", bg="white") %>%
-      fontsize(size=6.5, part="all")
+      fontsize(size=8, part="all")
   }
 
   plot(Table2_print)
