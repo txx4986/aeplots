@@ -73,7 +73,7 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
   if (arm_number==2){
     Table2_print <- Table2 %>%
       mutate(
-        Frequency_Total = sum(Frequency_A1, Frequency_A2),
+        Frequency_Total = sum(Frequency_A1, Frequency_A2, na.rm=TRUE),
         Proportions_Total = scales::percent(Frequency_Total/(N1+N2), 0.1)) %>%
       relocate(Proportions_A1, .after=Frequency_A1) %>%
       flextable() %>%
@@ -97,7 +97,7 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
   } else if (arm_number==3){
     Table2_print <- Table2 %>%
       mutate(
-        Frequency_Total = sum(Frequency_A1, Frequency_A2, Frequency_A3),
+        Frequency_Total = sum(Frequency_A1, Frequency_A2, Frequency_A3, na.rm=TRUE),
         Proportions_Total = scales::percent(Frequency_Total/(N1+N2+N3), 0.1)) %>%
       relocate(Proportions_A1, .after=Frequency_A1) %>%
       relocate(Proportions_A2, .after=Frequency_A2) %>%
@@ -122,7 +122,7 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
   } else {
     Table2_print <- Table2 %>%
       mutate(
-        Frequency_Total = sum(Frequency_A1, Frequency_A2, Frequency_A3, Frequency_A4),
+        Frequency_Total = sum(Frequency_A1, Frequency_A2, Frequency_A3, Frequency_A4, na.rm=TRUE),
         Proportions_Total = scales::percent(Frequency_Total/(N1+N2+N3+N4), 0.1)) %>%
       relocate(Proportions_A1, .after=Frequency_A1) %>%
       relocate(Proportions_A2, .after=Frequency_A2) %>%
