@@ -440,7 +440,7 @@ devtools::install_github("https://github.com/txx4986/aeplots.git")
 <td valign="top" width="121">
 <p><strong>Variable name</strong></p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p><strong>Variable description</strong></p>
 </td>
 <td valign="top" width="237">
@@ -451,7 +451,7 @@ devtools::install_github("https://github.com/txx4986/aeplots.git")
 <td valign="top" width="121">
 <p>adverse_event</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Adverse event name</p>
 </td>
 <td valign="top" width="237">
@@ -462,7 +462,7 @@ devtools::install_github("https://github.com/txx4986/aeplots.git")
 <td valign="top" width="121">
 <p>body_system_class</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Body system class of adverse event</p>
 </td>
 <td valign="top" width="237">
@@ -473,18 +473,18 @@ devtools::install_github("https://github.com/txx4986/aeplots.git")
 <td valign="top" width="121">
 <p>id</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Participant ID</p>
 </td>
 <td valign="top" width="237">
-<p>Numeric / Factor</p>
+<p>Factor / Character / Numeric</p>
 </td>
 </tr>
 <tr>
 <td valign="top" width="121">
 <p>arm</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Treatment arm of participant (2, 3 or 4 arms)</p>
 </td>
 <td valign="top" width="237">
@@ -495,7 +495,7 @@ devtools::install_github("https://github.com/txx4986/aeplots.git")
 <td valign="top" width="121">
 <p>date_rand</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Randomisation date</p>
 </td>
 <td valign="top" width="237">
@@ -506,7 +506,7 @@ devtools::install_github("https://github.com/txx4986/aeplots.git")
 <td valign="top" width="121">
 <p>last_visit</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Date of last visit</p>
 </td>
 <td valign="top" width="237">
