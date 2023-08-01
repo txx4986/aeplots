@@ -151,11 +151,11 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
   plot(Table2_print)
 
   if (!is.null(save_image_path)){
-    save_as_image(Table1_print, path=save_image_path)
+    save_as_image(Table2_print, path=save_image_path)
   }
 
   if(!is.null(save_docx_path)){
-    save_as_docx(Table1_print, path=save_docx_path)
+    save_as_docx(Table2_print, path=save_docx_path)
   }
 
 }
