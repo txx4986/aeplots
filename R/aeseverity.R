@@ -61,15 +61,7 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
                   arm=="A3" ~ scales::percent(Frequency / N3, 0.1),
                   arm=="A4" ~ scales::percent(Frequency / N4, 0.1)))%>%
     pivot_wider(
-      names_from = arm, values_from = c(Frequency, Proportions)) %>%
-    mutate(
-      Frequency_Total = case_when(arm_number==2 ~ sum(Frequency_A1, Frequency_A2),
-                                  arm_number==3 ~ sum(Frequency_A1, Frequency_A2, Frequency_A3),
-                                  arm_number==4 ~ sum(Frequency_A1, Frequency_A2, Frequency_A3, Frequency_A4)),
-      Proportions_Total = case_when(arm_number==2 ~ scales::percent(Frequency_Total/(N1+N2), 0.1),
-                                    arm_number==3 ~ scales::percent(Frequency_Total/(N1+N2+N3), 0.1),
-                                    arm_number==4 ~ scales::percent(Frequency_Total/(N1+N2+N3+N4), 0.1))
-      )
+      names_from = arm, values_from = c(Frequency, Proportions))
 
   #to produce nice table
   name1 <- "N" %p% subsc("1")
@@ -80,6 +72,10 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
 
   if (arm_number==2){
     Table2_print <- Table2 %>%
+      mutate(
+        Frequency_Total = sum(Frequency_A1, Frequency_A2),
+        Proportions_Total = scales::percent(Frequency_Total/(N1+N2), 0.1)) %>%
+      relocate(Proportions_A1, .after=Frequency_A1) %>%
       flextable() %>%
       add_header_row(
         values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})"), "Total"),
@@ -100,6 +96,11 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
 
   } else if (arm_number==3){
     Table2_print <- Table2 %>%
+      mutate(
+        Frequency_Total = sum(Frequency_A1, Frequency_A2, Frequency_A3),
+        Proportions_Total = scales::percent(Frequency_Total/(N1+N2+N3), 0.1)) %>%
+      relocate(Proportions_A1, .after=Frequency_A1) %>%
+      relocate(Proportions_A2, .after=Frequency_A2) %>%
       flextable() %>%
       add_header_row(
         values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})"),
@@ -120,6 +121,12 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
       fontsize(size=6.5, part="all")
   } else {
     Table2_print <- Table2 %>%
+      mutate(
+        Frequency_Total = sum(Frequency_A1, Frequency_A2, Frequency_A3, Frequency_A4),
+        Proportions_Total = scales::percent(Frequency_Total/(N1+N2+N3+N4), 0.1)) %>%
+      relocate(Proportions_A1, .after=Frequency_A1) %>%
+      relocate(Proportions_A2, .after=Frequency_A2) %>%
+      relocate(Proportions_A3, .after=Frequency_A3) %>%
       flextable() %>%
       add_header_row(
         values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})"),
