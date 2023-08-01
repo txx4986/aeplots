@@ -41,7 +41,6 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
 
   # checks if the variable type for each column is correct
   stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
-  stopifnot("id variable type is not numeric or factor!" = is.numeric(dataset[["id"]]) | is.factor(dataset[["id"]]))
   stopifnot("date_rand variable type is not Date!" = is.Date(dataset[["date_rand"]]))
   stopifnot("last_visit variable type is not Date!" = is.Date(dataset[["last_visit"]]))
 
