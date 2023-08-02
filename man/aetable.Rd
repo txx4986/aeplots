@@ -19,6 +19,9 @@ aetable(
   intervention1_name = "Intervention 1",
   intervention2_name = "Intervention 2",
   intervention3_name = "Intervention 3",
+  IRR = TRUE,
+  variables = c(),
+  mean = TRUE,
   save_image_path = NULL,
   save_docx_path = NULL
 )
@@ -52,9 +55,15 @@ aetable(
 
 \item{intervention3_name}{Name of intervention 3 arm}
 
-\item{save_image_path}{file path to save table as image}
+\item{IRR}{Boolean to include IRR and 95\% CI column in summary table (only for 2 arms)}
 
-\item{save_docx_path}{file path to save table as docx}
+\item{variables}{Vector of variables to be included in the glm Poisson model for computation of IRR besides arm}
+
+\item{mean}{Boolean to include mean and SD column in summary table}
+
+\item{save_image_path}{File path to save table as image}
+
+\item{save_docx_path}{File path to save table as docx}
 }
 \value{
 Flextable of AE summary by body system class
