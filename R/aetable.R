@@ -126,13 +126,13 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       count()
 
     glm_func <- function(x){
-      summary(glm(n ~ . - follow_up_time, offset=log(follow_up_time),
-                  family=poisson(link="log"),
+      summary(glm(n ~ . - follow_up_time, offset=log(follow_up_time), family=poisson(link="log"),
                   data=reg_df %>%
                     filter(body_system_class==x) %>%
-                    mutate(arm=relevel(arm, ref="C")))) %>%
+                    mutate(arm=relevel(arm, ref="C")) %>%
                     ungroup() %>%
-                    select(all_of(c(variables, "arm", "follow_up_time", "n")))$coefficients["armI1", c("Estimate", "Std. Error")]
+                    select(all_of(c(variables, "arm", "follow_up_time", "n")))))$coefficients["armI1",c("Estimate",
+                                                                                                        "Std. Error")]
     }
 
     glm_func_vect <- Vectorize(glm_func)
@@ -140,9 +140,9 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
     Table1_IRR <- Table1 %>%
       rowwise() %>%
       mutate(
-        Coef = possibly(glm_func_vect, otherwise=NA)(body_system_class),
-        Estimate = ifelse(is.na(Coef)==FALSE, Coef[[1]], NA),
-        SE = ifelse(is.na(Coef)==FALSE, Coef[[2]], NA),
+        Coef = list(possibly(glm_func_vect, otherwise=NA)(body_system_class)),
+        Estimate = Coef[[1]][[1]],
+        SE = ifelse(is.na(Estimate)==FALSE, Coef[[2]], NA),
         IRR = signif(exp(Estimate), 3),
         lower = signif(exp(Estimate - crit_value * SE), 3),
         upper = signif(exp(Estimate + crit_value * SE), 3),
