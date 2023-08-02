@@ -6,14 +6,14 @@
 #' @param arm Name of arm column
 #' @param date_rand Name of date_rand column
 #' @param last_visit Name of last_visit column
-#' @param arm1 Factor level of arm 1
-#' @param arm2 Factor level of arm 2
-#' @param arm3 Factor level of arm 3
-#' @param arm4 Factor level of arm 4
-#' @param arm1_name Name of arm 1
-#' @param arm2_name Name of arm 2
-#' @param arm3_name Name of arm 3
-#' @param arm4_name Name of arm 4
+#' @param control Factor level of control arm
+#' @param intervention1 Factor level of intervention 1 arm
+#' @param intervention2 Factor level of intervention 2 arm
+#' @param intervention3 Factor level of intervention 3 arm
+#' @param control_name Name of control arm
+#' @param intervention1_name Name of intervention 1 arm
+#' @param intervention2_name Name of intervention 2 arm
+#' @param intervention3_name Name of intervention 3 arm
 #' @param save_image_path file path to save table as image
 #' @param save_docx_path file path to save table as docx
 #'
@@ -31,8 +31,9 @@
 #' @examples
 #' aetable(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm", date_rand="randomisation_date", last_visit="date_of_last_visit")
 aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand",
-                    last_visit = "last_visit", arm1 = "A1", arm2 = "A2", arm3 = "A3", arm4="A4", arm1_name="Arm 1",
-                    arm2_name = "Arm 2", arm3_name = "Arm 3", arm4_name = "Arm 4",
+                    last_visit = "last_visit", control = "C", intervention1 = "I1", intervention2 = "I2",
+                    intervention3="I3", control_name="Control", intervention1_name = "Intervention 1",
+                    intervention2_name = "Intervention 2", intervention3_name = "Intervention 3",
                     save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
@@ -44,6 +45,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   stopifnot("date_rand variable type is not Date!" = is.Date(dataset[["date_rand"]]))
   stopifnot("last_visit variable type is not Date!" = is.Date(dataset[["last_visit"]]))
 
+  # number of arm factor levels
   arm_number <- length(unique(dataset$arm))
   # recode arm factor
   # dataset <- dataset %>%
@@ -53,17 +55,17 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   #                 arm_number==3 ~ recode_factor(arm, arm1="A1", arm2="A2, arm3="A3"),
   #                 arm_number==4 ~ recode_factor(arm, arm1="A1", arm2="A2, arm3="A3", arm4="arm4")))
   dataset$arm <- as.character(dataset$arm)
-  dataset$arm[which(dataset$arm==arm1)] <- "A1"
-  dataset$arm[which(dataset$arm==arm2)] <- "A2"
-  dataset$arm[which(dataset$arm==arm3)] <- "A3"
-  dataset$arm[which(dataset$arm==arm4)] <- "A4"
+  dataset$arm[which(dataset$arm==control)] <- "C"
+  dataset$arm[which(dataset$arm==intervention1)] <- "I1"
+  dataset$arm[which(dataset$arm==intervention2)] <- "I2"
+  dataset$arm[which(dataset$arm==intervention3)] <- "I3"
   dataset$arm <- as.factor(dataset$arm)
 
   # number of participants at risk per arm
-  N1 <- length(unique((dataset %>% filter(arm=="A1"))$id))
-  N2 <- length(unique((dataset %>% filter(arm=="A2"))$id))
-  N3 <- length(unique((dataset %>% filter(arm=="A3"))$id))
-  N4 <- length(unique((dataset %>% filter(arm=="A4"))$id))
+  N0 <- length(unique((dataset %>% filter(arm=="C"))$id))
+  N1 <- length(unique((dataset %>% filter(arm=="I1"))$id))
+  N2 <- length(unique((dataset %>% filter(arm=="I2"))$id))
+  N3 <- length(unique((dataset %>% filter(arm=="I3"))$id))
 
   Table1 <- dataset %>%
     # follow up time is computed as difference between randomisation date and last visit date (units=weeks)
@@ -115,22 +117,22 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
 
   if (arm_number==2){
     Table1_print <- Table1 %>%
-      relocate(Events_A1, Mean_A1, .after = Frequency_A1) %>%
+      select(body_system_class, Frequency_I1, Events_I1, Mean_I1, Frequency_C, Events_C, Mean_C) %>%
       flextable() %>%
       add_header(
-        values = c(Frequency_A1="At least one event",
-                   Events_A1="Number of events",
-                   Mean_A1="Number of events",
-                   Frequency_A2="At least one event",
-                   Events_A2="Number of events",
-                   Mean_A2="Number of events")) %>%
+        values = c(Frequency_I1="At least one event",
+                   Events_I1="Number of events",
+                   Mean_I1="Number of events",
+                   Frequency_C="At least one event",
+                   Events_C="Number of events",
+                   Mean_C="Number of events")) %>%
       add_header_row(
-        values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})")),
+        values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})")),
         colwidths = c(1, 3, 3)) %>%
       set_header_labels(
-        body_system_class="Body system class", Frequency_A1="N (%)", Events_A1="n (IR)",
-        Mean_A1="Mean number of events per participant (SD)", Frequency_A2="N (%)",Events_A2="n (IR)",
-        Mean_A2="Mean number of events per participant (SD)") %>%
+        body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
+        Mean_I1="Mean number of events per participant (SD)", Frequency_C="N (%)",Events_C="n (IR)",
+        Mean_C="Mean number of events per participant (SD)") %>%
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:7), part="all") %>%
       autofit() %>%
@@ -146,28 +148,28 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       fontsize(size=6.5, part="all")
   } else if (arm_number==3){
     Table1_print <- Table1 %>%
-      select(body_system_class,Frequency_A1, Events_A1, Mean_A1, Frequency_A2, Events_A2, Mean_A2, Frequency_A3,
-             Events_A3, Mean_A3) %>%
+      select(body_system_class, Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_C,
+             Events_C, Mean_C) %>%
       flextable() %>%
       add_header(
-        values = c(Frequency_A1="At least one event",
-                   Events_A1="Number of events",
-                   Mean_A1="Number of events",
-                   Frequency_A2="At least one event",
-                   Events_A2="Number of events",
-                   Mean_A2="Number of events",
-                   Frequency_A3="At least one event",
-                   Events_A3="Number of events",
-                   Mean_A3="Number of events")) %>%
+        values = c(Frequency_I1="At least one event",
+                   Events_I1="Number of events",
+                   Mean_I1="Number of events",
+                   Frequency_I2="At least one event",
+                   Events_I2="Number of events",
+                   Mean_I2="Number of events",
+                   Frequency_C="At least one event",
+                   Events_C="Number of events",
+                   Mean_C="Number of events")) %>%
       add_header_row(
-        values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})"),
-                 str_glue("{arm3_name} ({name3}={N3})")),
+        values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{intervention2_name} ({name2}={N2})"),
+                 str_glue("{control_name} ({name3}={N0})")),
         colwidths = c(1, 3, 3, 3)) %>%
       set_header_labels(
-        body_system_class="Body system class", Frequency_A1="N (%)", Events_A1="n (IR)",
-        Mean_A1="Mean number of events per participant (SD)",  Frequency_A2="N (%)", Events_A2="n (IR)",
-        Mean_A2="Mean number of events per participant (SD)", Frequency_A3="N (%)",Events_A3="n (IR)",
-        Mean_A3="Mean number of events per participant (SD)") %>%
+        body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
+        Mean_I1="Mean number of events per participant (SD)",  Frequency_I2="N (%)", Events_I2="n (IR)",
+        Mean_I2="Mean number of events per participant (SD)", Frequency_C="N (%)",Events_C="n (IR)",
+        Mean_C="Mean number of events per participant (SD)") %>%
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:10), part="all") %>%
       autofit() %>%
@@ -183,32 +185,32 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       fontsize(size=6.5, part="all")
   } else {
     Table1_print <- Table1 %>%
-      select(body_system_class, Frequency_A1, Events_A1, Mean_A1, Frequency_A2, Events_A2, Mean_A2, Frequency_A3,
-             Events_A3, Mean_A3, Frequency_A4, Events_A4, Mean_A4) %>%
+      select(body_system_class, Frequency_I1, Events_I1, Mean_I1, Frequency_I2, Events_I2, Mean_I2, Frequency_I3,
+             Events_I3, Mean_I3, Frequency_C, Events_C, Mean_C) %>%
       flextable() %>%
       add_header(
-        values = c(Frequency_A1="At least one event",
-                   Events_A1="Number of events",
-                   Mean_A1="Number of events",
-                   Frequency_A2="At least one event",
-                   Events_A2="Number of events",
-                   Mean_A2="Number of events",
-                   Frequency_A3="At least one event",
-                   Events_A3="Number of events",
-                   Mean_A3="Number of events",
-                   Frequency_A4="At least one event",
-                   Events_A4="Number of events",
-                   Mean_A4="Number of events")) %>%
+        values = c(Frequency_I1="At least one event",
+                   Events_I1="Number of events",
+                   Mean_I1="Number of events",
+                   Frequency_I2="At least one event",
+                   Events_I2="Number of events",
+                   Mean_I2="Number of events",
+                   Frequency_I3="At least one event",
+                   Events_I3="Number of events",
+                   Mean_I3="Number of events",
+                   Frequency_C="At least one event",
+                   Events_C="Number of events",
+                   Mean_C="Number of events")) %>%
       add_header_row(
-        values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})"),
-                 str_glue("{arm3_name} ({name3}={N3})"), str_glue("{arm4_name} ({name4}={N4})")),
+        values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{intervention2_name} ({name2}={N2})"),
+                 str_glue("{intervention3_name} ({name3}={N3})"), str_glue("{control_name} ({name4}={N0})")),
         colwidths = c(1, 3, 3, 3, 3)) %>%
       set_header_labels(
-        body_system_class="Body system class", Frequency_A1="N (%)", Events_A1="n (IR)",
-        Mean_A1="Mean number of events per participant (SD)",  Frequency_A2="N (%)", Events_A2="n (IR)",
-        Mean_A2="Mean number of events per participant (SD)", Frequency_A3="N (%)", Events_A3="n (IR)",
-        Mean_A3="Mean number of events per participant (SD)", Frequency_A4="N (%)",Events_A4="n (IR)",
-        Mean_A4="Mean number of events per participant (SD)") %>%
+        body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
+        Mean_I1="Mean number of events per participant (SD)",  Frequency_I2="N (%)", Events_I2="n (IR)",
+        Mean_I2="Mean number of events per participant (SD)", Frequency_I3="N (%)", Events_I3="n (IR)",
+        Mean_I3="Mean number of events per participant (SD)", Frequency_C="N (%)",Events_C="n (IR)",
+        Mean_C="Mean number of events per participant (SD)") %>%
       merge_h(part="header") %>%
       flextable::align(align="center", j = c(2:13), part="all") %>%
       autofit() %>%
