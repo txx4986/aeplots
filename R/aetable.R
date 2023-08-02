@@ -141,8 +141,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       rowwise() %>%
       mutate(
         Coef = possibly(glm_func_vect, otherwise=NA)(body_system_class),
-        Estimate = Coef[[1]],
-        SE = Coef[[2]],
+        Estimate = ifelse(is.na(Coef)==FALSE, Coef[[1]], NA),
+        SE = ifelse(is.na(Coef)==FALSE, Coef[[2]], NA),
         IRR = signif(exp(Estimate), 3),
         lower = signif(exp(Estimate - crit_value * SE), 3),
         upper = signif(exp(Estimate + crit_value * SE), 3),
