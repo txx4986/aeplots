@@ -33,62 +33,71 @@ aetable(
 )
 }
 \arguments{
-\item{data}{Dataframe with adverse_event, body_system_class, id, arm, date_rand and last_visit columns}
+\item{data}{data frame with adverse_event, body_system_class, id, arm, date_rand and last_visit columns}
 
-\item{body_system_class}{Name of body_system_class column}
+\item{body_system_class}{name of body_system_class column}
 
-\item{id}{Name of id column}
+\item{id}{name of id column}
 
-\item{arm}{Name of arm column}
+\item{arm}{name of arm column}
 
-\item{date_rand}{Name of date_rand column}
+\item{date_rand}{name of date_rand column}
 
-\item{last_visit}{Name of last_visit column}
+\item{last_visit}{name of last_visit column}
 
-\item{control}{Factor level of control arm}
+\item{control}{factor level of control arm}
 
-\item{intervention1}{Factor level of intervention 1 arm}
+\item{intervention1}{factor level of intervention 1 arm}
 
-\item{intervention2}{Factor level of intervention 2 arm}
+\item{intervention2}{factor level of intervention 2 arm}
 
-\item{intervention3}{Factor level of intervention 3 arm}
+\item{intervention3}{factor level of intervention 3 arm}
 
-\item{control_name}{Name of control arm}
+\item{control_name}{name of control arm}
 
-\item{intervention1_name}{Name of intervention 1 arm}
+\item{intervention1_name}{name of intervention 1 arm}
 
-\item{intervention2_name}{Name of intervention 2 arm}
+\item{intervention2_name}{name of intervention 2 arm}
 
-\item{intervention3_name}{Name of intervention 3 arm}
+\item{intervention3_name}{name of intervention 3 arm}
 
-\item{IRR}{Boolean to include IRR and 95\% CI column in summary table (only for 2 arms)}
+\item{IRR}{a logical value whether to include IRR and 95\% CI column in summary table (only for 2 arms)}
 
-\item{variables}{Vector of variables to be included in the glm Poisson model for computation of IRR besides arm}
+\item{variables}{vector of variable names to be included in the glm Poisson model for computation of IRR (excluding arm)}
 
-\item{mean}{Boolean to include mean and SD column in summary table}
+\item{mean}{a logical value whether to include mean and SD column in summary table}
 
-\item{proportions_dp}{Number of decimal places for proportions}
+\item{proportions_dp}{number of decimal places for proportions}
 
-\item{IR_dp}{Number of decimal places for incidence rate}
+\item{IR_dp}{number of decimal places for incidence rate}
 
-\item{mean_dp}{Number of decimal places for mean number of AEs per participant}
+\item{mean_dp}{number of decimal places for mean number of AEs per participant}
 
-\item{SD_dp}{Number of decimal places for standard deviation of number of AEs per participant}
+\item{SD_dp}{number of decimal places for standard deviation of number of AEs per participant}
 
-\item{IRR_sf}{Number of significant figures for IRR}
+\item{IRR_sf}{number of significant figures for IRR}
 
-\item{CI_sf}{Number of significant figures for 95\% CI}
+\item{CI_sf}{number of significant figures for 95\% CI}
 
-\item{save_image_path}{File path to save table as image}
+\item{save_image_path}{file path to save table as image}
 
-\item{save_docx_path}{File path to save table as docx}
+\item{save_docx_path}{file path to save table as docx}
 }
 \value{
-Flextable of AE summary by body system class
+flextable of AE summary by body system class and arm
 }
 \description{
-Table of AE summary by body system class
+\code{aetable} is used to plot a table of AE summary by body system class and arm using the following summary statistics:
+\itemize{
+\item \strong{Total number of participants at risk per arm}
+\item \strong{Frequency} (number of participants with at least one event for each event)
+\item \strong{Proportions} (number of participants with at least one event for each body system class relative to number of participants at risk)
+\item \strong{Number of adverse events per participant}: presented as \strong{counts}, \strong{mean (SD)}
+\item \strong{Total number of events} and \strong{incidence rates} (\strong{number of events} relative to \strong{total time in follow-up})
+\item \strong{Treatment effect estimate (IRR)} and \strong{95\% confidence intervals}
+}
 }
 \examples{
-aetable(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm", date_rand="randomisation_date", last_visit="date_of_last_visit")
+## ADAPT sample data
+aetable(df, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
 }

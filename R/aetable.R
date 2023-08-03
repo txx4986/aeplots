@@ -1,32 +1,42 @@
 #' Table of AE summary by body system class
 #'
-#' @param data Dataframe with adverse_event, body_system_class, id, arm, date_rand and last_visit columns
-#' @param body_system_class Name of body_system_class column
-#' @param id Name of id column
-#' @param arm Name of arm column
-#' @param date_rand Name of date_rand column
-#' @param last_visit Name of last_visit column
-#' @param control Factor level of control arm
-#' @param intervention1 Factor level of intervention 1 arm
-#' @param intervention2 Factor level of intervention 2 arm
-#' @param intervention3 Factor level of intervention 3 arm
-#' @param control_name Name of control arm
-#' @param intervention1_name Name of intervention 1 arm
-#' @param intervention2_name Name of intervention 2 arm
-#' @param intervention3_name Name of intervention 3 arm
-#' @param IRR Boolean to include IRR and 95% CI column in summary table (only for 2 arms)
-#' @param variables Vector of variables to be included in the glm Poisson model for computation of IRR besides arm
-#' @param mean Boolean to include mean and SD column in summary table
-#' @param proportions_dp Number of decimal places for proportions
-#' @param IR_dp Number of decimal places for incidence rate
-#' @param mean_dp Number of decimal places for mean number of AEs per participant
-#' @param SD_dp Number of decimal places for standard deviation of number of AEs per participant
-#' @param IRR_sf Number of significant figures for IRR
-#' @param CI_sf Number of significant figures for 95% CI
-#' @param save_image_path File path to save table as image
-#' @param save_docx_path File path to save table as docx
+#' @description
+#' `aetable` is used to plot a table of AE summary by body system class and arm using the following summary statistics:
 #'
-#' @return Flextable of AE summary by body system class
+#' - **Total number of participants at risk per arm**
+#' - **Frequency** (number of participants with at least one event for each event)
+#' - **Proportions** (number of participants with at least one event for each body system class relative to number of participants at risk)
+#' - **Number of adverse events per participant**: presented as **counts**, **mean (SD)**
+#' - **Total number of events** and **incidence rates** (**number of events** relative to **total time in follow-up**)
+#' - **Treatment effect estimate (IRR)** and **95% confidence intervals**
+#'
+#' @param data data frame with adverse_event, body_system_class, id, arm, date_rand and last_visit columns
+#' @param body_system_class name of body_system_class column
+#' @param id name of id column
+#' @param arm name of arm column
+#' @param date_rand name of date_rand column
+#' @param last_visit name of last_visit column
+#' @param control factor level of control arm
+#' @param intervention1 factor level of intervention 1 arm
+#' @param intervention2 factor level of intervention 2 arm
+#' @param intervention3 factor level of intervention 3 arm
+#' @param control_name name of control arm
+#' @param intervention1_name name of intervention 1 arm
+#' @param intervention2_name name of intervention 2 arm
+#' @param intervention3_name name of intervention 3 arm
+#' @param IRR a logical value whether to include IRR and 95% CI column in summary table (only for 2 arms)
+#' @param variables vector of variable names to be included in the glm Poisson model for computation of IRR (excluding arm)
+#' @param mean a logical value whether to include mean and SD column in summary table
+#' @param proportions_dp number of decimal places for proportions
+#' @param IR_dp number of decimal places for incidence rate
+#' @param mean_dp number of decimal places for mean number of AEs per participant
+#' @param SD_dp number of decimal places for standard deviation of number of AEs per participant
+#' @param IRR_sf number of significant figures for IRR
+#' @param CI_sf number of significant figures for 95% CI
+#' @param save_image_path file path to save table as image
+#' @param save_docx_path file path to save table as docx
+#'
+#' @return flextable of AE summary by body system class and arm
 #'
 #' @import dplyr
 #' @import tidyr
@@ -38,7 +48,8 @@
 #' @export
 #'
 #' @examples
-#' aetable(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm", date_rand="randomisation_date", last_visit="date_of_last_visit")
+#' ## ADAPT sample data
+#' aetable(df, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
 aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand",
                     last_visit = "last_visit", control = "C", intervention1 = "I1", intervention2 = "I2",
                     intervention3="I3", control_name="Control", intervention1_name = "Intervention 1",
