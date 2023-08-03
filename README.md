@@ -12,14 +12,12 @@ To see the full list of exported functions:
 library("aeplots")
 ls("package:aeplots")
 ```
-Functions included in the package:
-<ul>
-<li>`aetable`: Plots a table of AE summary by body system class</li>
-<li>`aeseverity`: Plots a table of AE summary by severity</li>
-<li>`aedot`:Plots a dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to give an overview of the harm profile</li>
-<li>`aestacked`: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity</li>
-<li>`aebar`: Plots a bar chart to present the number of events reported per participant</li>
-</ul>
+Functions available in the package:
+-`aetable`: Plots a table of AE summary by body system class
+-`aeseverity`: Plots a table of AE summary by severity
+-`aedot`:Plots a dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to give an overview of the harm profile
+-`aestacked`: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity
+-`aebar`: Plots a bar chart to present the number of events reported per participant
 
 ## Sample dataset used to produce table to summarise AEs
 <table style="width: 609px;" border="1" cellspacing="0" cellpadding="0">
@@ -581,7 +579,7 @@ Functions included in the package:
 <td valign="top" width="121">
 <p><strong>Variable name</strong></p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p><strong>Variable description</strong></p>
 </td>
 <td valign="top" width="237">
@@ -592,7 +590,7 @@ Functions included in the package:
 <td valign="top" width="121">
 <p>adverse_event</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Adverse event name</p>
 </td>
 <td valign="top" width="237">
@@ -603,7 +601,7 @@ Functions included in the package:
 <td valign="top" width="121">
 <p>body_system_class</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Body system class of adverse event</p>
 </td>
 <td valign="top" width="237">
@@ -614,7 +612,7 @@ Functions included in the package:
 <td valign="top" width="121">
 <p>id</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Participant ID</p>
 </td>
 <td valign="top" width="237">
@@ -625,8 +623,8 @@ Functions included in the package:
 <td valign="top" width="121">
 <p>arm</p>
 </td>
-<td valign="top" width="243">
-<p>Treatment arm of participant</p>
+<td valign="top" width="300">
+<p>Treatment arm of participant (2, 3 or 4 arms)</p>
 </td>
 <td valign="top" width="237">
 <p>Factor/Character/Numeric</p>
@@ -636,7 +634,7 @@ Functions included in the package:
 <td valign="top" width="121">
 <p>date_rand</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Randomisation date</p>
 </td>
 <td valign="top" width="237">
@@ -647,7 +645,7 @@ Functions included in the package:
 <td valign="top" width="121">
 <p>last_visit</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Date of last visit</p>
 </td>
 <td valign="top" width="237">
@@ -658,7 +656,7 @@ Functions included in the package:
 <td valign="top" width="121">
 <p>variable</p>
 </td>
-<td valign="top" width="243">
+<td valign="top" width="300">
 <p>Variables to be included in generalised linear models with Poisson function and log link for estimation of IRRs and 95% CIs</p>
 </td>
 <td valign="top" width="237">
