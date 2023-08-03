@@ -31,7 +31,7 @@
 #' ## ADAPT sample data
 #' aeseverity(df, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", proportions_dp=2)
 aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1", arm2="A2", arm3="A3", arm4="A4",
-                       arm1_name="Arm 1", arm2_name="Arm 2", arm3_name="Arm 3", arm4_name="Arm 4",
+                       arm1_name="Arm 1", arm2_name="Arm 2", arm3_name="Arm 3", arm4_name="Arm 4", proportions_dp=1,
                        save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
