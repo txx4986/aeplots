@@ -48,7 +48,7 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
 
   # create table of relative risks and CIs
   Table2 <- dataset %>%
-    group_by(event) %>%
+    group_by(body_system_class) %>%
     summarise(
       eventn1 = length(unique(id[arm=="I"])),
       N1 = N1,
@@ -79,22 +79,22 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
   # decreasing order of relative risk
   RDSortedBS <- Table2[order(-Table2$relrisk),]
   # create subset of full data with the elements that we need for each half of the plot
-  BSRisk <- subset(RDSortedBS, select=c(event, Intervention, Placebo, relrisk))
-  BSRisk$event <- factor(BSRisk$event, levels=BSRisk$event[order(-BSRisk$relrisk)])
-  BSRiskRatio <- subset(RDSortedBS, select=c(event, relrisk, lowerCIRR, upperCIRR))
-  BSRiskRatio$event <- factor(BSRiskRatio$event, levels=BSRisk$event[order(-BSRisk$relrisk)])
+  BSRisk <- subset(RDSortedBS, select=c(body_system_class, Intervention, Placebo, relrisk))
+  BSRisk$event <- factor(BSRisk$body_system_class, levels=BSRisk$body_system_class[order(-BSRisk$relrisk)])
+  BSRiskRatio <- subset(RDSortedBS, select=c(body_system_class, relrisk, lowerCIRR, upperCIRR))
+  BSRiskRatio$event <- factor(BSRiskRatio$body_system_class, levels=BSRisk$body_system_class[order(-BSRisk$relrisk)])
 
-  ByGroup <- melt(BSRisk, id=c("event"))
+  ByGroup <- melt(BSRisk, id=c("body_system_class"))
   ByGroup <- ByGroup[ByGroup$variable != "relrisk",]
 
-  # left is ggplot object of the group-specific risks (percentage of participants experiencing each type of event)
-  left <- ggplot(ByGroup, aes(x=value, y=event, fill=variable)) +
+  # left is ggplot object of the group-specific risks (percentage of participants experiencing each type of body_system_class)
+  left <- ggplot(ByGroup, aes(x=value, y=body_system_class, fill=variable)) +
     geom_dotplot(binaxis='y', stackdir='center', dotsize=0.5) +
     scale_fill_manual(values=c("red", "blue")) +
     ggtitle("") +
     ylab("Body system") +
     scale_x_continuous(name="Percentage of participants (%)") +
-    scale_y_discrete(limits=rev(levels(ByGroup$event))) +
+    scale_y_discrete(limits=rev(levels(ByGroup$body_system_class))) +
     theme(legend.position="bottom",
           legend.title=element_blank(),
           panel.background = element_blank(),
@@ -104,7 +104,7 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
           axis.line=element_line(color="black"))
 
   # right is a ggplot object of the estimate and corresponding confidence interval
-  right <- ggplot(BSRiskRatio, aes(y=event, x=relrisk, xmin=lowerCIRR, xmax=upperCIRR, fill="Relative risk with 95% CI")) +
+  right <- ggplot(BSRiskRatio, aes(y=body_system_class, x=relrisk, xmin=lowerCIRR, xmax=upperCIRR, fill="Relative risk with 95% CI")) +
     ggstance::geom_pointrangeh(aes(xmin=lowerCIRR, xmax=upperCIRR)) +
     ggtitle("")+
     geom_vline(xintercept=1, linetype=2, colour="blue", size=0.75) +
@@ -112,7 +112,7 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
                        trans=log2_trans(),
                        breaks=c(0.10, 0.5, 1, 2, 5, 10, 50, 100, 220),
                        labels=as.character(c(0.10, 0.5, 1, 2, 5, 10, 50, 100, 220))) +
-    scale_y_discrete(limits=rev(levels(BSRiskRatio$event))) +
+    scale_y_discrete(limits=rev(levels(BSRiskRatio$body_system_class))) +
     theme(legend.position="bottom",
           legend.title=element_blank(),
           axis.title.y=element_blank(),
@@ -125,10 +125,10 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
           axis.text.x=element_text(angle=0, hjust=0.5, size=10),
           axis.line.x=element_line(linewidth=0.5, linetype="solid", colour="black"))
 
-  ### This code creates the table format for the number of patients experiencing an event per arm,
-  ### or the total number of events of each type per arm
-  tab_base <- ggplot(RDSortedBS, aes(y=event)) +
-    ylab(NULL) + xlab(" ") + scale_y_discrete(limits = rev(levels(BSRiskRatio$event))) +
+  ### This code creates the table format for the number of patients experiencing an body_system_class per arm,
+  ### or the total number of body_system_classs of each type per arm
+  tab_base <- ggplot(RDSortedBS, aes(y=body_system_class)) +
+    ylab(NULL) + xlab(" ") + scale_y_discrete(limits = rev(levels(BSRiskRatio$body_system_class))) +
     theme(plot.title = element_text(hjust = 0.5, size=12), ## centering title on text
           axis.text.x=element_text(color="white"), ## need text to be printed so it stays aligned with figure but white so it's invisible
           axis.line=element_blank(),
@@ -140,8 +140,8 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
   t_I_n<-tab_base + geom_text(aes(x=1, label = eventn1, hjust = "middle")) + ggtitle(expression("I"["n"]))
   t_P_n<-tab_base + geom_text(aes(x=1, label = eventn2, hjust = "middle")) + ggtitle(expression("P"["n"]))
   ### Tables of total number of events per harm type for Intervention (I) and Placebo (P) arms
-  t_I_event<-tab_base + geom_text(aes(x=1, label = n_events1, hjust = "middle")) + ggtitle(expression("I"["event"]))
-  t_P_event<-tab_base + geom_text(aes(x=1, label = n_events2, hjust = "middle")) + ggtitle(expression("P"["event"]))
+  t_I_event<-tab_base + geom_text(aes(x=1, label = n_events1, hjust = "middle")) + ggtitle(expression("I"["body_system_class"]))
+  t_P_event<-tab_base + geom_text(aes(x=1, label = n_events2, hjust = "middle")) + ggtitle(expression("P"["body_system_class"]))
 
   ### Dot plot Version 2 - number of participants with each event and total number of events
   DotPlot <- plot_grid(left, right, t_I_n, t_I_event, t_P_n, t_P_event, nrow = 1, align = "h", rel_widths =
@@ -150,7 +150,7 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
   annotate_figure(DotPlot,
                   bottom = text_grob(bquote("I:Intervention (N = "*.(RDSortedBS[1,"N1"])*"),
                   P:Placebo (N ="*.(RDSortedBS[1,"N2"])*");
-                  X"["n"]*"= number of participants in arm X with AE, X"["event"]*"= number of AEs in arm X"),
+                  X"["n"]*"= number of participants in arm X with AE, X"["body_system_class"]*"= number of AEs in arm X"),
                                      color = "black", face = "bold", size = 10),
                   top = text_grob("", color = "black", face = "bold", size = 10))
 
