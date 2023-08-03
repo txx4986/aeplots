@@ -13,11 +13,12 @@ library("aeplots")
 ls("package:aeplots")
 ```
 Functions available in the package:
--`aetable`: Plots a table of AE summary by body system class
--`aeseverity`: Plots a table of AE summary by severity
--`aedot`:Plots a dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to give an overview of the harm profile
--`aestacked`: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity
--`aebar`: Plots a bar chart to present the number of events reported per participant
+
+-   `aetable`: Plots a table of AE summary by body system class
+-   `aeseverity`: Plots a table of AE summary by severity
+-   `aedot`:Plots a dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to give an overview of the harm profile
+-   `aestacked`: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity
+-   `aebar`: Plots a bar chart to present the number of events reported per participant
 
 ## Sample dataset used to produce table to summarise AEs
 <table style="width: 609px;" border="1" cellspacing="0" cellpadding="0">
