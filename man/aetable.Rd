@@ -22,6 +22,12 @@ aetable(
   IRR = TRUE,
   variables = c(),
   mean = TRUE,
+  proportions_dp = 1,
+  IR_dp = 1,
+  mean_dp = 1,
+  SD_dp = 1,
+  IRR_sf = 3,
+  CI_sf = 3,
   save_image_path = NULL,
   save_docx_path = NULL
 )
@@ -60,6 +66,18 @@ aetable(
 \item{variables}{Vector of variables to be included in the glm Poisson model for computation of IRR besides arm}
 
 \item{mean}{Boolean to include mean and SD column in summary table}
+
+\item{proportions_dp}{Number of decimal places for proportions}
+
+\item{IR_dp}{Number of decimal places for incidence rate}
+
+\item{mean_dp}{Number of decimal places for mean number of AEs per participant}
+
+\item{SD_dp}{Number of decimal places for standard deviation of number of AEs per participant}
+
+\item{IRR_sf}{Number of significant figures for IRR}
+
+\item{CI_sf}{Number of significant figures for 95\% CI}
 
 \item{save_image_path}{File path to save table as image}
 

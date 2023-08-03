@@ -17,6 +17,12 @@
 #' @param IRR Boolean to include IRR and 95% CI column in summary table (only for 2 arms)
 #' @param variables Vector of variables to be included in the glm Poisson model for computation of IRR besides arm
 #' @param mean Boolean to include mean and SD column in summary table
+#' @param proportions_dp Number of decimal places for proportions
+#' @param IR_dp Number of decimal places for incidence rate
+#' @param mean_dp Number of decimal places for mean number of AEs per participant
+#' @param SD_dp Number of decimal places for standard deviation of number of AEs per participant
+#' @param IRR_sf Number of significant figures for IRR
+#' @param CI_sf Number of significant figures for 95% CI
 #' @param save_image_path File path to save table as image
 #' @param save_docx_path File path to save table as docx
 #'
@@ -37,7 +43,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                     last_visit = "last_visit", control = "C", intervention1 = "I1", intervention2 = "I2",
                     intervention3="I3", control_name="Control", intervention1_name = "Intervention 1",
                     intervention2_name = "Intervention 2", intervention3_name = "Intervention 3", IRR = TRUE,
-                    variables = c(), mean = TRUE, save_image_path=NULL, save_docx_path=NULL){
+                    variables = c(), mean = TRUE, proportions_dp = 1, IR_dp = 1, mean_dp = 1, SD_dp = 1,
+                    IRR_sf = 3, CI_sf = 3, save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand,
@@ -87,21 +94,21 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
       # total length of follow up time for each body system class and arm
       Total_Time = sum(follow_up_time),
       # mean number of adverse events for each participant for each body system class and arm
-      Mean = round(mean(n), 1),
+      Mean = round(mean(n), mean_dp),
       # standard deviation of number of adverse events for each participant for each body system class and arm
-      SD = round(sd(n), 1)) %>%
+      SD = round(sd(n), SD_dp)) %>%
     mutate(
       # IR = Events / Total_Time
-      IR = scales::percent(Events / Total_Time, 0.1),
+      IR = scales::percent(Events / Total_Time, 10^(-IR_dp)),
       # Proportions = Frequency / N
       Proportions =
-        case_when(arm=="C" ~ scales::percent(Frequency / N0, 0.1),
-                  arm=="I1" ~ scales::percent(Frequency / N1, 0.1),
-                  arm=="I2" ~ scales::percent(Frequency / N2, 0.1),
-                  arm=="I3" ~ scales::percent(Frequency / N3, 0.1))) %>%
-    mutate(
-      # one decimal place for mean and SD
-      across(c(Mean, SD), \(x) format(x, nsmall=1))) %>%
+        case_when(arm=="C" ~ scales::percent(Frequency / N0, 10^(-proportions_dp)),
+                  arm=="I1" ~ scales::percent(Frequency / N1, 10^(-proportions_dp)),
+                  arm=="I2" ~ scales::percent(Frequency / N2, 10^(-proportions_dp)),
+                  arm=="I3" ~ scales::percent(Frequency / N3, 10^(-proportions_dp)))) %>%
+    # mutate(
+    #   # one decimal place for mean and SD
+    #   across(c(Mean, SD), \(x) format(x, nsmall=1))) %>%
     mutate(
       # combine Frequency & Proportions, Events & IR, Mean & SD columns
       Frequency = str_glue("{Frequency} ({Proportions})"),
@@ -143,9 +150,9 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
         Coef = list(possibly(glm_func_vect, otherwise=NA)(body_system_class)),
         Estimate = Coef[[1]][[1]],
         SE = ifelse(is.na(Estimate)==FALSE, Coef[[2]], NA),
-        IRR = signif(exp(Estimate), 3),
-        lower = signif(exp(Estimate - crit_value * SE), 3),
-        upper = signif(exp(Estimate + crit_value * SE), 3),
+        IRR = signif(exp(Estimate), IRR_sf),
+        lower = signif(exp(Estimate - crit_value * SE), CI_sf),
+        upper = signif(exp(Estimate + crit_value * SE), CI_sf),
         CI = str_c("(", lower, ", ", upper, ")")
       ) %>%
       select(-c(Coef, Estimate, SE, lower, upper))
