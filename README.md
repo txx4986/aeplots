@@ -16,9 +16,18 @@ Functions available in the package:
 
 -   `aetable`: Plots a table of AE summary by body system class
 -   `aeseverity`: Plots a table of AE summary by severity
--   `aedot`:Plots a dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to give an overview of the harm profile
+-   `aedot`: Plots a dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to give an overview of the harm profile
 -   `aestacked`: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity
 -   `aebar`: Plots a bar chart to present the number of events reported per participant
+
+To see more detailed documentation of each function:
+```
+help(aetable)
+```
+or
+```
+?aetable
+```
 
 ## Sample dataset used to produce table to summarise AEs
 <table style="width: 595px;" border="1" cellspacing="0" cellpadding="0">
