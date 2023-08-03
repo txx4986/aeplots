@@ -9,22 +9,25 @@ aedot(
   body_system_class = "body_system_class",
   id = "id",
   arm = "arm",
-  arm1 = "A1",
-  arm2 = "A2"
+  control = "C",
+  intervention = "I",
+  save_image_path = NULL
 )
 }
 \arguments{
-\item{data}{Dataframe with adverse_event, body_system_class, id and arm columns}
+\item{data}{data frame with adverse_event, body_system_class, id and arm columns}
 
-\item{body_system_class}{Name of body_system_class column}
+\item{body_system_class}{name of body_system_class column}
 
-\item{id}{Name of id column}
+\item{id}{name of id column}
 
-\item{arm}{Name of arm column}
+\item{arm}{name of arm column}
 
-\item{arm1}{Factor level of arm 1}
+\item{control}{factor level of control arm}
 
-\item{arm2}{Factor level of arm 2}
+\item{intervention}{factor level of intervention arm}
+
+\item{save_image_path}{file path to save dot plot as image}
 }
 \value{
 Dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95\% confidence interval
@@ -33,5 +36,5 @@ Dot plot with proportions alongside treatment effect estimates (IRR) with accomp
 Dot plot to visualise AE and harm profiles in two-arm randomised controlled trials
 }
 \examples{
-aedot(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm")
+aedot(df, body_system_class="ae_02", control="Placebo", intervention="Anti-IgE")
 }

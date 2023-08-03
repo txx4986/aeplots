@@ -1,11 +1,12 @@
 #' Dot plot to visualise AE and harm profiles in two-arm randomised controlled trials
 #'
-#' @param data Dataframe with adverse_event, body_system_class, id and arm columns
-#' @param body_system_class Name of body_system_class column
-#' @param id Name of id column
-#' @param arm Name of arm column
-#' @param arm1 Factor level of arm 1
-#' @param arm2 Factor level of arm 2
+#' @param data data frame with adverse_event, body_system_class, id and arm columns
+#' @param body_system_class name of body_system_class column
+#' @param id name of id column
+#' @param arm name of arm column
+#' @param control factor level of control arm
+#' @param intervention factor level of intervention arm
+#' @param save_image_path file path to save dot plot as image
 #'
 #' @return Dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval
 #'
@@ -21,8 +22,9 @@
 #' @export
 #'
 #' @examples
-#' aedot(df, body_system_class="ae_02", id="participant_id", arm="treatment_arm")
-aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm", arm1="A1", arm2="A2"){
+#' aedot(df, body_system_class="ae_02", control="Placebo", intervention="Anti-IgE")
+aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm", control="C", intervention="I",
+                  save_image_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm)
@@ -34,13 +36,13 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
   # recode arm factor
   arm_number <- length(unique(dataset$arm))
   dataset$arm <- as.character(dataset$arm)
-  dataset$arm[which(dataset$arm==arm1)] <- "A1"
-  dataset$arm[which(dataset$arm==arm2)] <- "A2"
+  dataset$arm[which(dataset$arm==control)] <- "C"
+  dataset$arm[which(dataset$arm==intervention)] <- "I"
   dataset$arm <- as.factor(dataset$arm)
 
   # number of participants at risk per arm
-  N1 <- length(unique((dataset %>% filter(arm=="A1"))$id))
-  N2 <- length(unique((dataset %>% filter(arm=="A2"))$id))
+  N1 <- length(unique((dataset %>% filter(arm=="I"))$id))
+  N2 <- length(unique((dataset %>% filter(arm=="C"))$id))
 
   crit_value <- qnorm(0.975, mean=0, sd=1)
 
@@ -48,13 +50,13 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
   Table2 <- dataset %>%
     group_by(event) %>%
     summarise(
-      eventn1 = length(unique(id[arm=="A1"])),
+      eventn1 = length(unique(id[arm=="I"])),
       N1 = N1,
-      eventn2 = length(unique(id[arm=="A2"])),
+      eventn2 = length(unique(id[arm=="C"])),
       N2 = N2,
       n_events = sum(!is.na(id)),
-      n_events1 = sum(!is.na(id[arm=="A1"])),
-      n_events2 = sum(!is.na(id[arm=="A2"]))
+      n_events1 = sum(!is.na(id[arm=="I"])),
+      n_events2 = sum(!is.na(id[arm=="C"]))
     ) %>%
     mutate(
       r1 = eventn1 / N1,
@@ -152,5 +154,8 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
                                      color = "black", face = "bold", size = 10),
                   top = text_grob("", color = "black", face = "bold", size = 10))
 
+  if (!is.null(save_image_path)){
+    ggsave(save_image_path)
+  }
 
 }

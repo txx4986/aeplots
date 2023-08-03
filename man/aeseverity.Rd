@@ -17,6 +17,7 @@ aeseverity(
   arm2_name = "Arm 2",
   arm3_name = "Arm 3",
   arm4_name = "Arm 4",
+  proportions_dp = 1,
   save_image_path = NULL,
   save_docx_path = NULL
 )
@@ -46,11 +47,11 @@ aeseverity(
 
 \item{arm4_name}{name of arm 4}
 
+\item{proportions_dp}{number of decimal places for proportions}
+
 \item{save_image_path}{file path to save table as image}
 
 \item{save_docx_path}{file path to save table as docx}
-
-\item{proportions_dp}{number of decimal places for proportions}
 }
 \value{
 flextable of frequencies and proportions of events by severity categories
