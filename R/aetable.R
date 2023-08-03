@@ -139,10 +139,12 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   if (IRR==TRUE){
     crit_value <- qnorm(0.975, mean=0, sd=1)
 
+    # count number of AEs for each id grouped by body_system_class
     reg_df <- dataset %>%
       group_by(across(all_of(c(variables, "body_system_class", "id", "arm", "follow_up_time")))) %>%
       count()
 
+    # fit glm model with Poisson function and log link
     glm_func <- function(x){
       summary(glm(n ~ . - follow_up_time, offset=log(follow_up_time), family=poisson(link="log"),
                   data=reg_df %>%

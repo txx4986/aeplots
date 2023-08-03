@@ -1,21 +1,22 @@
 #' Table of frequencies and proportions of events by severity categories
 #'
-#' @param data Dataframe with adverse event, severity, id and arm columns
-#' @param severity Name of severity column
-#' @param id Name of id column
-#' @param arm Name of arm column
-#' @param arm1 Factor level of arm 1
-#' @param arm2 Factor level of arm 2
-#' @param arm3 Factor level of arm 3
-#' @param arm4 Factor level of arm 4
-#' @param arm1_name Name of arm 1
-#' @param arm2_name Name of arm 2
-#' @param arm3_name Name of arm 3
-#' @param arm4_name Name of arm 4
+#' @param data data frame with adverse event, severity, id and arm columns
+#' @param severity name of severity column
+#' @param id name of id column
+#' @param arm name of arm column
+#' @param arm1 factor level of arm 1
+#' @param arm2 factor level of arm 2
+#' @param arm3 factor level of arm 3
+#' @param arm4 factor level of arm 4
+#' @param arm1_name name of arm 1
+#' @param arm2_name name of arm 2
+#' @param arm3_name name of arm 3
+#' @param arm4_name name of arm 4
+#' @param proportions_dp number of decimal places for proportions
 #' @param save_image_path file path to save table as image
 #' @param save_docx_path file path to save table as docx
 #'
-#' @return Flextable of frequencies and proportions of events by severity categories
+#' @return flextable of frequencies and proportions of events by severity categories
 #'
 #' @import dplyr
 #' @import tidyr
@@ -25,6 +26,10 @@
 #' @import here
 #'
 #' @export
+#'
+#' @examples
+#' ## ADAPT sample data
+#' aeseverity(df, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", proportions_dp=2)
 aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1", arm2="A2", arm3="A3", arm4="A4",
                        arm1_name="Arm 1", arm2_name="Arm 2", arm3_name="Arm 3", arm4_name="Arm 4",
                        save_image_path=NULL, save_docx_path=NULL){
@@ -56,10 +61,10 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
       Frequency=length(unique(id))) %>%
     mutate(
       Proportions =
-        case_when(arm=="A1" ~ scales::percent(Frequency / N1, 0.1),
-                  arm=="A2" ~ scales::percent(Frequency / N2, 0.1),
-                  arm=="A3" ~ scales::percent(Frequency / N3, 0.1),
-                  arm=="A4" ~ scales::percent(Frequency / N4, 0.1)))%>%
+        case_when(arm=="A1" ~ scales::percent(Frequency / N1, 10^(-proportions_dp)),
+                  arm=="A2" ~ scales::percent(Frequency / N2, 10^(-proportions_dp)),
+                  arm=="A3" ~ scales::percent(Frequency / N3, 10^(-proportions_dp)),
+                  arm=="A4" ~ scales::percent(Frequency / N4, 10^(-proportions_dp))))%>%
     pivot_wider(
       names_from = arm, values_from = c(Frequency, Proportions))
 

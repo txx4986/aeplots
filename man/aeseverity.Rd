@@ -22,37 +22,43 @@ aeseverity(
 )
 }
 \arguments{
-\item{data}{Dataframe with adverse event, severity, id and arm columns}
+\item{data}{data frame with adverse event, severity, id and arm columns}
 
-\item{severity}{Name of severity column}
+\item{severity}{name of severity column}
 
-\item{id}{Name of id column}
+\item{id}{name of id column}
 
-\item{arm}{Name of arm column}
+\item{arm}{name of arm column}
 
-\item{arm1}{Factor level of arm 1}
+\item{arm1}{factor level of arm 1}
 
-\item{arm2}{Factor level of arm 2}
+\item{arm2}{factor level of arm 2}
 
-\item{arm3}{Factor level of arm 3}
+\item{arm3}{factor level of arm 3}
 
-\item{arm4}{Factor level of arm 4}
+\item{arm4}{factor level of arm 4}
 
-\item{arm1_name}{Name of arm 1}
+\item{arm1_name}{name of arm 1}
 
-\item{arm2_name}{Name of arm 2}
+\item{arm2_name}{name of arm 2}
 
-\item{arm3_name}{Name of arm 3}
+\item{arm3_name}{name of arm 3}
 
-\item{arm4_name}{Name of arm 4}
+\item{arm4_name}{name of arm 4}
 
 \item{save_image_path}{file path to save table as image}
 
 \item{save_docx_path}{file path to save table as docx}
+
+\item{proportions_dp}{number of decimal places for proportions}
 }
 \value{
-Flextable of frequencies and proportions of events by severity categories
+flextable of frequencies and proportions of events by severity categories
 }
 \description{
 Table of frequencies and proportions of events by severity categories
+}
+\examples{
+## ADAPT sample data
+aeseverity(df, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", proportions_dp=2)
 }
