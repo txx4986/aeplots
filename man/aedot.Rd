@@ -30,7 +30,7 @@ aedot(
 \item{save_image_path}{file path to save dot plot as image}
 }
 \value{
-Dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95\% confidence interval
+dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95\% confidence interval
 }
 \description{
 Dot plot to visualise AE and harm profiles in two-arm randomised controlled trials

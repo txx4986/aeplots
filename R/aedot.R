@@ -8,7 +8,7 @@
 #' @param intervention factor level of intervention arm
 #' @param save_image_path file path to save dot plot as image
 #'
-#' @return Dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval
+#' @return dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval
 #'
 #' @import dplyr
 #' @import tidyr
