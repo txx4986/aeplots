@@ -24,7 +24,7 @@ aestacked(
 )
 }
 \arguments{
-\item{data}{data frame with adverse_event, body_system_class, severity, id and arm column}
+\item{data}{data frame with adverse_event, body_system_class, severity, id and arm columns}
 
 \item{body_system_class}{name of body_system_class column}
 
