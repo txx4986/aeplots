@@ -55,6 +55,8 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
   N3 <- length(unique((dataset %>% filter(arm=="A3"))$id))
   N4 <- length(unique((dataset %>% filter(arm=="A4"))$id))
 
+  options(dplyr.summarise.inform = FALSE)
+
   Table2 <- dataset %>%
     group_by(severity, arm) %>%
     summarise(

@@ -92,6 +92,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
     # follow up time is computed as difference between randomisation date and last visit date (units=weeks)
     mutate(follow_up_time = as.numeric(difftime(last_visit, date_rand, units="weeks")))
 
+  options(dplyr.summarise.inform = FALSE)
+
   Table1 <- dataset %>%
     group_by(body_system_class, id, arm, follow_up_time) %>%
     # count total number of adverse events of each participant for each body system class

@@ -1,6 +1,6 @@
 #' Stacked bar chart of proportions for each body system class by arm and maximum severity
 #'
-#' @param data data frame with adverse_event, body_system_class, severity, id and arm column
+#' @param data data frame with adverse_event, body_system_class, severity, id and arm columns
 #' @param body_system_class name of body_system_class column
 #' @param severity name of severity column
 #' @param id name of id column
@@ -34,7 +34,7 @@ aestacked <- function(data, body_system_class="body_system_class", severity="sev
                       save_image_path=NULL){
   # change the column names
   dataset <- data %>%
-    dplyr::rename("body_system_class" = body_system_class, "severity" = severity, "id" = id, "arm" = arm)
+    rename("body_system_class" = body_system_class, "severity" = severity, "id" = id, "arm" = arm)
 
   # checks if the variable type for each column is correct
   stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
@@ -75,6 +75,8 @@ aestacked <- function(data, body_system_class="body_system_class", severity="sev
   N2 <- length(unique((dataset %>% filter(arm=="A2"))$id))
   N3 <- length(unique((dataset %>% filter(arm=="A3"))$id))
   N4 <- length(unique((dataset %>% filter(arm=="A4"))$id))
+
+  options(dplyr.summarise.inform = FALSE)
 
   Table4 <- dataset %>%
     group_by(body_system_class, id, arm) %>%
