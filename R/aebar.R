@@ -6,6 +6,7 @@
 #' @param arm_levels vector of factor levels in arm variable
 #' @param arm_names vector of names for each arm in arm variable
 #' @param arm_colours vector of colours for each arm
+#' @param facets a logical value whether to plot bar chart with facets
 #' @param save_image_path file path to save bar chart as image
 #'
 #' @return Bar chart presenting the number of events reported per participant

@@ -4,11 +4,40 @@
 \alias{aebar}
 \title{Bar chart}
 \usage{
-aebar()
+aebar(
+  data,
+  id = "id",
+  arm = "arm",
+  arm_levels = c("A1", "A2", "A3", "A4"),
+  arm_names = c("Arm 1", "Arm 2", "Arm 3", "Arm 4"),
+  arm_colours = c(),
+  facets = TRUE,
+  save_image_path = NULL
+)
 }
 \arguments{
-\item{data}{data frame}
+\item{data}{data frame with adverse_event, id and arm columns}
+
+\item{id}{name of id column}
+
+\item{arm}{name of arm column}
+
+\item{arm_levels}{vector of factor levels in arm variable}
+
+\item{arm_names}{vector of names for each arm in arm variable}
+
+\item{arm_colours}{vector of colours for each arm}
+
+\item{facets}{a logical value whether to plot bar chart with facets}
+
+\item{save_image_path}{file path to save bar chart as image}
+}
+\value{
+Bar chart presenting the number of events reported per participant
 }
 \description{
 Bar chart
+}
+\examples{
+aebar(df, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
 }
