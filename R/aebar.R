@@ -25,7 +25,7 @@ aebar <- function(data, id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4")
                   save_image_path=NULL){
   # change the column names
   dataset <- data %>%
-    rename("id" = id, "arm" = arm)
+    dplyr::rename("id" = id, "arm" = arm)
 
   if (length(arm_colours)==0){
     arm_colours <- c("#e14b31", "#22a7f0", "#6AA84f", "#F1C232")
