@@ -200,7 +200,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                      "Treatment Effect Estimate (IRR)", "95% CI"),
             colwidths = c(1, 3, 3, 1, 1)) %>%
           set_header_labels(
-            ae_02="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
+            body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
             Mean_I1="Mean number of events per participant (SD)", Frequency_C="N (%)",
             Events_C="n (IR)", Mean_C="Mean number of events per participant (SD)",
             IRR = "Treatment Effect Estimate (IRR)", CI = "95% CI") %>%
@@ -347,7 +347,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                      "Treatment Effect Estimate (IRR)", "95% CI"),
             colwidths = c(1, 2, 2, 1, 1)) %>%
           set_header_labels(
-            ae_02="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)", Frequency_C="N (%)",
+            body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)", Frequency_C="N (%)",
             Events_C="n (IR)", IRR = "Treatment Effect Estimate (IRR)", CI = "95% CI") %>%
           merge_h(part="header") %>%
           merge_v(part="header") %>%
