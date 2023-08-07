@@ -1,6 +1,8 @@
 ---
 title: "aeplots"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{aeplots}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,13 +18,62 @@ knitr::opts_chunk$set(
 
 ## Introduction
 The vignette documents how to use the functions in `aeplot` to create tables and plots for analysing adverse event data in clinical trials.
-```{r setup}
+```{r setup, message=FALSE}
+devtools::install_github("https://github.com/txx4986/aeplots.git")
 library(aeplots)
 ```
 
 ## Input data
 To generate tables and plots to summarise adverse events in clinical trials, the R package requires the input dataset in data frame format. A sample dataset is shown below:
 ```{r}
-load(df2)
+data(df2)
+head(df2, 10)
+```
+
+```{r}
+df2$ae_02 <- as.factor(df2$ae_02)
+df2$ae_05 <- as.factor(df2$ae_05)
+```
+
+## `aetable` function
+`aetable` 
+```{r, fig.dim=c(7, 6)}
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
+```
+
+```{r, fig.dim=c(7, 6)}
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=FALSE, mean=TRUE)
+```
+
+## `aeseverity` function
+```{r, fig.dim=c(7, 6)}
+aeseverity(df2, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", proportions_dp=2)
+```
+
+## `aedot` function
+```{r, message=FALSE, warning=FALSE, fig.dim=c(7, 6)}
+aedot(df2, body_system_class="ae_02", control="Placebo", intervention="Anti-IgE")
+```
+
+## `aestacked` function
+```{r, fig.dim=c(7, 6)}
+aestacked(df2, body_system_class="ae_02", severity="ae_05", arm1="Anti-IgE", arm2="Placebo", severity_levels=c("Mild", "Moderate", "Severe"), arm1_name="Anti-IgE", arm2_name="Placebo")
+```
+
+## `aebar` function
+```{r, fig.dim=c(7, 6)}
+aebar(df2, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
+```
+
+```{r, fig.dim=c(7, 6)}
+aebar(df2, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=TRUE)
+```
+
+## More than 2 treatment arms
+```{r}
+data(df3)
+df3$ae_02 <- as.factor(df3$ae_02)
+df3$ae_05 <- as.factor(df3$ae_05)
+head(df3, 10)
 ```
 
