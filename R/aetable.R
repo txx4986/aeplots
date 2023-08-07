@@ -45,6 +45,7 @@
 #' @import common
 #' @import here
 #' @import lubridate
+#' @import stringr
 #'
 #' @export
 #'

@@ -15,6 +15,7 @@
 #' @import tidyr
 #' @import tidyverse
 #' @import ggplot2
+#' @import stringr
 #'
 #' @export
 #'
