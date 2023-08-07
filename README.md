@@ -2,9 +2,13 @@
 R package to create tables and plots for analysing adverse event data in clinical trials
 
 ## How to install
+You can install `aeplots` with:
 ```
+# install.packages("devtools")
 devtools::install_github("https://github.com/txx4986/aeplots.git")
 ```
+
+Please refer to the [devtools documentation](https://www.r-project.org/nosvn/pandoc/devtools.html) for instructions on how to set up a working development environment and install `devtools` depending on your platform.
 
 ## Overview
 To see the full list of exported functions:
