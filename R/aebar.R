@@ -75,7 +75,7 @@ aebar <- function(data, id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4")
   if (facets==TRUE){
     bar <- ggplot(Table5, aes(x=factor(n), y=Percentage, fill=arm)) +
       geom_bar(stat="identity", width=0.6) +
-      scale_y_continuous(expand=expand_scale(add = c(0,5))) +
+      scale_y_continuous(expand=expansion(add = c(0,5))) +
       labs(x="Number of adverse events", y="Percentage of participants") +
       scale_fill_manual(values=arm_colours) +
       theme(
