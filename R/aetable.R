@@ -44,6 +44,7 @@
 #' @import flextable
 #' @import common
 #' @import here
+#' @import lubridate
 #'
 #' @export
 #'
