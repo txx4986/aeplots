@@ -16,6 +16,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r, include=FALSE}
+library(printr)
+```
+
 ## Introduction
 The vignette documents how to use the functions in `aeplot` to create tables and plots for analysing adverse event data in clinical trials.
 ```{r setup, message=FALSE}
@@ -24,56 +28,124 @@ library(aeplots)
 ```
 
 ## Input data
-To generate tables and plots to summarise adverse events in clinical trials, the R package requires the input dataset in data frame format. A sample dataset is shown below:
+### 2 treatment arms
+To generate tables and plots to summarise adverse events in clinical trials, the R package requires the input dataset in data frame format. A sample dataset with two treatment arms is shown below:
 ```{r}
 data(df2)
 head(df2, 10)
 ```
 
+We would need to convert the body_system_class and severity columns to factors.
 ```{r}
 df2$ae_02 <- as.factor(df2$ae_02)
-df2$ae_05 <- as.factor(df2$ae_05)
+# for severity to be presented in ascending order, we order the levels
+df2$ae_05 <- ordered(df2$ae_05, c("Mild", "Moderate", "Severe"))
+```
+
+## More than 2 treatment arms
+The functions `aetable`, `aeseverity`, `aestacked` and `aebar` can take up to 4 treatment arms. A sample dataset with 3 treatment arms:
+```{r}
+data(df3)
+head(df3, 10)
+df3$ae_02 <- as.factor(df3$ae_02)
+df3$ae_05 <- ordered(df2$ae_05, c("Mild", "Moderate", "Severe"))
 ```
 
 ## `aetable` function
-`aetable` 
+### 2 treatment arms
+`aetable` plots a table of AE summary by body system class and arm. It contains the total number of participants at risk per arm ($N_{1}$, $N_{2}$), frequency (N), proportion (%), total number of events (n), incidence rate (IR), number of adverse events per participant (mean & SD) and treatment effect estimate (IRR) with its 95% confidence interval (CI). To include additional covariates besides arm in the generalised linear model with Poisson function and log link, specify a vector the variable names in the **variables** argument.
 ```{r, fig.dim=c(7, 6)}
-aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"))
 ```
 
+We can specify the number of decimal places for the proportions, IR, mean and SD columns as well as the number of significant figures for the IRR and 95% CI.
 ```{r, fig.dim=c(7, 6)}
-aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=FALSE, mean=TRUE)
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), proportions_dp=2, IR_dp=2, mean_dp=2, SD_dp=2, IRR_sf=4, CI_sf=4)
+```
+
+We can choose to drop the IRR and 95% CI by specifying **IRR=FALSE**.
+```{r, fig.dim=c(7, 6)}
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=FALSE)
+```
+
+We can also choose to drop the mean column by specifying **mean=FALSE**.
+```{r, fig.dim=c(7, 6)}
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=FALSE, mean=FALSE)
+```
+
+### More than 2 treatment arms
+`aetable` does not include the IRRs and their 95% CIs for datasets with more than 2 treatment arms.
+```{r, fig.dim=c(7, 6)}
+aetable(df3, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE")
 ```
 
 ## `aeseverity` function
+### 2 treatment arms
+`aeseverity` plots a table of frequencies and proportions of events by severity categories. We specify the number of decimal places for proportions via the argument **proportions_dp**.
 ```{r, fig.dim=c(7, 6)}
-aeseverity(df2, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", proportions_dp=2)
+aeseverity(df2, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", arm1_name="Anti-IgE", arm2_name="Placebo", proportions_dp=2)
+```
+
+### More than 2 treatment arms
+```{r, fig.dim=c(7, 6)}
+aeseverity(df3, severity="ae_05", arm1="I1", arm2="I2", arm3="C")
 ```
 
 ## `aedot` function
+`aedot` plots a dot plot proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to visualise AE and harm profiles in two-arm randomised controlled trials.
 ```{r, message=FALSE, warning=FALSE, fig.dim=c(7, 6)}
 aedot(df2, body_system_class="ae_02", control="Placebo", intervention="Anti-IgE")
 ```
 
 ## `aestacked` function
+### 2 treatment arms
+`aestacked` plots a stacked bar chart of proportions for each body system class by arm and maximum severity. If severity is not ordered, it is required to specify the levels of severity in ascending order in the argument **severity_levels**.
 ```{r, fig.dim=c(7, 6)}
 aestacked(df2, body_system_class="ae_02", severity="ae_05", arm1="Anti-IgE", arm2="Placebo", severity_levels=c("Mild", "Moderate", "Severe"), arm1_name="Anti-IgE", arm2_name="Placebo")
 ```
 
+We can change the colour for each severity by specifying a vector of colour codes corresponding to each severity level in the **severity_colours** argument. 
+```{r, fig.dim=c(7, 6)}
+aestacked(df2, body_system_class="ae_02", severity="ae_05", arm1="Anti-IgE", arm2="Placebo", severity_levels=c("Mild", "Moderate", "Severe"), severity_colours=c("#D0EE11", "#48B5C4", "#115F9A"), arm1_name="Anti-IgE", arm2_name="Placebo")
+```
+
+### More than 2 treatment arms
+```{r, fig.dim=c(7, 6)}
+aestacked(df3, body_system_class="ae_02", severity="ae_05", arm1="I1", arm2="I2", arm3="C", severity_levels=c("Mild", "Moderate", "Severe"))
+```
+
 ## `aebar` function
+### 2 treatment arms
+`aebar` plots a bar chart for number of events reported per participant.
 ```{r, fig.dim=c(7, 6)}
 aebar(df2, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
 ```
 
+We can change the colour representing each treatment arm by specifying a vector of colour codes in the **arm_colours** argument according to the order of arm levels specified in the arm_levels argument.
 ```{r, fig.dim=c(7, 6)}
-aebar(df2, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=TRUE)
+aebar(df2, arm_levels=c("Anti-IgE","Placebo"), arm_colours=c("#FFB55A", "#B2E061"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
 ```
 
-## More than 2 treatment arms
-```{r}
-data(df3)
-df3$ae_02 <- as.factor(df3$ae_02)
-df3$ae_05 <- as.factor(df3$ae_05)
-head(df3, 10)
+### More than 2 treatment arms
+```{r, fig.dim=c(7, 6)}
+aebar(df3, arm_levels=c("I1","I2", "C"), arm_names=c("I1","I2", "C"), facets=FALSE)
+```
+
+We can plot a bar chart for each treatment arm in separate facets by specifying **facets=TRUE**.
+```{r, fig.dim=c(7, 6)}
+aebar(df3, arm_levels=c("I1","I2", "C"), arm_names=c("I1","I2", "C"), facets=TRUE)
+```
+
+## Saving tables and plots
+### Docx
+We can save tables as docx by specifying the filepath in the **save_docx_path** argument.
+```{r, fig.dim=c(7, 6)}
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), save_docx_path="table.docx")
+```
+
+### Image
+We can save tables and plots as images by specifying the filepath in the **save_image_path** argument.
+```{r, fig.dim=c(7, 6)}
+aebar(df3, arm_levels=c("I1","I2", "C"), arm_names=c("I1","I2", "C"), facets=TRUE, save_image_path="image.png")
 ```
 
