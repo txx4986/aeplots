@@ -14,6 +14,15 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Introduction
+The vignette documents how to use the functions in `aeplot` to create tables and plots for analysing adverse event data in clinical trials.
 ```{r setup}
 library(aeplots)
 ```
+
+## Input data
+To generate tables and plots to summarise adverse events in clinical trials, the R package requires the input dataset in data frame format. A sample dataset is shown below:
+```{r}
+load(df2)
+```
+
