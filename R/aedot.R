@@ -16,7 +16,7 @@
 #' @importFrom reshape2 melt
 #' @import ggplot2
 #' @import scales
-#' @importFrom ggpubr annotate_figure
+#' @importFrom ggpubr annotate_figure, text_grob
 #' @importFrom cowplot plot_grid
 #'
 #' @export
