@@ -23,7 +23,6 @@ library(printr)
 ## Introduction
 The vignette documents how to use the functions in `aeplot` to create tables and plots for analysing adverse event data in clinical trials.
 ```{r setup, message=FALSE}
-devtools::install_github("https://github.com/txx4986/aeplots.git")
 library(aeplots)
 ```
 
