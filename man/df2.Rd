@@ -7,15 +7,15 @@
 \format{
 A data frame with 370 rows and 9 variables:
 \describe{
-\item{ae_01}{Adverse event}
-\item{ae_02}{Body system class}
 \item{id}{Participant's id}
-\item{arm}{Treatment arm}
+\item{arm}{Treatment arm: Placebo & Intervention}
+\item{ae_pt}{Adverse event preferred term}
+\item{aebodysys}{Body system class}
+\item{severity}{Severity}
 \item{date_rand}{Date of randomisation}
 \item{last_visit}{Date of last visit}
-\item{IgEstrat}{Variable 1 to be included in Poisson regression}
-\item{agestrat}{Variable 2 to be included in Poisson regression}
-\item{ae_05}{Severity}
+\item{variable1}{Variable 1 to be included in Poisson regression}
+\item{variable2}{Variable 2 to be included in Poisson regression}
 }
 }
 \usage{
