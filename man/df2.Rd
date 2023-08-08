@@ -10,7 +10,7 @@ A data frame with 370 rows and 9 variables:
 \item{id}{Participant's id}
 \item{arm}{Treatment arm: Placebo & Intervention}
 \item{ae_pt}{Adverse event preferred term}
-\item{aebodysys}{Body system class}
+\item{aebodsys}{Body system class}
 \item{severity}{Severity}
 \item{date_rand}{Date of randomisation}
 \item{last_visit}{Date of last visit}

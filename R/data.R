@@ -5,7 +5,7 @@
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo & Intervention}
 #'    \item{ae_pt}{Adverse event preferred term}
-#'    \item{aebodysys}{Body system class}
+#'    \item{aebodsys}{Body system class}
 #'    \item{severity}{Severity}
 #'    \item{date_rand}{Date of randomisation}
 #'    \item{last_visit}{Date of last visit}
@@ -21,7 +21,7 @@
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2}
 #'    \item{ae_pt}{Adverse event preferred term}
-#'    \item{aebodysys}{Body system class}
+#'    \item{aebodsys}{Body system class}
 #'    \item{severity}{Severity}
 #'    \item{date_rand}{Date of randomisation}
 #'    \item{last_visit}{Date of last visit}
@@ -35,7 +35,7 @@
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2, Intervention 3}
 #'    \item{ae_pt}{Adverse event preferred term}
-#'    \item{aebodysys}{Body system class}
+#'    \item{aebodsys}{Body system class}
 #'    \item{severity}{Severity}
 #'    \item{date_rand}{Date of randomisation}
 #'    \item{last_visit}{Date of last visit}
