@@ -91,1157 +91,310 @@
 <div class="section level2">
 <h2 id="sample-dataset">Sample dataset<a class="anchor" aria-label="anchor" href="#sample-dataset"></a>
 </h2>
-<table style="width: 609px;" border="1" cellspacing="0" cellpadding="0" class="table"><tbody>
-<tr>
-<td valign="top" width="84">
-<p>
-<strong>adverse_event</strong>
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-<strong>body_system_class</strong>
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-<strong>severity</strong>
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-<strong>id</strong>
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-<strong>arm</strong>
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-<strong>date_rand</strong>
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-<strong>last_visit</strong>
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-<strong>variable1</strong>
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-<strong>variable2</strong>
-</p>
-</td>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th>id</th>
+<th>arm</th>
+<th>adverse_event</th>
+<th>body_system_class</th>
+<th>severity</th>
+<th>date_rand</th>
+<th>last_visit</th>
+<th>variable1</th>
+<th>variable2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>2001</td>
+<td>Placebo</td>
+<td>Cold</td>
+<td>Respiratory</td>
+<td>Moderate</td>
+<td>2015-10-28</td>
+<td>2016-08-31</td>
+<td>2</td>
+<td>910.785</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Runny nose
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Eyes, ear, nose, throat
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Mild
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1001
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-23
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-234
-</p>
-</td>
+<tr class="even">
+<td>2001</td>
+<td>Placebo</td>
+<td>Anemia</td>
+<td>Blood and lymphatic</td>
+<td>Severe</td>
+<td>2015-10-28</td>
+<td>2016-08-31</td>
+<td>2</td>
+<td>910.785</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Eczema aggravated
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Dermatological
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Moderate
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1001
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-23
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-234
-</p>
-</td>
+<tr class="odd">
+<td>2001</td>
+<td>Placebo</td>
+<td>Anemia</td>
+<td>Blood and lymphatic</td>
+<td>Moderate</td>
+<td>2015-10-28</td>
+<td>2016-08-31</td>
+<td>2</td>
+<td>910.785</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Eczema aggravated
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Dermatological
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Severe
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1001
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-23
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-234
-</p>
-</td>
+<tr class="even">
+<td>2001</td>
+<td>Placebo</td>
+<td>Leukocytosis</td>
+<td>Blood and lymphatic</td>
+<td>Severe</td>
+<td>2015-10-28</td>
+<td>2016-08-31</td>
+<td>2</td>
+<td>910.785</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Cold sore
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Respiratory
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Mild
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1001
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-23
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-234
-</p>
-</td>
+<tr class="odd">
+<td>2001</td>
+<td>Placebo</td>
+<td>Nausea</td>
+<td>Gastrointestinal</td>
+<td>Severe</td>
+<td>2015-10-28</td>
+<td>2016-08-31</td>
+<td>2</td>
+<td>910.785</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Upper respiratory tract infection
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Respiratory
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Mild
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1001
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-23
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-234
-</p>
-</td>
+<tr class="even">
+<td>2002</td>
+<td>Intervention</td>
+<td>Other</td>
+<td>Blood and lymphatic</td>
+<td>Moderate</td>
+<td>2015-08-18</td>
+<td>2016-07-29</td>
+<td>2</td>
+<td>736.752</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Fractured wrist
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Musculo-skeletal
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Severe
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1001
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-23
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-234
-</p>
-</td>
+<tr class="odd">
+<td>2002</td>
+<td>Intervention</td>
+<td>Toothache</td>
+<td>Other</td>
+<td>Moderate</td>
+<td>2015-08-18</td>
+<td>2016-07-29</td>
+<td>2</td>
+<td>736.752</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Headache
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Neurological
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Moderate
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1001
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-23
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-234
-</p>
-</td>
+<tr class="even">
+<td>2002</td>
+<td>Intervention</td>
+<td>Accident</td>
+<td>Other</td>
+<td>Moderate</td>
+<td>2015-08-18</td>
+<td>2016-07-29</td>
+<td>2</td>
+<td>736.752</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Skin infection
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Dermatological
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Moderate
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1002
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-I
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-22
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-0
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-789
-</p>
-</td>
+<tr class="odd">
+<td>2004</td>
+<td>Placebo</td>
+<td>Cystitis</td>
+<td>Renal and urinary</td>
+<td>Mild</td>
+<td>2015-04-26</td>
+<td>2016-08-11</td>
+<td>1</td>
+<td>307.814</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Exacerbation of eczema
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Other
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Moderate
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1002
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-I
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-22
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-0
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-789
-</p>
-</td>
+<tr class="even">
+<td>2004</td>
+<td>Placebo</td>
+<td>Vomiting</td>
+<td>Gastrointestinal</td>
+<td>Severe</td>
+<td>2015-04-26</td>
+<td>2016-08-11</td>
+<td>1</td>
+<td>307.814</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Toothache
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Other
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Severe
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1002
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-I
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-15
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-22
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-0
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-789
-</p>
-</td>
+<tr class="odd">
+<td>2004</td>
+<td>Placebo</td>
+<td>Vomiting</td>
+<td>Gastrointestinal</td>
+<td>Mild</td>
+<td>2015-04-26</td>
+<td>2016-08-11</td>
+<td>1</td>
+<td>307.814</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Aching in limb
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Musculo-skeletal
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Mild
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1004
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-16
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-14
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-0
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-456
-</p>
-</td>
+<tr class="even">
+<td>2004</td>
+<td>Placebo</td>
+<td>Vomiting</td>
+<td>Gastrointestinal</td>
+<td>Mild</td>
+<td>2015-04-26</td>
+<td>2016-08-11</td>
+<td>1</td>
+<td>307.814</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Cold symptoms
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Respiratory
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Mild
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1004
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-16
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-14
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-0
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-456
-</p>
-</td>
+<tr class="odd">
+<td>2004</td>
+<td>Placebo</td>
+<td>Anemia</td>
+<td>Blood and lymphatic</td>
+<td>Moderate</td>
+<td>2015-04-26</td>
+<td>2016-08-11</td>
+<td>1</td>
+<td>307.814</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Nausea
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Gastro-intestinal
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Moderate
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1004
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-16
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-14
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-0
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-456
-</p>
-</td>
+<tr class="even">
+<td>2004</td>
+<td>Placebo</td>
+<td>Dry skin</td>
+<td>Dermatological</td>
+<td>Moderate</td>
+<td>2015-04-26</td>
+<td>2016-08-11</td>
+<td>1</td>
+<td>307.814</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Coryzal symptoms
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Respiratory
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Mild
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1004
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-01-16
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2015-12-14
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-0
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-456
-</p>
-</td>
+<tr class="odd">
+<td>2008</td>
+<td>Intervention</td>
+<td>Other</td>
+<td>Blood and lymphatic</td>
+<td>Moderate</td>
+<td>2015-12-04</td>
+<td>2016-04-28</td>
+<td>4</td>
+<td>380.890</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Eczema herpeticum
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Dermatological
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Mild
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1005
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-02-18
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2016-01-20
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-999
-</p>
-</td>
+<tr class="even">
+<td>2008</td>
+<td>Intervention</td>
+<td>Anemia</td>
+<td>Blood and lymphatic</td>
+<td>Mild</td>
+<td>2015-12-04</td>
+<td>2016-04-28</td>
+<td>4</td>
+<td>380.890</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Infected eczema
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Dermatological
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Severe
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1005
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-02-18
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2016-01-20
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-999
-</p>
-</td>
+<tr class="odd">
+<td>2008</td>
+<td>Intervention</td>
+<td>Anemia</td>
+<td>Blood and lymphatic</td>
+<td>Mild</td>
+<td>2015-12-04</td>
+<td>2016-04-28</td>
+<td>4</td>
+<td>380.890</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Allergic reaction (pollen)
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Allergies
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Severe
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1007
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-C
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-02-12
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2016-01-18
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-0
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-101
-</p>
-</td>
+<tr class="even">
+<td>2008</td>
+<td>Intervention</td>
+<td>Nausea</td>
+<td>Gastrointestinal</td>
+<td>Moderate</td>
+<td>2015-12-04</td>
+<td>2016-04-28</td>
+<td>4</td>
+<td>380.890</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Urticaria
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Dermatological
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Moderate
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1008
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-I
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-02-06
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2016-01-04
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-567
-</p>
-</td>
+<tr class="odd">
+<td>2014</td>
+<td>Intervention</td>
+<td>Headache</td>
+<td>Neuruological</td>
+<td>Mild</td>
+<td>2015-10-16</td>
+<td>2016-01-19</td>
+<td>3</td>
+<td>389.012</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Wheeze
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Respiratory
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Moderate
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1008
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-I
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-02-06
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2016-01-04
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-567
-</p>
-</td>
+<tr class="even">
+<td>2014</td>
+<td>Intervention</td>
+<td>Headache</td>
+<td>Neuruological</td>
+<td>Mild</td>
+<td>2015-10-16</td>
+<td>2016-01-19</td>
+<td>3</td>
+<td>389.012</td>
 </tr>
-<tr>
-<td valign="top" width="84">
-<p>
-Urticaria
-</p>
-</td>
-<td valign="top" nowrap width="123">
-<p>
-Dermatological
-</p>
-</td>
-<td valign="top" width="61">
-<p>
-Severe
-</p>
-</td>
-<td valign="top" nowrap width="37">
-<p>
-1008
-</p>
-</td>
-<td valign="top" nowrap width="33">
-<p>
-I
-</p>
-</td>
-<td valign="top" nowrap width="81">
-<p>
-2015-02-06
-</p>
-</td>
-<td valign="top" nowrap width="72">
-<p>
-2016-01-04
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-1
-</p>
-</td>
-<td valign="top" width="58">
-<p>
-567
-</p>
-</td>
-</tr>
-</tbody></table>
-<p>
- 
-</p>
+</tbody>
+</table>
 </div>
 <div class="section level2">
 <h2 id="variable-description-for-sample-dataset">Variable description for sample dataset<a class="anchor" aria-label="anchor" href="#variable-description-for-sample-dataset"></a>
 </h2>
-<table border="1" cellspacing="0" cellpadding="0" class="table"><tbody>
-<tr>
-<td valign="top" width="121">
-<p>
-<strong>Variable name</strong>
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-<strong>Variable description</strong>
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-<strong>Variable type</strong>
-</p>
-</td>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable name</th>
+<th>Variable description</th>
+<th>Variable type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>id</td>
+<td>Participant ID</td>
+<td>Factor/Character/Numeric</td>
 </tr>
-<tr>
-<td valign="top" width="121">
-<p>
-adverse_event
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-Adverse event name
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-Character
-</p>
-</td>
+<tr class="even">
+<td>arm</td>
+<td>Treatment arm of participant (2, 3 or 4 arms)</td>
+<td>Factor/Character/Numeric</td>
 </tr>
-<tr>
-<td valign="top" width="121">
-<p>
-body_system_class
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-Body system class of adverse event
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-Factor
-</p>
-</td>
+<tr class="odd">
+<td>adverse_event</td>
+<td>Adverse event preferred term</td>
+<td>Character</td>
 </tr>
-<tr>
-<td valign="top" width="121">
-<p>
-severity
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-Severity of adverse event
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-Factor
-</p>
-</td>
+<tr class="even">
+<td>body_system_class</td>
+<td>Body system class of adverse event</td>
+<td>Factor</td>
 </tr>
-<tr>
-<td valign="top" width="121">
-<p>
-id
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-Participant ID
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-Factor/Character/Numeric
-</p>
-</td>
+<tr class="odd">
+<td>severity</td>
+<td>Severity of adverse event</td>
+<td>Factor</td>
 </tr>
-<tr>
-<td valign="top" width="121">
-<p>
-arm
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-Treatment arm of participant (2, 3 or 4 arms)
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-Factor/Character/Numeric
-</p>
-</td>
+<tr class="even">
+<td>date_rand</td>
+<td>Randomisation date</td>
+<td>Date</td>
 </tr>
-<tr>
-<td valign="top" width="121">
-<p>
-date_rand
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-Randomisation date
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-Date
-</p>
-</td>
+<tr class="odd">
+<td>last_visit</td>
+<td>Date of last visit</td>
+<td>Date</td>
 </tr>
-<tr>
-<td valign="top" width="121">
-<p>
-last_visit
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-Date of last visit
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-Date
-</p>
-</td>
+<tr class="even">
+<td>variable</td>
+<td>Variables to be included in generalised linear models with Poisson function and log link for estimation of IRRs and 95% CIs</td>
+<td>Factor/Character/Numeric</td>
 </tr>
-<tr>
-<td valign="top" width="121">
-<p>
-variable
-</p>
-</td>
-<td valign="top" width="400">
-<p>
-Variables to be included in generalised linear models with Poisson function and log link for estimation of IRRs and 95% CIs
-</p>
-</td>
-<td valign="top" width="237">
-<p>
-Factor/Character/Numeric
-</p>
-</td>
-</tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
