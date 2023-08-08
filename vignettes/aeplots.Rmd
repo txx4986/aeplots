@@ -55,28 +55,28 @@ df3$ae_05 <- ordered(df2$ae_05, c("Mild", "Moderate", "Severe"))
 ### 2 treatment arms
 `aetable` plots a table of AE summary by body system class and arm. It contains the total number of participants at risk per arm ($N_{1}$, $N_{2}$), frequency (N), proportion (%), total number of events (n), incidence rate (IR), number of adverse events per participant (mean & SD) and treatment effect estimate (IRR) with its 95% confidence interval (CI). To include additional covariates besides arm in the generalised linear model with Poisson function and log link, specify a vector the variable names in the **variables** argument.
 ```{r, fig.dim=c(7, 6)}
-aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"))
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=TRUE, variables = c("agestrat", "IgEstrat"))
 ```
 
 We can specify the number of decimal places for the proportions, IR, mean and SD columns as well as the number of significant figures for the IRR and 95% CI.
 ```{r, fig.dim=c(7, 6)}
-aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), proportions_dp=2, IR_dp=2, mean_dp=2, SD_dp=2, IRR_sf=4, CI_sf=4)
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=TRUE, variables = c("agestrat", "IgEstrat"), proportions_dp=2, IR_dp=2, mean_dp=2, SD_dp=2, IRR_sf=4, CI_sf=4)
 ```
 
 We can choose to drop the IRR and 95% CI by specifying **IRR=FALSE**.
 ```{r, fig.dim=c(7, 6)}
-aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=FALSE)
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=FALSE)
 ```
 
 We can also choose to drop the mean column by specifying **mean=FALSE**.
 ```{r, fig.dim=c(7, 6)}
-aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=FALSE, mean=FALSE)
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=FALSE, mean=FALSE)
 ```
 
 ### More than 2 treatment arms
 `aetable` does not include the IRRs and their 95% CIs for datasets with more than 2 treatment arms.
 ```{r, fig.dim=c(7, 6)}
-aetable(df3, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE")
+aetable(df3, body_system_class="ae_02", control="C", intervention_levels=c("I1", "I2"), intervention_names=c("Intervention 1", "Intervention 2"))
 ```
 
 ## `aeseverity` function
@@ -140,7 +140,7 @@ aebar(df3, arm_levels=c("I1","I2", "C"), facets=TRUE)
 ### Docx
 We can save tables as docx by specifying the filepath in the **save_docx_path** argument.
 ```{r, fig.dim=c(7, 6)}
-aetable(df2, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), save_docx_path="table.docx")
+aetable(df2, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=TRUE, variables = c("agestrat", "IgEstrat"), save_docx_path="table.docx")
 ```
 
 ### Image
