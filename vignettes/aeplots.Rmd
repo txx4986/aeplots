@@ -42,7 +42,7 @@ df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 ```
 
 Note that for all the functions below, you would need to specify the column names corresponding to each variable needed unless you rename the column names of your dataset to the default column names as specified in the sample dataset of the documentation. Do refer to the detailed documentation of each function by typing:
-```{r}
+```{r, results="hide"}
 help(aetable)
 ```
 
