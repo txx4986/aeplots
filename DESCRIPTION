@@ -25,7 +25,8 @@ Imports:
   purrr,
   reshape2,
   printr,
-  devtools
+  devtools,
+  pkgdown
 Suggests: 
     knitr,
     rmarkdown
