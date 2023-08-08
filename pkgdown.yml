@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   aeplots: aeplots.html
-last_built: 2023-08-08T14:40Z
+last_built: 2023-08-08T14:44Z
 urls:
   reference: https://txx4986.github.io/aeplots/reference
   article: https://txx4986.github.io/aeplots/articles
