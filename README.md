@@ -11,11 +11,6 @@ devtools::install_github("https://github.com/txx4986/aeplots.git")
 Please refer to the [devtools documentation](https://www.r-project.org/nosvn/pandoc/devtools.html) for instructions on how to set up a working development environment and install `devtools` depending on your platform.
 
 ## Overview
-To see the full list of exported functions:
-```
-library("aeplots")
-ls("package:aeplots")
-```
 Functions available in the package:
 
 -   `aetable`: Plots a table of AE summary by body system class
@@ -33,552 +28,615 @@ or
 ?aetable
 ```
 
-## Sample dataset used to produce table to summarise AEs
-<table style="width: 595px;" border="1" cellspacing="0" cellpadding="0">
+## Sample dataset
+<table style="width: 609px;" border="1" cellspacing="0" cellpadding="0">
 <tbody>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p><strong>adverse_event</strong></p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p><strong>body_system_class</strong></p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p><strong>severity</strong></p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p><strong>id</strong></p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p><strong>arm</strong></p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p><strong>date_rand</strong></p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p><strong>last_visit</strong></p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p><strong>variable1</strong></p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p><strong>variable2</strong></p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Runny nose</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Eyes, ear, nose, throat</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Mild</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1001</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-23</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>234</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Eczema aggravated</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Dermatological</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Moderate</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1001</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-23</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>234</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Eczema aggravated</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Dermatological</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Severe</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1001</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-23</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>234</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Cold sore</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Respiratory</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Mild</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1001</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-23</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>234</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Upper respiratory tract infection</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Respiratory</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Mild</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1001</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-23</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>234</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Fractured wrist</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Musculo-skeletal</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Severe</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1001</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-23</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>234</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Headache</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Neurological</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Moderate</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1001</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-23</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>234</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Skin infection</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Dermatological</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Moderate</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1002</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>I</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-22</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>0</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>789</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Exacerbation of eczema</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Other</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Moderate</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1002</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>I</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-22</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>0</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>789</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Toothache</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Other</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Severe</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1002</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>I</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-15</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-22</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>0</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>789</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Aching in limb</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Musculo-skeletal</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Mild</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1004</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-16</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-14</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>0</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>456</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Cold symptoms</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Respiratory</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Mild</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1004</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-16</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-14</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>0</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>456</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Nausea</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Gastro-intestinal</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Moderate</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1004</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-16</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-14</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>0</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>456</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Coryzal symptoms</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Respiratory</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Mild</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1004</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-01-16</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2015-12-14</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>0</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>456</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Eczema herpeticum</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Dermatological</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Mild</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1005</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-02-18</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2016-01-20</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>999</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Infected eczema</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Dermatological</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Severe</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1005</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-02-18</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2016-01-20</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>999</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Allergic reaction (pollen)</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Allergies</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Severe</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1007</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>C</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-02-12</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2016-01-18</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>0</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>101</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Urticaria</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Dermatological</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Moderate</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1008</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>I</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-02-06</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2016-01-04</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>567</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Wheeze</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Respiratory</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Moderate</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1008</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>I</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-02-06</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2016-01-04</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>567</p>
 </td>
 </tr>
 <tr>
-<td valign="top" width="110">
+<td valign="top" width="84">
 <p>Urticaria</p>
 </td>
-<td valign="top" nowrap="nowrap" width="129">
+<td valign="top" nowrap="nowrap" width="123">
 <p>Dermatological</p>
 </td>
-<td valign="top" nowrap="nowrap" width="39">
+<td valign="top" width="61">
+<p>Severe</p>
+</td>
+<td valign="top" nowrap="nowrap" width="37">
 <p>1008</p>
 </td>
-<td valign="top" nowrap="nowrap" width="34">
+<td valign="top" nowrap="nowrap" width="33">
 <p>I</p>
 </td>
-<td valign="top" nowrap="nowrap" width="84">
+<td valign="top" nowrap="nowrap" width="81">
 <p>2015-02-06</p>
 </td>
-<td valign="top" nowrap="nowrap" width="76">
+<td valign="top" nowrap="nowrap" width="72">
 <p>2016-01-04</p>
 </td>
-<td valign="top" width="59">
+<td valign="top" width="58">
 <p>1</p>
 </td>
-<td valign="top" width="64">
+<td valign="top" width="58">
 <p>567</p>
 </td>
 </tr>
@@ -617,6 +675,17 @@ or
 </td>
 <td valign="top" width="400">
 <p>Body system class of adverse event</p>
+</td>
+<td valign="top" width="237">
+<p>Factor</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="121">
+<p>severity</p>
+</td>
+<td valign="top" width="400">
+<p>Severity of adverse event</p>
 </td>
 <td valign="top" width="237">
 <p>Factor</p>
