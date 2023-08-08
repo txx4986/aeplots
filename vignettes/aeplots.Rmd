@@ -118,22 +118,22 @@ aestacked(df3, body_system_class="ae_02", severity="ae_05", arm1="I1", arm2="I2"
 ### 2 treatment arms
 `aebar` plots a bar chart for number of events reported per participant.
 ```{r, fig.dim=c(7, 6)}
-aebar(df2, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
+aebar(df2, arm_levels=c("Anti-IgE","Placebo"), facets=FALSE)
 ```
 
 We can change the colour representing each treatment arm by specifying a vector of colour codes in the **arm_colours** argument according to the order of arm levels specified in the arm_levels argument.
 ```{r, fig.dim=c(7, 6)}
-aebar(df2, arm_levels=c("Anti-IgE","Placebo"), arm_colours=c("#FFB55A", "#B2E061"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
+aebar(df2, arm_levels=c("Anti-IgE","Placebo"), arm_colours=c("#FFB55A", "#B2E061"), facets=FALSE)
 ```
 
 ### More than 2 treatment arms
 ```{r, fig.dim=c(7, 6)}
-aebar(df3, arm_levels=c("I1","I2", "C"), arm_names=c("I1","I2", "C"), facets=FALSE)
+aebar(df3, arm_levels=c("I1","I2", "C"), arm_names=c("Intervention 1","Intervention 2", "Control"), facets=FALSE)
 ```
 
 We can plot a bar chart for each treatment arm in separate facets by specifying **facets=TRUE**.
 ```{r, fig.dim=c(7, 6)}
-aebar(df3, arm_levels=c("I1","I2", "C"), arm_names=c("I1","I2", "C"), facets=TRUE)
+aebar(df3, arm_levels=c("I1","I2", "C"), facets=TRUE)
 ```
 
 ## Saving tables and plots

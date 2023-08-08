@@ -21,8 +21,8 @@
 #'
 #' @examples
 #' aebar(df, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
-aebar <- function(data, id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4"),
-                  arm_names=NULL, arm_colours=NULL, facets=TRUE, save_image_path=NULL){
+aebar <- function(data, id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4"), arm_names=NULL,
+                  arm_colours=NULL, facets=TRUE, save_image_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("id" = id, "arm" = arm)

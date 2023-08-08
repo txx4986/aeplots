@@ -5,14 +5,8 @@
 #' @param severity name of severity column
 #' @param id name of id column
 #' @param arm name of arm column
-#' @param arm1 factor level of arm 1
-#' @param arm2 factor level of arm 2
-#' @param arm3 factor level of arm 3
-#' @param arm4 factor level of arm 4
-#' @param arm1_name name of arm 1
-#' @param arm2_name name of arm 2
-#' @param arm3_name name of arm 3
-#' @param arm4_name name of arm 4
+#' @param arm_levels vector of factor levels in arm variable
+#' @param arm_names vector of names for each arm in arm variable
 #' @param severity_levels vector of level of severity in ascending order if severity is not ordered factor
 #' @param severity_colours vector of colours for level of severity in ascending order
 #' @param save_image_path file path to save stacked bar chart plot as image
@@ -29,22 +23,25 @@
 #' @examples
 #' aestacked(df, body_system_class="ae_02", severity="ae_05", arm1="Anti-IgE", arm2="Placebo", severity_levels=c("Mild", "Moderate", "Severe"), arm1_name="Anti-IgE", arm2_name="Placebo")
 aestacked <- function(data, body_system_class="body_system_class", severity="severity", id="id", arm="arm",
-                      arm1="A1", arm2="A2", arm3="A3", arm4="A4", arm1_name="Arm 1", arm2_name="Arm 2",
-                      arm3_name="Arm 3", arm4_name="Arm 4", severity_levels=c(), severity_colours=c(),
-                      save_image_path=NULL){
+                      arm_levels=c("A1", "A2", "A3", "A4"), arm_names=NULL, severity_levels=NULL,
+                      severity_colours=NULL, save_image_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "severity" = severity, "id" = id, "arm" = arm)
+
+  if (is.null(arm_names)){
+    arm_names <- arm_levels
+  }
 
   # checks if the variable type for each column is correct
   stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
   stopifnot("severity variable type is not factor!" = is.factor(dataset[["severity"]]))
 
   # checks if either severity variable is ordered or severity level is specified
-  stopifnot("severity variable is not ordered or severity_levels is not specified!" = !(!is.ordered(dataset$severity) & length(severity_levels)==0))
+  stopifnot("severity variable is not ordered or severity_levels is not specified!" = !(!is.ordered(dataset$severity) & is.null(severity_levels)))
 
   severity_number <- length(levels(dataset$severity))
-  if (length(severity_colours)==0){
+  if (is.null(severity_colours)){
     severity_colours <- c("#a7d5ed", "#22a7f0", "#e14b31", "#c23728", "#000000")
   }
 
@@ -64,10 +61,10 @@ aestacked <- function(data, body_system_class="body_system_class", severity="sev
   arm_number <- length(unique(dataset$arm))
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)
-  dataset$arm[which(dataset$arm==arm1)] <- "A1"
-  dataset$arm[which(dataset$arm==arm2)] <- "A2"
-  dataset$arm[which(dataset$arm==arm3)] <- "A3"
-  dataset$arm[which(dataset$arm==arm4)] <- "A4"
+  dataset$arm[which(dataset$arm==arm_levels[1])] <- "A1"
+  dataset$arm[which(dataset$arm==arm_levels[2])] <- "A2"
+  dataset$arm[which(dataset$arm==arm_levels[3])] <- "A3"
+  dataset$arm[which(dataset$arm==arm_levels[4])] <- "A4"
   dataset$arm <- as.factor(dataset$arm)
 
   # number of participants at risk per arm
@@ -125,19 +122,19 @@ aestacked <- function(data, body_system_class="body_system_class", severity="sev
     stacked <- stacked +
       geom_text(data=subset(Table4, Frequency != 0), aes(label=Frequency), position=position_stack(vjust=0.8),
                 colour="black", size=2) +
-      scale_x_discrete(limits=rev, drop=FALSE, expand=c(0.9, 0), labels=c(arm2_name, arm1_name))
+      scale_x_discrete(limits=rev, drop=FALSE, expand=c(0.9, 0), labels=c(arm_names[2], arm_names[1]))
   } else if (arm_number==3){
     stacked <- stacked +
       geom_text(data=subset(Table4, Frequency != 0), aes(label=Frequency), position=position_stack(vjust=0.8),
                 colour="black", size=1.3) +
-      scale_x_discrete(limits=rev, drop=FALSE, expand=c(0.6, 0), labels=c(arm3_name, arm2_name, arm1_name)) +
+      scale_x_discrete(limits=rev, drop=FALSE, expand=c(0.6, 0), labels=c(arm_names[3], arm_names[2], arm_names[1])) +
       theme(axis.text.y = element_text(size=6))
   } else{
     stacked <- stacked +
       geom_text(data=subset(Table4, Frequency != 0), aes(label=Frequency), position=position_stack(vjust=0.8),
                 colour="black", size=1) +
-      scale_x_discrete(limits=rev, drop=FALSE, expand=c(0.4, 0), labels=c(arm4_name, arm3_name, arm2_name,
-                                                                          arm1_name)) +
+      scale_x_discrete(limits=rev, drop=FALSE, expand=c(0.4, 0), labels=c(arm_names[4], arm_names[3], arm_names[2],
+                                                                          arm_names[1])) +
       theme(axis.text.y = element_text(size=5.5))
   }
 
