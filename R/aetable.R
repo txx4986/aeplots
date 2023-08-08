@@ -238,7 +238,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                        Events_C="Number of events",
                        Mean_C="Number of events")) %>%
           add_header_row(
-            values=c("", str_glue("{interventions_name[1]} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})")),
+            values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})")),
             colwidths = c(1, 3, 3)) %>%
           set_header_labels(
             body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
