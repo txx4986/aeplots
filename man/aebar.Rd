@@ -2,15 +2,15 @@
 % Please edit documentation in R/aebar.R
 \name{aebar}
 \alias{aebar}
-\title{Bar chart}
+\title{Bar chart for number of events reported per participant}
 \usage{
 aebar(
   data,
   id = "id",
   arm = "arm",
   arm_levels = c("A1", "A2", "A3", "A4"),
-  arm_names = c("Arm 1", "Arm 2", "Arm 3", "Arm 4"),
-  arm_colours = c(),
+  arm_names = NULL,
+  arm_colours = NULL,
   facets = TRUE,
   save_image_path = NULL
 )
@@ -36,7 +36,7 @@ aebar(
 Bar chart presenting the number of events reported per participant
 }
 \description{
-Bar chart
+Bar chart for number of events reported per participant
 }
 \examples{
 aebar(df, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
