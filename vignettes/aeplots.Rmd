@@ -42,7 +42,7 @@ df2$ae_02 <- as.factor(df2$ae_02)
 df2$ae_05 <- ordered(df2$ae_05, c("Mild", "Moderate", "Severe"))
 ```
 
-## More than 2 treatment arms
+### More than 2 treatment arms
 The functions `aetable`, `aeseverity`, `aestacked` and `aebar` can take up to 4 treatment arms. A sample dataset with 3 treatment arms:
 ```{r}
 data(df3)
@@ -83,12 +83,12 @@ aetable(df3, body_system_class="ae_02", control="Placebo", intervention1="Anti-I
 ### 2 treatment arms
 `aeseverity` plots a table of frequencies and proportions of events by severity categories. We specify the number of decimal places for proportions via the argument **proportions_dp**.
 ```{r, fig.dim=c(7, 6)}
-aeseverity(df2, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", arm1_name="Anti-IgE", arm2_name="Placebo", proportions_dp=2)
+aeseverity(df2, severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), proportions_dp=2)
 ```
 
 ### More than 2 treatment arms
 ```{r, fig.dim=c(7, 6)}
-aeseverity(df3, severity="ae_05", arm1="I1", arm2="I2", arm3="C")
+aeseverity(df3, severity="ae_05",arm_levels=c("I1","I2", "C"), arm_names=c("Intervention 1","Intervention 2", "Control"))
 ```
 
 ## `aedot` function
@@ -101,17 +101,17 @@ aedot(df2, body_system_class="ae_02", control="Placebo", intervention="Anti-IgE"
 ### 2 treatment arms
 `aestacked` plots a stacked bar chart of proportions for each body system class by arm and maximum severity. If severity is not ordered, it is required to specify the levels of severity in ascending order in the argument **severity_levels**.
 ```{r, fig.dim=c(7, 6)}
-aestacked(df2, body_system_class="ae_02", severity="ae_05", arm1="Anti-IgE", arm2="Placebo", severity_levels=c("Mild", "Moderate", "Severe"), arm1_name="Anti-IgE", arm2_name="Placebo")
+aestacked(df2, body_system_class="ae_02", severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
 ```
 
 We can change the colour for each severity by specifying a vector of colour codes corresponding to each severity level in the **severity_colours** argument. 
 ```{r, fig.dim=c(7, 6)}
-aestacked(df2, body_system_class="ae_02", severity="ae_05", arm1="Anti-IgE", arm2="Placebo", severity_levels=c("Mild", "Moderate", "Severe"), severity_colours=c("#D0EE11", "#48B5C4", "#115F9A"), arm1_name="Anti-IgE", arm2_name="Placebo")
+aestacked(df2, body_system_class="ae_02", severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"), severity_colours=c("#D0EE11", "#48B5C4", "#115F9A"))
 ```
 
 ### More than 2 treatment arms
 ```{r, fig.dim=c(7, 6)}
-aestacked(df3, body_system_class="ae_02", severity="ae_05", arm1="I1", arm2="I2", arm3="C", severity_levels=c("Mild", "Moderate", "Severe"))
+aestacked(df3, body_system_class="ae_02", severity="ae_05", arm_levels=c("I1","I2", "C"), arm_names=c("Intervention 1","Intervention 2", "Control"), severity_levels=c("Mild", "Moderate", "Severe"))
 ```
 
 ## `aebar` function
