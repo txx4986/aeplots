@@ -21,17 +21,13 @@
 #' @export
 #'
 #' @examples
-#' aestacked(df, body_system_class="ae_02", severity="ae_05", arm1="Anti-IgE", arm2="Placebo", severity_levels=c("Mild", "Moderate", "Severe"))
+#' aestacked(df, body_system_class="ae_02", severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
 aestacked <- function(data, body_system_class="body_system_class", severity="severity", id="id", arm="arm",
                       arm_levels=c("A1", "A2", "A3", "A4"), arm_names=NULL, severity_levels=NULL,
                       severity_colours=NULL, save_image_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "severity" = severity, "id" = id, "arm" = arm)
-
-  if (is.null(arm_names)){
-    arm_names <- arm_levels
-  }
 
   # checks if the variable type for each column is correct
   stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
@@ -57,8 +53,17 @@ aestacked <- function(data, body_system_class="body_system_class", severity="sev
         severity = ordered(severity, levels = severity_levels))
   }
 
+  if (is.null(arm_names)){
+    arm_names <- arm_levels
+  }
+
   # number of arm factor levels
   arm_number <- length(unique(dataset$arm))
+  # checks if length of arm_levels equals to the number of arm factor levels
+  stopifnot("length of arm_levels needs to be eqaul to the number of levels in arm" = length(arm_levels)==arm_number)
+  # checks if length of arm_names equals to the number of arm factor levels
+  stopifnot("length of arm_names needs to be equal to the number of levels in arm" = length(arm_names)==arm_number)
+
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)
   dataset$arm[which(dataset$arm==arm_levels[1])] <- "A1"

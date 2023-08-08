@@ -9,14 +9,8 @@ aeseverity(
   severity = "severity",
   id = "id",
   arm = "arm",
-  arm1 = "A1",
-  arm2 = "A2",
-  arm3 = "A3",
-  arm4 = "A4",
-  arm1_name = "Arm 1",
-  arm2_name = "Arm 2",
-  arm3_name = "Arm 3",
-  arm4_name = "Arm 4",
+  arm_levels = c("A1", "A2", "A3", "A4"),
+  arm_names = NULL,
   proportions_dp = 1,
   save_image_path = NULL,
   save_docx_path = NULL
@@ -31,21 +25,9 @@ aeseverity(
 
 \item{arm}{name of arm column}
 
-\item{arm1}{factor level of arm 1}
+\item{arm_levels}{vector of factor levels in arm variable}
 
-\item{arm2}{factor level of arm 2}
-
-\item{arm3}{factor level of arm 3}
-
-\item{arm4}{factor level of arm 4}
-
-\item{arm1_name}{name of arm 1}
-
-\item{arm2_name}{name of arm 2}
-
-\item{arm3_name}{name of arm 3}
-
-\item{arm4_name}{name of arm 4}
+\item{arm_names}{vector of names for each arm in arm variable}
 
 \item{proportions_dp}{number of decimal places for proportions}
 
@@ -61,5 +43,5 @@ Table of frequencies and proportions of events by severity categories
 }
 \examples{
 ## ADAPT sample data
-aeseverity(df, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", proportions_dp=2)
+aeseverity(df, severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), proportions_dp=2)
 }

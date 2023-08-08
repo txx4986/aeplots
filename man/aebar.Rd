@@ -39,5 +39,5 @@ Bar chart presenting the number of events reported per participant
 Bar chart for number of events reported per participant
 }
 \examples{
-aebar(df, arm_levels=c("Anti-IgE","Placebo"), arm_names=c("Anti-IgE", "Placebo"), facets=FALSE)
+aebar(df, arm_levels=c("Anti-IgE","Placebo"), facets=FALSE)
 }

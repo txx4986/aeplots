@@ -45,5 +45,5 @@ stacked bar chart presenting the proportions of participants with each event by 
 Stacked bar chart of proportions for each body system class by arm and maximum severity
 }
 \examples{
-aestacked(df, body_system_class="ae_02", severity="ae_05", arm1="Anti-IgE", arm2="Placebo", severity_levels=c("Mild", "Moderate", "Severe"), arm1_name="Anti-IgE", arm2_name="Placebo")
+aestacked(df, body_system_class="ae_02", severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
 }

@@ -4,14 +4,8 @@
 #' @param severity name of severity column
 #' @param id name of id column
 #' @param arm name of arm column
-#' @param arm1 factor level of arm 1
-#' @param arm2 factor level of arm 2
-#' @param arm3 factor level of arm 3
-#' @param arm4 factor level of arm 4
-#' @param arm1_name name of arm 1
-#' @param arm2_name name of arm 2
-#' @param arm3_name name of arm 3
-#' @param arm4_name name of arm 4
+#' @param arm_levels vector of factor levels in arm variable
+#' @param arm_names vector of names for each arm in arm variable
 #' @param proportions_dp number of decimal places for proportions
 #' @param save_image_path file path to save table as image
 #' @param save_docx_path file path to save table as docx
@@ -30,10 +24,9 @@
 #'
 #' @examples
 #' ## ADAPT sample data
-#' aeseverity(df, severity="ae_05", arm1="Anti-IgE", arm2="Placebo", proportions_dp=2)
-aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1", arm2="A2", arm3="A3", arm4="A4",
-                       arm1_name="Arm 1", arm2_name="Arm 2", arm3_name="Arm 3", arm4_name="Arm 4", proportions_dp=1,
-                       save_image_path=NULL, save_docx_path=NULL){
+#' aeseverity(df, severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), proportions_dp=2)
+aeseverity <- function(data, severity="severity", id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4"),
+                       arm_names=NULL, proportions_dp=1, save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("severity" = severity, "id" = id, "arm" = arm)
@@ -41,13 +34,23 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
   # checks if the variable type for each column is correct
   stopifnot("severity variable type is not factor!" = is.factor(dataset[["severity"]]))
 
+  if (is.null(arm_names)){
+    arm_names <- arm_levels
+  }
+
+  # number of arm factor levels
   arm_number <- length(unique(dataset$arm))
+  # checks if length of arm_levels equals to the number of arm factor levels
+  stopifnot("length of arm_levels needs to be eqaul to the number of levels in arm" = length(arm_levels)==arm_number)
+  # checks if length of arm_names equals to the number of arm factor levels
+  stopifnot("length of arm_names needs to be equal to the number of levels in arm" = length(arm_names)==arm_number)
+
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)
-  dataset$arm[which(dataset$arm==arm1)] <- "A1"
-  dataset$arm[which(dataset$arm==arm2)] <- "A2"
-  dataset$arm[which(dataset$arm==arm3)] <- "A3"
-  dataset$arm[which(dataset$arm==arm4)] <- "A4"
+  dataset$arm[which(dataset$arm==arm_levels[1])] <- "A1"
+  dataset$arm[which(dataset$arm==arm_levels[2])] <- "A2"
+  dataset$arm[which(dataset$arm==arm_levels[3])] <- "A3"
+  dataset$arm[which(dataset$arm==arm_levels[4])] <- "A4"
   dataset$arm <- as.factor(dataset$arm)
 
   # number of participants at risk per arm
@@ -86,7 +89,7 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
       relocate(Proportions_A1, .after=Frequency_A1) %>%
       flextable() %>%
       add_header_row(
-        values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})"), "Total"),
+        values=c("", str_glue("{arm_names[1]} ({name1}={N1})"), str_glue("{arm_names[2]} ({name2}={N2})"), "Total"),
         colwidths = c(1, 2, 2, 2)) %>%
       set_header_labels(
         severity="Severity", Frequency_A1="N", Proportions_A1="%", Frequency_A2="N", Proportions_A2="%",
@@ -111,8 +114,8 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
       relocate(Proportions_A2, .after=Frequency_A2) %>%
       flextable() %>%
       add_header_row(
-        values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})"),
-                 str_glue("{arm3_name} ({name3}={N3})"), "Total"),
+        values=c("", str_glue("{arm_names[1]} ({name1}={N1})"), str_glue("{arm_names[2]} ({name2}={N2})"),
+                 str_glue("{arm_names[3]} ({name3}={N3})"), "Total"),
         colwidths = c(1, 2, 2, 2, 2)) %>%
       set_header_labels(
         severity="Severity", Frequency_A1="N", Proportions_A1="%", Frequency_A2="N", Proportions_A2="%",
@@ -137,8 +140,8 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm1="A1",
       relocate(Proportions_A3, .after=Frequency_A3) %>%
       flextable() %>%
       add_header_row(
-        values=c("", str_glue("{arm1_name} ({name1}={N1})"), str_glue("{arm2_name} ({name2}={N2})"),
-                 str_glue("{arm3_name} ({name3}={N3})"), str_glue("{arm4_name} ({name4}={N4})"), "Total"),
+        values=c("", str_glue("{arm_names[1]} ({name1}={N1})"), str_glue("{arm_names[2]} ({name2}={N2})"),
+                 str_glue("{arm_names[3]} ({name3}={N3})"), str_glue("{arm_names[4]} ({name4}={N4})"), "Total"),
         colwidths = c(1, 2, 2, 2, 2, 2)) %>%
       set_header_labels(
         severity="Severity", Frequency_A1="N", Proportions_A1="%", Frequency_A2="N", Proportions_A2="%",
