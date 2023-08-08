@@ -31,7 +31,6 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
 
   # checks if the variable type for each column is correct
   stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
-  stopifnot("id variable type is not numeric or factor!" = is.numeric(dataset[["id"]]) | is.factor(dataset[["id"]]))
 
   # recode arm factor
   arm_number <- length(unique(dataset$arm))
