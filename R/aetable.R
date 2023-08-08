@@ -17,13 +17,9 @@
 #' @param date_rand name of date_rand column
 #' @param last_visit name of last_visit column
 #' @param control factor level of control arm
-#' @param intervention1 factor level of intervention 1 arm
-#' @param intervention2 factor level of intervention 2 arm
-#' @param intervention3 factor level of intervention 3 arm
+#' @param intervention_levels vector of factor levels for interventions
 #' @param control_name name of control arm
-#' @param intervention1_name name of intervention 1 arm
-#' @param intervention2_name name of intervention 2 arm
-#' @param intervention3_name name of intervention 3 arm
+#' @param intervention_names vector of names for interventions
 #' @param IRR a logical value whether to include IRR and 95% CI column in summary table (only for 2 arms)
 #' @param variables vector of variable names to be included in the glm Poisson model for computation of IRR (excluding arm)
 #' @param mean a logical value whether to include mean and SD column in summary table
@@ -51,13 +47,12 @@
 #'
 #' @examples
 #' ## ADAPT sample data
-#' aetable(df, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
+#' aetable(df, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
 aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand",
-                    last_visit = "last_visit", control = "C", intervention1 = "I1", intervention2 = "I2",
-                    intervention3="I3", control_name="Control", intervention1_name = "Intervention 1",
-                    intervention2_name = "Intervention 2", intervention3_name = "Intervention 3", IRR = TRUE,
-                    variables = c(), mean = TRUE, proportions_dp = 1, IR_dp = 1, mean_dp = 1, SD_dp = 1,
-                    IRR_sf = 3, CI_sf = 3, save_image_path=NULL, save_docx_path=NULL){
+                    last_visit = "last_visit", control = "C", intervention_levels=c("I1", "I2", "I3"),
+                    control_name=NULL, intervention_names=NULL, IRR = TRUE, variables = c(), mean = TRUE,
+                    proportions_dp = 1, IR_dp = 1, mean_dp = 1, SD_dp = 1, IRR_sf = 3, CI_sf = 3,
+                    save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand,
@@ -67,6 +62,17 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
   stopifnot("date_rand variable type is not Date!" = is.Date(dataset[["date_rand"]]))
   stopifnot("last_visit variable type is not Date!" = is.Date(dataset[["last_visit"]]))
+
+  if (is.null(control_name)){
+    control_name <- control
+  }
+
+  if (is.null(intervention_names)){
+    intervention_names <- intervention_levels
+  }
+
+  # checks if length of intervention_names equals to length of intervention_levels
+  stopifnot("length of intervention_names needs to equal to length of intervention_levels"= length(intervention_names)==length(intervention_levels))
 
   # number of arm factor levels
   arm_number <- length(unique(dataset$arm))
@@ -79,9 +85,9 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   #                 arm_number==4 ~ recode_factor(arm, arm1="A1", arm2="A2, arm3="A3", arm4="arm4")))
   dataset$arm <- as.character(dataset$arm)
   dataset$arm[which(dataset$arm==control)] <- "C"
-  dataset$arm[which(dataset$arm==intervention1)] <- "I1"
-  dataset$arm[which(dataset$arm==intervention2)] <- "I2"
-  dataset$arm[which(dataset$arm==intervention3)] <- "I3"
+  dataset$arm[which(dataset$arm==intervention_levels[1])] <- "I1"
+  dataset$arm[which(dataset$arm==intervention_levels[2])] <- "I2"
+  dataset$arm[which(dataset$arm==intervention_levels[3])] <- "I3"
   dataset$arm <- as.factor(dataset$arm)
 
   # number of participants at risk per arm
@@ -198,7 +204,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                        IRR = "Treatment Effect Estimate (IRR)",
                        CI = "95% CI")) %>%
           add_header_row(
-            values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})"),
+            values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})"),
                      "Treatment Effect Estimate (IRR)", "95% CI"),
             colwidths = c(1, 3, 3, 1, 1)) %>%
           set_header_labels(
@@ -232,7 +238,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                        Events_C="Number of events",
                        Mean_C="Number of events")) %>%
           add_header_row(
-            values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})")),
+            values=c("", str_glue("{interventions_name[1]} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})")),
             colwidths = c(1, 3, 3)) %>%
           set_header_labels(
             body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
@@ -268,7 +274,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                      Events_C="Number of events",
                      Mean_C="Number of events")) %>%
         add_header_row(
-          values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{intervention2_name} ({name2}={N2})"),
+          values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{intervention_names[2]} ({name2}={N2})"),
                    str_glue("{control_name} ({name3}={N0})")),
           colwidths = c(1, 3, 3, 3)) %>%
         set_header_labels(
@@ -308,8 +314,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                      Events_C="Number of events",
                      Mean_C="Number of events")) %>%
         add_header_row(
-          values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{intervention2_name} ({name2}={N2})"),
-                   str_glue("{intervention3_name} ({name3}={N3})"), str_glue("{control_name} ({name4}={N0})")),
+          values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{intervention_names[2]} ({name2}={N2})"),
+                   str_glue("{intervention_names[3]} ({name3}={N3})"), str_glue("{control_name} ({name4}={N0})")),
           colwidths = c(1, 3, 3, 3, 3)) %>%
         set_header_labels(
           body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
@@ -345,7 +351,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                        IRR = "Treatment Effect Estimate (IRR)",
                        CI = "95% CI")) %>%
           add_header_row(
-            values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})"),
+            values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})"),
                      "Treatment Effect Estimate (IRR)", "95% CI"),
             colwidths = c(1, 2, 2, 1, 1)) %>%
           set_header_labels(
@@ -374,7 +380,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                        Frequency_C="At least one event",
                        Events_C="Number of events")) %>%
           add_header_row(
-            values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})")),
+            values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})")),
             colwidths = c(1, 2, 2)) %>%
           set_header_labels(
             body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",Frequency_C="N (%)",
@@ -404,7 +410,7 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                      Frequency_C="At least one event",
                      Events_C="Number of events")) %>%
         add_header_row(
-          values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{intervention2_name} ({name2}={N2})"),
+          values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{intervention_names[2]} ({name2}={N2})"),
                    str_glue("{control_name} ({name3}={N0})")),
           colwidths = c(1, 2, 2, 2)) %>%
         set_header_labels(
@@ -437,8 +443,8 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
                      Frequency_C="At least one event",
                      Events_C="Number of events")) %>%
         add_header_row(
-          values=c("", str_glue("{intervention1_name} ({name1}={N1})"), str_glue("{intervention2_name} ({name2}={N2})"),
-                   str_glue("{intervention3_name} ({name3}={N3})"), str_glue("{control_name} ({name4}={N0})")),
+          values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{intervention_names[2]} ({name2}={N2})"),
+                   str_glue("{intervention_names[3]} ({name3}={N3})"), str_glue("{control_name} ({name4}={N0})")),
           colwidths = c(1, 2, 2, 2, 2)) %>%
         set_header_labels(
           body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)", Frequency_I2="N (%)",

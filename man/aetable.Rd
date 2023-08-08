@@ -12,13 +12,9 @@ aetable(
   date_rand = "date_rand",
   last_visit = "last_visit",
   control = "C",
-  intervention1 = "I1",
-  intervention2 = "I2",
-  intervention3 = "I3",
-  control_name = "Control",
-  intervention1_name = "Intervention 1",
-  intervention2_name = "Intervention 2",
-  intervention3_name = "Intervention 3",
+  intervention_levels = c("I1", "I2", "I3"),
+  control_name = NULL,
+  intervention_names = NULL,
   IRR = TRUE,
   variables = c(),
   mean = TRUE,
@@ -47,19 +43,11 @@ aetable(
 
 \item{control}{factor level of control arm}
 
-\item{intervention1}{factor level of intervention 1 arm}
-
-\item{intervention2}{factor level of intervention 2 arm}
-
-\item{intervention3}{factor level of intervention 3 arm}
+\item{intervention_levels}{vector of factor levels for interventions}
 
 \item{control_name}{name of control arm}
 
-\item{intervention1_name}{name of intervention 1 arm}
-
-\item{intervention2_name}{name of intervention 2 arm}
-
-\item{intervention3_name}{name of intervention 3 arm}
+\item{intervention_names}{vector of names for interventions}
 
 \item{IRR}{a logical value whether to include IRR and 95\% CI column in summary table (only for 2 arms)}
 
@@ -99,5 +87,5 @@ flextable of AE summary by body system class and arm
 }
 \examples{
 ## ADAPT sample data
-aetable(df, body_system_class="ae_02", control="Placebo", intervention1="Anti-IgE", IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
+aetable(df, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
 }
