@@ -24,7 +24,8 @@ Imports:
   ggpubr,
   purrr,
   reshape2,
-  printr
+  printr,
+  devtools
 Suggests: 
     knitr,
     rmarkdown
