@@ -43,5 +43,5 @@ Table of frequencies and proportions of events by severity categories
 }
 \examples{
 ## ADAPT sample data
-aeseverity(df, severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), proportions_dp=2)
+aeseverity(df2, arm_levels=c("Intervention","Placebo"), proportions_dp=2)
 }

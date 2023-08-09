@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#' aestacked(df, body_system_class="ae_02", severity="ae_05", arm_levels=c("Anti-IgE","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
+#' aestacked(df2, body_system_class="aebodsys", arm_levels=c("Intervention","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
 aestacked <- function(data, body_system_class="body_system_class", severity="severity", id="id", arm="arm",
                       arm_levels=c("A1", "A2", "A3", "A4"), arm_names=NULL, severity_levels=NULL,
                       severity_colours=NULL, save_image_path=NULL){

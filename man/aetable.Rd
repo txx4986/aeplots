@@ -87,5 +87,5 @@ flextable of AE summary by body system class and arm
 }
 \examples{
 ## ADAPT sample data
-aetable(df, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
+aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), IRR=TRUE, variables = c("variable1", "variable2"))
 }

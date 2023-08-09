@@ -47,7 +47,7 @@
 #'
 #' @examples
 #' ## ADAPT sample data
-#' aetable(df, body_system_class="ae_02", control="Placebo", intervention_levels=c("Anti-IgE"), IRR=TRUE, variables = c("agestrat", "IgEstrat"), mean=FALSE)
+#' aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), IRR=TRUE, variables = c("variable1", "variable2"))
 aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand",
                     last_visit = "last_visit", control = "C", intervention_levels=c("I1", "I2", "I3"),
                     control_name=NULL, intervention_names=NULL, IRR = TRUE, variables = c(), mean = TRUE,

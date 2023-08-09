@@ -22,7 +22,7 @@
 #' @export
 #'
 #' @examples
-#' aedot(df, body_system_class="ae_02", control="Placebo", intervention="Anti-IgE")
+#' aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
 aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm", control="C", intervention="I",
                   save_image_path=NULL){
   # change the column names

@@ -36,5 +36,5 @@ dot plot with proportions alongside treatment effect estimates (IRR) with accomp
 Dot plot to visualise AE and harm profiles in two-arm randomised controlled trials
 }
 \examples{
-aedot(df, body_system_class="ae_02", control="Placebo", intervention="Anti-IgE")
+aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
 }
