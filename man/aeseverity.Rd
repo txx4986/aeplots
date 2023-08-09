@@ -42,6 +42,6 @@ flextable of frequencies and proportions of events by severity categories
 Table of frequencies and proportions of events by severity categories
 }
 \examples{
-## ADAPT sample data
+df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 aeseverity(df2, arm_levels=c("Intervention","Placebo"), proportions_dp=2)
 }

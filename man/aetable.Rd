@@ -86,7 +86,6 @@ flextable of AE summary by body system class and arm
 }
 }
 \examples{
-## ADAPT sample data
 df2$aebodsys <- as.factor(df2$aebodsys)
 aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), IRR=TRUE, variables = c("variable1", "variable2"))
 }

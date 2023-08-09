@@ -22,6 +22,7 @@
 #'
 #' @examples
 #' df2$aebodsys <- as.factor(df2$aebodsys)
+#' df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 #' aestacked(df2, body_system_class="aebodsys", arm_levels=c("Intervention","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
 aestacked <- function(data, body_system_class="body_system_class", severity="severity", id="id", arm="arm",
                       arm_levels=c("A1", "A2", "A3", "A4"), arm_names=NULL, severity_levels=NULL,

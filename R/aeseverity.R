@@ -22,7 +22,7 @@
 #' @export
 #'
 #' @examples
-#' ## ADAPT sample data
+#' df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 #' aeseverity(df2, arm_levels=c("Intervention","Placebo"), proportions_dp=2)
 aeseverity <- function(data, severity="severity", id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4"),
                        arm_names=NULL, proportions_dp=1, save_image_path=NULL, save_docx_path=NULL){

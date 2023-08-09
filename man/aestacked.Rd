@@ -46,5 +46,6 @@ Stacked bar chart of proportions for each body system class by arm and maximum s
 }
 \examples{
 df2$aebodsys <- as.factor(df2$aebodsys)
+df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 aestacked(df2, body_system_class="aebodsys", arm_levels=c("Intervention","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
 }
