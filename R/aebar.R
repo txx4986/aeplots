@@ -116,7 +116,7 @@ aebar <- function(data, id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4")
   } else{
     bar <- ggplot(Table5, aes(x=factor(n), y=Percentage, fill=arm)) +
       geom_col(position=position_dodge(0.7, preserve="single"), width=0.6) +
-      scale_y_continuous(expand=c(0, 0)) +
+      scale_y_continuous(expand=expansion(add = c(0,5))) +
       labs(title="Adverse event count by treatment arm", x="Number of adverse events", y="Percentage of participants") +
       theme(
         panel.background = element_blank(),
