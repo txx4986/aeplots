@@ -45,5 +45,6 @@ stacked bar chart presenting the proportions of participants with each event by 
 Stacked bar chart of proportions for each body system class by arm and maximum severity
 }
 \examples{
+df2$aebodsys <- as.factor(df2$aebodsys)
 aestacked(df2, body_system_class="aebodsys", arm_levels=c("Intervention","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
 }

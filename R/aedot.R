@@ -22,6 +22,7 @@
 #' @export
 #'
 #' @examples
+#' df2$aebodsys <- as.factor(df2$aebodsys)
 #' aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
 aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm", control="C", intervention="I",
                   save_image_path=NULL){
