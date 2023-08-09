@@ -5,7 +5,7 @@ Version: 0.1.0
 Authors@R: person("Xiao Xuan", "Tan", email="txx4986@gmail.com", role=c("aut", "cre")) 
 Description: You provide the data, tell 'aeplots' to plot summary tables, dot plots, bar charts etc.
     Use four spaces when indenting paragraphs within the Description.
-License: use_mit_license()
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
