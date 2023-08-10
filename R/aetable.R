@@ -10,6 +10,11 @@
 #' - **Total number of events** and **incidence rates** (**number of events** relative to **total time in follow-up**)
 #' - **Treatment effect estimate (IRR)** and **95% confidence intervals**
 #'
+#' @section Treatment Effect Estimate (IRR):
+#' The treatment effect and its 95% confidence interval are estimated via fitting a generalised linear model
+#' with Poisson function and log link with total length of follow up time as offset. Additional covariates
+#' besides arm can be added into the model via the argument `variables`.
+#'
 #' @param data data frame with adverse_event, body_system_class, id, arm, date_rand and last_visit columns
 #' @param control factor level of control arm
 #' @param intervention_levels vector of factor levels for interventions

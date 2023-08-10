@@ -85,6 +85,13 @@ flextable of AE summary by body system class and arm
 \item \strong{Treatment effect estimate (IRR)} and \strong{95\% confidence intervals}
 }
 }
+\section{Treatment Effect Estimate (IRR)}{
+
+The treatment effect and its 95\% confidence interval are estimated via fitting a generalised linear model
+with Poisson function and log link with total length of follow up time as offset. Additional covariates
+besides arm can be added into the model via the argument \code{variables}.
+}
+
 \examples{
 df2$aebodsys <- as.factor(df2$aebodsys)
 aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), IRR=TRUE, variables = c("variable1", "variable2"))
