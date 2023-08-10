@@ -11,13 +11,13 @@
 #' - **Treatment effect estimate (IRR)** and **95% confidence intervals**
 #'
 #' @param data data frame with adverse_event, body_system_class, id, arm, date_rand and last_visit columns
+#' @param control factor level of control arm
+#' @param intervention_levels vector of factor levels for interventions
 #' @param body_system_class name of body_system_class column
 #' @param id name of id column
 #' @param arm name of arm column
 #' @param date_rand name of date_rand column
 #' @param last_visit name of last_visit column
-#' @param control factor level of control arm
-#' @param intervention_levels vector of factor levels for interventions
 #' @param control_name name of control arm
 #' @param intervention_names vector of names for interventions
 #' @param IRR a logical value whether to include IRR and 95% CI column in summary table (only for 2 arms)
@@ -48,11 +48,11 @@
 #' @examples
 #' df2$aebodsys <- as.factor(df2$aebodsys)
 #' aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), IRR=TRUE, variables = c("variable1", "variable2"))
-aetable <- function(data, body_system_class = "body_system_class", id = "id", arm = "arm", date_rand = "date_rand",
-                    last_visit = "last_visit", control = "C", intervention_levels=c("I1", "I2", "I3"),
-                    control_name=NULL, intervention_names=NULL, IRR = TRUE, variables = c(), mean = TRUE,
-                    proportions_dp = 1, IR_dp = 1, mean_dp = 1, SD_dp = 1, IRR_sf = 3, CI_sf = 3,
-                    save_image_path=NULL, save_docx_path=NULL){
+aetable <- function(data, control, intervention_levels, body_system_class = "body_system_class", id = "id",
+                    arm = "arm", date_rand = "date_rand", last_visit = "last_visit", control_name=NULL,
+                    intervention_names=NULL, IRR = TRUE, variables = c(), mean = TRUE, proportions_dp = 1,
+                    IR_dp = 1, mean_dp = 1, SD_dp = 1, IRR_sf = 3, CI_sf = 3, save_image_path=NULL,
+                    save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand,
@@ -63,6 +63,14 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
   stopifnot("date_rand variable type is not Date!" = is.Date(dataset[["date_rand"]]))
   stopifnot("last_visit variable type is not Date!" = is.Date(dataset[["last_visit"]]))
 
+  # checks that control is a single value
+  stopifnot("control should be of length 1!" = length(control)==1)
+
+  # checks if control and intervention_levels can be found in arm variable
+  stopifnot("control level specified cannot be found in arm column!" = control %in% dataset$arm)
+  stopfinot("intervention levels specified cannot be found in arm column!" = intervention_levels %in% dataset$arm)
+
+  # sets control_name and intervention_names as control and intervention_levels if names not specified
   if (is.null(control_name)){
     control_name <- control
   }
@@ -71,8 +79,10 @@ aetable <- function(data, body_system_class = "body_system_class", id = "id", ar
     intervention_names <- intervention_levels
   }
 
+  # checks if control_name is a character of length 1
+  stopifnot("control_name should be of length 1!" = length(control_name)==1)
   # checks if length of intervention_names equals to length of intervention_levels
-  stopifnot("length of intervention_names needs to equal to length of intervention_levels"= length(intervention_names)==length(intervention_levels))
+  stopifnot("length of intervention_names needs to equal to length of intervention_levels!"= length(intervention_names)==length(intervention_levels))
 
   # number of arm factor levels
   arm_number <- length(unique(dataset$arm))

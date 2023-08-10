@@ -6,13 +6,13 @@
 \usage{
 aetable(
   data,
+  control,
+  intervention_levels,
   body_system_class = "body_system_class",
   id = "id",
   arm = "arm",
   date_rand = "date_rand",
   last_visit = "last_visit",
-  control = "C",
-  intervention_levels = c("I1", "I2", "I3"),
   control_name = NULL,
   intervention_names = NULL,
   IRR = TRUE,
@@ -31,6 +31,10 @@ aetable(
 \arguments{
 \item{data}{data frame with adverse_event, body_system_class, id, arm, date_rand and last_visit columns}
 
+\item{control}{factor level of control arm}
+
+\item{intervention_levels}{vector of factor levels for interventions}
+
 \item{body_system_class}{name of body_system_class column}
 
 \item{id}{name of id column}
@@ -40,10 +44,6 @@ aetable(
 \item{date_rand}{name of date_rand column}
 
 \item{last_visit}{name of last_visit column}
-
-\item{control}{factor level of control arm}
-
-\item{intervention_levels}{vector of factor levels for interventions}
 
 \item{control_name}{name of control arm}
 
