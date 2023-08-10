@@ -6,26 +6,26 @@
 \usage{
 aedot(
   data,
+  control,
+  intervention,
   body_system_class = "body_system_class",
   id = "id",
   arm = "arm",
-  control = "C",
-  intervention = "I",
   save_image_path = NULL
 )
 }
 \arguments{
 \item{data}{data frame with adverse_event, body_system_class, id and arm columns}
 
+\item{control}{factor level of control arm}
+
+\item{intervention}{factor level of intervention arm}
+
 \item{body_system_class}{name of body_system_class column}
 
 \item{id}{name of id column}
 
 \item{arm}{name of arm column}
-
-\item{control}{factor level of control arm}
-
-\item{intervention}{factor level of intervention arm}
 
 \item{save_image_path}{file path to save dot plot as image}
 }

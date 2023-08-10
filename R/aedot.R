@@ -1,11 +1,11 @@
 #' Dot plot to visualise AE and harm profiles in two-arm randomised controlled trials
 #'
 #' @param data data frame with adverse_event, body_system_class, id and arm columns
+#' @param control factor level of control arm
+#' @param intervention factor level of intervention arm
 #' @param body_system_class name of body_system_class column
 #' @param id name of id column
 #' @param arm name of arm column
-#' @param control factor level of control arm
-#' @param intervention factor level of intervention arm
 #' @param save_image_path file path to save dot plot as image
 #'
 #' @return dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval
@@ -24,7 +24,7 @@
 #' @examples
 #' df2$aebodsys <- as.factor(df2$aebodsys)
 #' aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
-aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm", control="C", intervention="I",
+aedot <- function(data, control, intervention, body_system_class="body_system_class", id="id", arm="arm",
                   save_image_path=NULL){
   # change the column names
   dataset <- data %>%
@@ -33,8 +33,15 @@ aedot <- function(data, body_system_class="body_system_class", id="id", arm="arm
   # checks if the variable type for each column is correct
   stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
 
+  # checks if control and intervention are of length 1
+  stopifnot("control should be of length 1!" = length(control)==1)
+  stopifnot("intervention should be of length 1!" = length(intervention)==1)
+
+  # checks if control and intervention can be found in arm variable
+  stopifnot("control level specified cannot be found in arm column!" = control %in% dataset$arm)
+  stopifnot("intervention level specified cannot be found in arm column!" = intervention %in% dataset$arm)
+
   # recode arm factor
-  arm_number <- length(unique(dataset$arm))
   dataset$arm <- as.character(dataset$arm)
   dataset$arm[which(dataset$arm==control)] <- "C"
   dataset$arm[which(dataset$arm==intervention)] <- "I"
