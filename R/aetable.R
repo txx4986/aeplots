@@ -68,7 +68,7 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
 
   # checks if control and intervention_levels can be found in arm variable
   stopifnot("control level specified cannot be found in arm column!" = control %in% dataset$arm)
-  stopfinot("intervention levels specified cannot be found in arm column!" = intervention_levels %in% dataset$arm)
+  stopifnot("intervention levels specified cannot be found in arm column!" = intervention_levels %in% dataset$arm)
 
   # sets control_name and intervention_names as control and intervention_levels if names not specified
   if (is.null(control_name)){
@@ -86,6 +86,9 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
 
   # number of arm factor levels
   arm_number <- length(unique(dataset$arm))
+  # checks if arm_number equals to the number of arms specified
+  stopifnot("total number of arms specified do not corresponed to the number of unique arms in arm column!" = (length(control) + length(intervention_levels)) == arm_number)
+
   # recode arm factor
   # dataset <- dataset %>%
   #   mutate(
