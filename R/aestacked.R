@@ -1,11 +1,11 @@
 #' Stacked bar chart of proportions for each body system class by arm and maximum severity
 #'
 #' @param data data frame with adverse_event, body_system_class, severity, id and arm columns
+#' @param arm_levels vector of factor levels in arm variable
 #' @param body_system_class name of body_system_class column
 #' @param severity name of severity column
 #' @param id name of id column
 #' @param arm name of arm column
-#' @param arm_levels vector of factor levels in arm variable
 #' @param arm_names vector of names for each arm in arm variable
 #' @param severity_levels vector of level of severity in ascending order if severity is not ordered factor
 #' @param severity_colours vector of colours for level of severity in ascending order
@@ -24,9 +24,9 @@
 #' df2$aebodsys <- as.factor(df2$aebodsys)
 #' df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 #' aestacked(df2, body_system_class="aebodsys", arm_levels=c("Intervention","Placebo"), severity_levels=c("Mild", "Moderate", "Severe"))
-aestacked <- function(data, body_system_class="body_system_class", severity="severity", id="id", arm="arm",
-                      arm_levels=c("A1", "A2", "A3", "A4"), arm_names=NULL, severity_levels=NULL,
-                      severity_colours=NULL, save_image_path=NULL){
+aestacked <- function(data, arm_levels, body_system_class="body_system_class", severity="severity", id="id",
+                      arm="arm", arm_names=NULL, severity_levels=NULL, severity_colours=NULL,
+                      save_image_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "severity" = severity, "id" = id, "arm" = arm)
@@ -54,6 +54,9 @@ aestacked <- function(data, body_system_class="body_system_class", severity="sev
       mutate(
         severity = ordered(severity, levels = severity_levels))
   }
+
+  # checks if arm_levels can be found in arm variable
+  stopifnot("arm levels specified cannot be found in arm column!" = arm_levels %in% dataset$arm)
 
   if (is.null(arm_names)){
     arm_names <- arm_levels

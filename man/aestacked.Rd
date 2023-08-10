@@ -6,11 +6,11 @@
 \usage{
 aestacked(
   data,
+  arm_levels,
   body_system_class = "body_system_class",
   severity = "severity",
   id = "id",
   arm = "arm",
-  arm_levels = c("A1", "A2", "A3", "A4"),
   arm_names = NULL,
   severity_levels = NULL,
   severity_colours = NULL,
@@ -20,6 +20,8 @@ aestacked(
 \arguments{
 \item{data}{data frame with adverse_event, body_system_class, severity, id and arm columns}
 
+\item{arm_levels}{vector of factor levels in arm variable}
+
 \item{body_system_class}{name of body_system_class column}
 
 \item{severity}{name of severity column}
@@ -27,8 +29,6 @@ aestacked(
 \item{id}{name of id column}
 
 \item{arm}{name of arm column}
-
-\item{arm_levels}{vector of factor levels in arm variable}
 
 \item{arm_names}{vector of names for each arm in arm variable}
 
