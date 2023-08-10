@@ -6,10 +6,10 @@
 \usage{
 aeseverity(
   data,
+  arm_levels,
   severity = "severity",
   id = "id",
   arm = "arm",
-  arm_levels = c("A1", "A2", "A3", "A4"),
   arm_names = NULL,
   proportions_dp = 1,
   save_image_path = NULL,
@@ -19,13 +19,13 @@ aeseverity(
 \arguments{
 \item{data}{data frame with adverse event, severity, id and arm columns}
 
+\item{arm_levels}{vector of factor levels in arm variable}
+
 \item{severity}{name of severity column}
 
 \item{id}{name of id column}
 
 \item{arm}{name of arm column}
-
-\item{arm_levels}{vector of factor levels in arm variable}
 
 \item{arm_names}{vector of names for each arm in arm variable}
 

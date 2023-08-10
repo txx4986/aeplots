@@ -1,10 +1,10 @@
 #' Table of frequencies and proportions of events by severity categories
 #'
 #' @param data data frame with adverse event, severity, id and arm columns
+#' @param arm_levels vector of factor levels in arm variable
 #' @param severity name of severity column
 #' @param id name of id column
 #' @param arm name of arm column
-#' @param arm_levels vector of factor levels in arm variable
 #' @param arm_names vector of names for each arm in arm variable
 #' @param proportions_dp number of decimal places for proportions
 #' @param save_image_path file path to save table as image
@@ -24,14 +24,17 @@
 #' @examples
 #' df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 #' aeseverity(df2, arm_levels=c("Intervention","Placebo"), proportions_dp=2)
-aeseverity <- function(data, severity="severity", id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4"),
-                       arm_names=NULL, proportions_dp=1, save_image_path=NULL, save_docx_path=NULL){
+aeseverity <- function(data, arm_levels, severity="severity", id="id", arm="arm", arm_names=NULL,
+                       proportions_dp=1, save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("severity" = severity, "id" = id, "arm" = arm)
 
   # checks if the variable type for each column is correct
   stopifnot("severity variable type is not factor!" = is.factor(dataset[["severity"]]))
+
+  # checks if arm_levels can be found in arm variable
+  stopifnot("arm levels specified cannot be found in arm column!" = arm_levels %in% dataset$arm)
 
   if (is.null(arm_names)){
     arm_names <- arm_levels
@@ -40,9 +43,9 @@ aeseverity <- function(data, severity="severity", id="id", arm="arm", arm_levels
   # number of arm factor levels
   arm_number <- length(unique(dataset$arm))
   # checks if length of arm_levels equals to the number of arm factor levels
-  stopifnot("length of arm_levels needs to be eqaul to the number of levels in arm" = length(arm_levels)==arm_number)
+  stopifnot("length of arm_levels needs to be equal to the number of levels in arm!" = length(arm_levels)==arm_number)
   # checks if length of arm_names equals to the number of arm factor levels
-  stopifnot("length of arm_names needs to be equal to the number of levels in arm" = length(arm_names)==arm_number)
+  stopifnot("length of arm_names needs to be equal to the number of levels in arm!" = length(arm_names)==arm_number)
 
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)
