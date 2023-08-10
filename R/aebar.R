@@ -1,9 +1,9 @@
 #' Bar chart for number of events reported per participant
 #'
 #' @param data data frame with adverse_event, id and arm columns
+#' @param arm_levels vector of factor levels in arm variable
 #' @param id name of id column
 #' @param arm name of arm column
-#' @param arm_levels vector of factor levels in arm variable
 #' @param arm_names vector of names for each arm in arm variable
 #' @param arm_colours vector of colours for each arm
 #' @param facets a logical value whether to plot bar chart with facets
@@ -21,8 +21,8 @@
 #'
 #' @examples
 #' aebar(df2, arm_levels=c("Intervention","Placebo"), facets=FALSE)
-aebar <- function(data, id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4"), arm_names=NULL,
-                  arm_colours=NULL, facets=TRUE, save_image_path=NULL){
+aebar <- function(data, arm_levels, id="id", arm="arm", arm_names=NULL, arm_colours=NULL, facets=TRUE,
+                  save_image_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("id" = id, "arm" = arm)
@@ -34,6 +34,9 @@ aebar <- function(data, id="id", arm="arm", arm_levels=c("A1", "A2", "A3", "A4")
   if (is.null(arm_colours)){
     arm_colours <- c("#e14b31", "#22a7f0", "#6AA84f", "#F1C232")
   }
+
+  # checks if arm_levels can be found in arm variable
+  stopifnot("arm levels specified cannot be found in arm column!" = arm_levels %in% dataset$arm)
 
   # number of arm factor levels
   arm_number <- length(unique(dataset$arm))

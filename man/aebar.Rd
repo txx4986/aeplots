@@ -6,9 +6,9 @@
 \usage{
 aebar(
   data,
+  arm_levels,
   id = "id",
   arm = "arm",
-  arm_levels = c("A1", "A2", "A3", "A4"),
   arm_names = NULL,
   arm_colours = NULL,
   facets = TRUE,
@@ -18,11 +18,11 @@ aebar(
 \arguments{
 \item{data}{data frame with adverse_event, id and arm columns}
 
+\item{arm_levels}{vector of factor levels in arm variable}
+
 \item{id}{name of id column}
 
 \item{arm}{name of arm column}
-
-\item{arm_levels}{vector of factor levels in arm variable}
 
 \item{arm_names}{vector of names for each arm in arm variable}
 
