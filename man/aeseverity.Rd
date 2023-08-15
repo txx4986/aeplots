@@ -7,7 +7,7 @@
 aeseverity(
   data,
   arm_levels,
-  severity_levels,
+  severity_levels = NULL,
   body_system_class = "body_system_class",
   severity = "severity",
   id = "id",

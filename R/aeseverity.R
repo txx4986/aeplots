@@ -28,7 +28,7 @@
 #' @examples
 #' df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 #' aeseverity(df2, arm_levels=c("Intervention","Placebo"), body_system_class="aebodsys", proportions_dp=2)
-aeseverity <- function(data, arm_levels, severity_levels, body_system_class="body_system_class",
+aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class="body_system_class",
                        severity="severity", id="id", arm="arm", n_events=TRUE, arm_names=NULL,
                        severity_names=NULL, proportions_dp=1, save_image_path=NULL, save_docx_path=NULL){
   # change the column names
@@ -36,10 +36,18 @@ aeseverity <- function(data, arm_levels, severity_levels, body_system_class="bod
     rename("body_system_class"=body_system_class, "severity" = severity, "id" = id, "arm" = arm)
 
   # checks if the variable type for each column is correct
+  stopifnot("body_system_class variable type is not factor!" = is.factor(dataset[["body_system_class"]]))
   stopifnot("severity variable type is not factor!" = is.factor(dataset[["severity"]]))
+
+  # checks if either severity variable is ordered or severity level is specified
+  stopifnot("severity variable is not ordered or severity_levels is not specified!" = !(!is.ordered(dataset$severity) & is.null(severity_levels)))
 
   # checks if severity_levels can be found in severity variable
   stopifnot("severity levels specified cannot be found in arm column!" = severity_levels %in% dataset$severity)
+
+  if (is.null(severity_levels)){
+    severity_levels <- levels(dataset$severity)
+  }
 
   if (is.null(severity_names)){
     severity_names <- severity_levels
@@ -100,9 +108,7 @@ aeseverity <- function(data, arm_levels, severity_levels, body_system_class="bod
         case_when(arm=="A1" ~ scales::percent(Frequency / N1, 10^(-proportions_dp)),
                   arm=="A2" ~ scales::percent(Frequency / N2, 10^(-proportions_dp)),
                   arm=="A3" ~ scales::percent(Frequency / N3, 10^(-proportions_dp)),
-                  arm=="A4" ~ scales::percent(Frequency / N4, 10^(-proportions_dp)))) %>%
-    pivot_wider(
-      names_from = arm, values_from = c(Frequency, Proportions, Events))
+                  arm=="A4" ~ scales::percent(Frequency / N4, 10^(-proportions_dp))))
 
   #to produce nice table
   name1 <- "N" %p% subsc("1")
@@ -112,6 +118,9 @@ aeseverity <- function(data, arm_levels, severity_levels, body_system_class="bod
   border <- fp_border_default(width=1.5)
 
   if (n_events==TRUE){
+    Table2 <- Table2 %>%
+      pivot_wider(
+        names_from = arm, values_from = c(Frequency, Proportions, Events))
     if (arm_number==2){
       Table2_print <- Table2 %>%
         pivot_wider(
@@ -922,6 +931,10 @@ aeseverity <- function(data, arm_levels, severity_levels, body_system_class="bod
       }
     }
   }else{
+    Table2 <- Table2 %>%
+      select(-c(Events)) %>%
+      pivot_wider(
+        names_from = arm, values_from = c(Frequency, Proportions))
     if (arm_number==2){
       Table2_print <- Table2 %>%
         pivot_wider(
