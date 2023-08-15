@@ -7,10 +7,14 @@
 aeseverity(
   data,
   arm_levels,
+  severity_levels,
+  body_system_class = "body_system_class",
   severity = "severity",
   id = "id",
   arm = "arm",
+  n_events = TRUE,
   arm_names = NULL,
+  severity_names = NULL,
   proportions_dp = 1,
   save_image_path = NULL,
   save_docx_path = NULL
@@ -21,13 +25,21 @@ aeseverity(
 
 \item{arm_levels}{vector of factor levels in arm variable}
 
+\item{severity_levels}{vector of severity levels in ascending order if severity is not ordered factor}
+
+\item{body_system_class}{name of body_system_class column}
+
 \item{severity}{name of severity column}
 
 \item{id}{name of id column}
 
 \item{arm}{name of arm column}
 
+\item{n_events}{a logical value whether to include number of events for each body system class and severity}
+
 \item{arm_names}{vector of names for each arm in arm variable}
+
+\item{severity_names}{vector of names for each severity in severity variable}
 
 \item{proportions_dp}{number of decimal places for proportions}
 
@@ -43,5 +55,5 @@ Table of frequencies and proportions of events by severity categories
 }
 \examples{
 df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
-aeseverity(df2, arm_levels=c("Intervention","Placebo"), proportions_dp=2)
+aeseverity(df2, arm_levels=c("Intervention","Placebo"), body_system_class="aebodsys", proportions_dp=2)
 }
