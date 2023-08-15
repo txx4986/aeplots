@@ -26,6 +26,7 @@
 #' @export
 #'
 #' @examples
+#' df2$aebodsys <- as.factor(df2$aebodsys)
 #' df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 #' aeseverity(df2, arm_levels=c("Intervention","Placebo"), body_system_class="aebodsys", proportions_dp=2)
 aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class="body_system_class",
