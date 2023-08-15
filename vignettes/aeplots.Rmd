@@ -88,12 +88,17 @@ aetable(df3, body_system_class="aebodsys", control="Placebo", control_name="No D
 ### 2 treatment arms
 `aeseverity` plots a table of frequencies and proportions of events by severity categories. We specify the number of decimal places for proportions via the argument `proportions_dp`.
 ```{r, fig.dim=c(8, 6)}
-aeseverity(df2, arm_levels=c("Intervention", "Placebo"), proportions_dp=2)
+aeseverity(df2, arm_levels=c("Intervention", "Placebo"), body_system_class="aebodsys", proportions_dp=2)
+```
+
+We can choose to drop the number of events column by specifying `n_events=FALSE`.
+```{r, fig.dim=c(8, 6)}
+aeseverity(df2, arm_levels=c("Intervention", "Placebo"), body_system_class="aebodsys", n_events=FALSE)
 ```
 
 ### More than 2 treatment arms
 ```{r, fig.dim=c(8, 6)}
-aeseverity(df3, arm_levels=c("Intervention 1", "Intervention 2", "Placebo"), arm_names=c("Drug A", "Drug B", "No Drug"))
+aeseverity(df3, arm_levels=c("Intervention 1", "Intervention 2", "Placebo"), arm_names=c("Drug A", "Drug B", "No Drug"), body_system_class="aebodsys")
 ```
 
 ## `aedot` function
