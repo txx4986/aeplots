@@ -54,6 +54,7 @@ flextable of frequencies and proportions of events by severity categories
 Table of frequencies and proportions of events by severity categories
 }
 \examples{
+df2$aebodsys <- as.factor(df2$aebodsys)
 df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 aeseverity(df2, arm_levels=c("Intervention","Placebo"), body_system_class="aebodsys", proportions_dp=2)
 }
