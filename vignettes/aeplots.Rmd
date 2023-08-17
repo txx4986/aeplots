@@ -155,7 +155,7 @@ aebar(df3, arm_levels=c("Intervention 1","Intervention 2", "Placebo"), arm_names
 ### Docx
 We can save tables as docx by specifying the filepath in the `save_docx_path` argument.
 ```{r, fig.dim=c(8, 6)}
-aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), IRR=TRUE, variables = c("variable1", "variable2"), save_docx_path="table.docx")
+aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), treatment_effect_estimate=TRUE, variables = c("variable1", "variable2"), save_docx_path="table.docx")
 ```
 
 ### Image
