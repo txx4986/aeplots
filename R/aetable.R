@@ -8,12 +8,28 @@
 #' - **Proportions** (number of participants with at least one event for each body system class relative to number of participants at risk)
 #' - **Number of adverse events per participant**: presented as **counts**, **mean (SD)**
 #' - **Total number of events** and **incidence rates** (**number of events** relative to **total time in follow-up**)
-#' - **Treatment effect estimate (IRR)** and **95% confidence intervals**
+#' - **Treatment effect estimate** and **95% confidence intervals**
 #'
 #' @section Treatment Effect Estimate (IRR):
-#' The treatment effect and its 95% confidence interval are estimated via fitting a generalised linear model
-#' with Poisson function and log link with total length of follow up time as offset. Additional covariates
-#' besides arm can be added into the model via the argument `variables`.
+#' The treatment effect and its 95% confidence interval are estimated via the following models below:
+#'
+#' - **Poisson (rate)**: fitting a generalised linear model with Poisson family and log link with length of follow up time as offset
+#' - **Poisson (count)**: fitting a generalised linear model with Poisson family and log link with count as response
+#' - **Negative Binomial (rate)**: fitting a Negative Binomial model with length of follow up time as offset
+#' - **Negative Binomial (count)**: fitting a Negative Binomial model with count as response
+#' - **Binomial (logit)**: fitting a generalised linear model with Binomial family and logit link
+#' - **Binomial (log)**: fitting a generalised linear model with Binomial family and log link
+#' - **Binomial (identity)**: fitting a generalised linear model with Binomial family and identity link
+#'
+#' The default model is the `Poisson (rate)` model.
+#'
+#' For Poisson and Negative Binomial models, the treatment effect estimate is the **Incidence Rate Ratio (IRR)**.
+#' For Binomial (logit) model, the treatment effect estimate is the **Odds Ratio (OR)**.
+#' For Binomial (log) model, the treatment effect estimate is the **Risk Ratio (RR)**.
+#' For Binomial (identity) model, the treatment effect estimate is the **Risk Difference (RD)**.
+#'
+#' Additional covariates besides arm can be added into the model via the argument `variables`.
+#' Note that interaction terms cannot be added to the model.
 #'
 #' @param data data frame with adverse_event, body_system_class, id, arm, date_rand and last_visit columns
 #' @param control factor level of control arm
@@ -25,14 +41,15 @@
 #' @param last_visit name of last_visit column
 #' @param control_name name of control arm
 #' @param intervention_names vector of names for interventions
-#' @param IRR a logical value whether to include IRR and 95% CI column in summary table (only for 2 arms)
-#' @param variables vector of variable names to be included in the glm Poisson model for computation of IRR (excluding arm)
+#' @param treatment_effect_estimate a logical value whether to include treatment effect estimate and 95% CI column in summary table (only for 2 arms)
+#' @param model model used for computation of treatment effect estimate and 95% CI
+#' @param variables vector of variable names to be included in the model for computation of treatment effect estimate (excluding arm)
 #' @param mean a logical value whether to include mean and SD column in summary table
 #' @param proportions_dp number of decimal places for proportions
 #' @param IR_dp number of decimal places for incidence rate
 #' @param mean_dp number of decimal places for mean number of AEs per participant
 #' @param SD_dp number of decimal places for standard deviation of number of AEs per participant
-#' @param IRR_sf number of significant figures for IRR
+#' @param estimate_sf number of significant figures for treatment effect estimate
 #' @param CI_sf number of significant figures for 95% CI
 #' @param save_image_path file path to save table as image
 #' @param save_docx_path file path to save table as docx
@@ -47,17 +64,18 @@
 #' @import lubridate
 #' @import stringr
 #' @importFrom purrr possibly
+#' @importFrom MASS glm.nb
 #'
 #' @export
 #'
 #' @examples
 #' df2$aebodsys <- as.factor(df2$aebodsys)
-#' aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), IRR=TRUE, variables = c("variable1", "variable2"))
+#' aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), treatment_effect_estimate=TRUE, variables = c("variable1", "variable2"))
 aetable <- function(data, control, intervention_levels, body_system_class = "body_system_class", id = "id",
                     arm = "arm", date_rand = "date_rand", last_visit = "last_visit", control_name=NULL,
-                    intervention_names=NULL, IRR = TRUE, variables = c(), mean = TRUE, proportions_dp = 1,
-                    IR_dp = 1, mean_dp = 1, SD_dp = 1, IRR_sf = 3, CI_sf = 3, save_image_path=NULL,
-                    save_docx_path=NULL){
+                    intervention_names=NULL, treatment_effect_estimate = TRUE, model="Poisson (rate)",
+                    variables = c(), mean = TRUE, proportions_dp = 1, IR_dp = 1, mean_dp = 1, SD_dp = 1,
+                    estimate_sf = 3, CI_sf = 3, save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand,
@@ -95,12 +113,6 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
   stopifnot("total number of arms specified do not corresponed to the number of unique arms in arm column!" = (length(control) + length(intervention_levels)) == arm_number)
 
   # recode arm factor
-  # dataset <- dataset %>%
-  #   mutate(
-  #     arm =
-  #       case_when(arm_number==2 ~ recode_factor(arm, arm1="A1", arm2="A2),
-  #                 arm_number==3 ~ recode_factor(arm, arm1="A1", arm2="A2, arm3="A3"),
-  #                 arm_number==4 ~ recode_factor(arm, arm1="A1", arm2="A2, arm3="A3", arm4="arm4")))
   dataset$arm <- as.character(dataset$arm)
   dataset$arm[which(dataset$arm==control)] <- "C"
   dataset$arm[which(dataset$arm==intervention_levels[1])] <- "I1"
@@ -117,8 +129,6 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
   dataset <- dataset %>%
     # follow up time is computed as difference between randomisation date and last visit date (units=weeks)
     mutate(follow_up_time = as.numeric(difftime(last_visit, date_rand, units="weeks")))
-
-  options(dplyr.summarise.inform = FALSE)
 
   Table1 <- dataset %>%
     group_by(body_system_class, id, arm, follow_up_time) %>%
@@ -145,9 +155,6 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
                   arm=="I1" ~ scales::percent(Frequency / N1, 10^(-proportions_dp)),
                   arm=="I2" ~ scales::percent(Frequency / N2, 10^(-proportions_dp)),
                   arm=="I3" ~ scales::percent(Frequency / N3, 10^(-proportions_dp)))) %>%
-    # mutate(
-    #   # one decimal place for mean and SD
-    #   across(c(Mean, SD), \(x) format(x, nsmall=1))) %>%
     mutate(
       # combine Frequency & Proportions, Events & IR, Mean & SD columns
       Frequency = str_glue("{Frequency} ({Proportions})"),
@@ -161,42 +168,161 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
 
   # exclude IRR column if there are more than 2 arms in the table
   if (arm_number > 2){
-    IRR <- FALSE
+    treatment_effect_estimate <- FALSE
   }
 
-  if (IRR==TRUE){
-    crit_value <- qnorm(0.975, mean=0, sd=1)
+  if (treatment_effect_estimate==TRUE){
+    # check if the model specified is either Poisson/Negative Binomial/Binomial
+    stopifnot("Model specified is not one of Poisson (rate), Poisson (count), Negative Binomial (rate), Negative Binomial (count), Binomial (logit), Binomial (log) or Binomial (identity)" = (model=="Poisson (rate)")|(model=="Poisson (count)")|(model=="Negative Binomial (rate)")|(model=="Negative Binomial (count)")|(model=="Binomial (logit)")|model=="Binomial (log)"|(model=="Binomial (identity)"))
 
     # count number of AEs for each id grouped by body_system_class
     reg_df <- dataset %>%
-      group_by(across(all_of(c(variables, "body_system_class", "id", "arm", "follow_up_time")))) %>%
-      count()
+      mutate(id=as.factor(id)) %>%
+      group_by(body_system_class, id) %>%
+      count() %>%
+      group_by(body_system_class) %>%
+      complete(id, fill=list(n=0))
+    lookup <- dataset %>% select(all_of(c(variables, "id", "arm", "follow_up_time"))) %>% distinct()
+    reg_df <- reg_df %>% merge(lookup, by="id")
 
-    # fit glm model with Poisson function and log link
-    glm_func <- function(x){
-      summary(glm(n ~ . - follow_up_time, offset=log(follow_up_time), family=poisson(link="log"),
-                  data=reg_df %>%
-                    filter(body_system_class==x) %>%
-                    mutate(arm=relevel(arm, ref="C")) %>%
-                    ungroup() %>%
-                    select(all_of(c(variables, "arm", "follow_up_time", "n")))))$coefficients["armI1",c("Estimate",
-                                                                                                        "Std. Error")]
+    if (model=="Poisson (rate)"){
+      estimator <- "IRR"
+
+      # fit glm model with Poisson function and log link
+      glm_func <- function(x){
+        fit <- glm(n ~ . - follow_up_time, offset=log(follow_up_time), family=poisson(link="log"),
+                   data=reg_df %>%
+                     filter(body_system_class==x) %>%
+                     mutate(arm=relevel(arm, ref="C")) %>%
+                     ungroup() %>%
+                     select(all_of(c(variables, "arm", "follow_up_time", "n"))))
+        return(list(Estimate=coef(fit)[["armI1"]], lower=confint(profile(fit), level=0.95)["armI1","2.5 %"],
+                    upper=confint(profile(fit), level=0.95)["armI1","97.5 %"]))
+      }
+
+    } else if (model=="Poisson (count)"){
+      estimator <- "IRR"
+
+      # fit glm model with Poisson function and log link
+      glm_func <- function(x){
+        fit <- glm(n ~ . , family=poisson(link="log"),
+                   data=reg_df %>%
+                     filter(body_system_class==x) %>%
+                     mutate(arm=relevel(arm, ref="C")) %>%
+                     ungroup() %>%
+                     select(all_of(c(variables, "arm", "n"))))
+        return(list(Estimate=coef(fit)[["armI1"]], lower=confint(profile(fit), level=0.95)["armI1","2.5 %"],
+                    upper=confint(profile(fit), level=0.95)["armI1","97.5 %"]))
+      }
+
+    } else if (model=="Negative Binomial (rate)"){
+      estimator <- "IRR"
+
+      # fit negative binomial model
+      glm_func <- function(x){
+        fit <- MASS::glm.nb(n ~ . - follow_up_time + offset(log(follow_up_time)),
+                            data=reg_df %>%
+                              filter(body_system_class==x) %>%
+                              mutate(arm=relevel(arm, ref="C")) %>%
+                              ungroup() %>%
+                              select(all_of(c(variables, "arm", "follow_up_time", "n"))))
+        return(list(Estimate=coef(fit)[["armI1"]], lower=confint(profile(fit), level=0.95)["armI1","2.5 %"],
+                    upper=confint(profile(fit), level=0.95)["armI1","97.5 %"]))
+      }
+
+    } else if (model=="Negative Binomial (count)"){
+      estimator <- "IRR"
+
+      # fit negative binomial model
+      glm_func <- function(x){
+        fit <- MASS::glm.nb(n ~ . ,
+                            data=reg_df %>%
+                              filter(body_system_class==x) %>%
+                              mutate(arm=relevel(arm, ref="C")) %>%
+                              ungroup() %>%
+                              select(all_of(c(variables, "arm", "n"))))
+        return(list(Estimate=coef(fit)[["armI1"]], lower=confint(profile(fit), level=0.95)["armI1","2.5 %"],
+                    upper=confint(profile(fit), level=0.95)["armI1","97.5 %"]))
+      }
+
+    } else {
+      # indicate whether each id had AE for each body_system_class
+      reg_df <- reg_df %>%
+        mutate(n=ifelse(n>=1, 1, 0)) %>%
+        select(-c(follow_up_time))
+
+      if(model=="Binomial (logit)"){
+        estimator <- "OR"
+
+        # fit glm model with binomial function and logit link
+        glm_func <- function(x){
+          fit <- glm(n ~ . , family=binomial(link="logit"),
+                     data=reg_df %>%
+                       filter(body_system_class==x) %>%
+                       mutate(arm=relevel(arm, ref="C")) %>%
+                       ungroup() %>%
+                       select(all_of(c(variables, "arm", "n"))))
+          return(list(Estimate=coef(fit)[["armI1"]], lower=confint(profile(fit), level=0.95)["armI1","2.5 %"],
+                      upper=confint(profile(fit), level=0.95)["armI1","97.5 %"]))
+        }
+      } else if (model=="Binomial (log)"){
+        estimator <- "RR"
+
+        # fit glm model with binomial function and log link
+        glm_func <- function(x){
+          fit <- glm(n ~ . , family=binomial(link="log"),
+                     data=reg_df %>%
+                       filter(body_system_class==x) %>%
+                       mutate(arm=relevel(arm, ref="C")) %>%
+                       ungroup() %>%
+                       select(all_of(c(variables, "arm", "n"))))
+          return(list(Estimate=coef(fit)[["armI1"]], lower=confint(profile(fit), level=0.95)["armI1","2.5 %"],
+                      upper=confint(profile(fit), level=0.95)["armI1","97.5 %"]))
+        }
+      } else {
+        estimator <- "RD"
+
+        # fit glm model with binomial function and identity link
+        glm_func <- function(x){
+          fit <- glm(n ~ . , family=binomial(link="identity"),
+                     data=reg_df %>%
+                       filter(body_system_class==x) %>%
+                       mutate(arm=relevel(arm, ref="C")) %>%
+                       ungroup() %>%
+                       select(all_of(c(variables, "arm", "n"))))
+          return(list(Estimate=coef(fit)[["armI1"]], lower=confint(profile(fit), level=0.95)["armI1","2.5 %"],
+                      upper=confint(profile(fit), level=0.95)["armI1","97.5 %"]))
+        }
+      }
     }
 
     glm_func_vect <- Vectorize(glm_func)
 
-    Table1_IRR <- Table1 %>%
+    Table1_treatment <- Table1 %>%
       rowwise() %>%
       mutate(
-        Coef = list(possibly(glm_func_vect, otherwise=NA)(body_system_class)),
-        Estimate = Coef[[1]][[1]],
-        SE = ifelse(is.na(Estimate)==FALSE, Coef[[2]], NA),
-        IRR = signif(exp(Estimate), IRR_sf),
-        lower = signif(exp(Estimate - crit_value * SE), CI_sf),
-        upper = signif(exp(Estimate + crit_value * SE), CI_sf),
-        CI = str_c("(", lower, ", ", upper, ")")
-      ) %>%
-      select(-c(Coef, Estimate, SE, lower, upper))
+        Coef = list(possibly(glm_func_vect, otherwise=NA)(body_system_class)))
+
+    if(model=="Binomial (identity)"){
+      Table1_treatment <- Table1_treatment %>%
+        mutate(
+          Estimate = signif(Coef[[1]], estimate_sf),
+          lower = signif(ifelse(is.na(Estimate)==FALSE, Coef[[2]], NA), CI_sf),
+          upper = signif(ifelse(is.na(Estimate)==FALSE, Coef[[3]], NA), CI_sf),
+          CI = str_c("(", lower, ", ", upper, ")")
+        ) %>%
+        select(-c(Coef, lower, upper))
+
+    } else{
+      Table1_treatment <- Table1_treatment %>%
+        mutate(
+          Estimate = signif(exp(Coef[[1]]), estimate_sf),
+          lower = signif(exp(ifelse(is.na(Estimate)==FALSE, Coef[[2]], NA)), CI_sf),
+          upper = signif(exp(ifelse(is.na(Estimate)==FALSE, Coef[[3]], NA)), CI_sf),
+          CI = str_c("(", lower, ", ", upper, ")")
+        ) %>%
+        select(-c(Coef, lower, upper))
+    }
   }
 
   #to produce nice table
@@ -208,9 +334,10 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
 
   if (mean==TRUE){
     if (arm_number==2){
-      if (IRR==TRUE){
-        Table1_print <- Table1_IRR %>%
-          select(body_system_class, Frequency_I1, Events_I1, Mean_I1, Frequency_C, Events_C, Mean_C, IRR, CI) %>%
+      if (treatment_effect_estimate==TRUE){
+        Table1_print <- Table1_treatment %>%
+          select(body_system_class, Frequency_I1, Events_I1, Mean_I1, Frequency_C, Events_C, Mean_C, Estimate,
+                 CI) %>%
           flextable() %>%
           add_header(
             values = c(Frequency_I1="At least one event",
@@ -219,17 +346,18 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
                        Frequency_C="At least one event",
                        Events_C="Number of events",
                        Mean_C="Number of events",
-                       IRR = "Treatment Effect Estimate (IRR)",
+                       Estimate = str_glue("Treatment Effect Estimate ({estimator})"),
                        CI = "95% CI")) %>%
           add_header_row(
-            values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})"),
-                     "Treatment Effect Estimate (IRR)", "95% CI"),
+            values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"),
+                     str_glue("{control_name} ({name2}={N0})"),
+                     str_glue("Treatment Effect Estimate ({estimator})"), "95% CI"),
             colwidths = c(1, 3, 3, 1, 1)) %>%
           set_header_labels(
             body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)",
             Mean_I1="Mean number of events per participant (SD)", Frequency_C="N (%)",
             Events_C="n (IR)", Mean_C="Mean number of events per participant (SD)",
-            IRR = "Treatment Effect Estimate (IRR)", CI = "95% CI") %>%
+            Estimate = str_glue("Treatment Effect Estimate ({estimator})"), CI = "95% CI") %>%
           merge_h(part="header") %>%
           merge_v(part="header") %>%
           flextable::align(align="center", j = c(2:9), part="all") %>%
@@ -357,24 +485,24 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
     }
   } else{
     if (arm_number==2){
-      if (IRR==TRUE){
+      if (treatment_effect_estimate==TRUE){
         Table1_print <- Table1_IRR %>%
-          select(body_system_class, Frequency_I1, Events_I1, Frequency_C, Events_C, IRR, CI) %>%
+          select(body_system_class, Frequency_I1, Events_I1, Frequency_C, Events_C, Estimate, CI) %>%
           flextable() %>%
           add_header(
             values = c(Frequency_I1="At least one event",
                        Events_I1="Number of events",
                        Frequency_C="At least one event",
                        Events_C="Number of events",
-                       IRR = "Treatment Effect Estimate (IRR)",
+                       Estimate = str_glue("Treatment Effect Estimate ({estimator})"),
                        CI = "95% CI")) %>%
           add_header_row(
             values=c("", str_glue("{intervention_names[1]} ({name1}={N1})"), str_glue("{control_name} ({name2}={N0})"),
-                     "Treatment Effect Estimate (IRR)", "95% CI"),
+                     str_glue("Treatment Effect Estimate ({estimator})"), "95% CI"),
             colwidths = c(1, 2, 2, 1, 1)) %>%
           set_header_labels(
             body_system_class="Body system class", Frequency_I1="N (%)", Events_I1="n (IR)", Frequency_C="N (%)",
-            Events_C="n (IR)", IRR = "Treatment Effect Estimate (IRR)", CI = "95% CI") %>%
+            Events_C="n (IR)", Estimate = str_glue("Treatment Effect Estimate ({estimator})"), CI = "95% CI") %>%
           merge_h(part="header") %>%
           merge_v(part="header") %>%
           flextable::align(align="center", j = c(2:7), part="all") %>%

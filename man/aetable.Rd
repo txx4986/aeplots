@@ -15,14 +15,15 @@ aetable(
   last_visit = "last_visit",
   control_name = NULL,
   intervention_names = NULL,
-  IRR = TRUE,
+  treatment_effect_estimate = TRUE,
+  model = "Poisson (rate)",
   variables = c(),
   mean = TRUE,
   proportions_dp = 1,
   IR_dp = 1,
   mean_dp = 1,
   SD_dp = 1,
-  IRR_sf = 3,
+  estimate_sf = 3,
   CI_sf = 3,
   save_image_path = NULL,
   save_docx_path = NULL
@@ -49,9 +50,11 @@ aetable(
 
 \item{intervention_names}{vector of names for interventions}
 
-\item{IRR}{a logical value whether to include IRR and 95\% CI column in summary table (only for 2 arms)}
+\item{treatment_effect_estimate}{a logical value whether to include treatment effect estimate and 95\% CI column in summary table (only for 2 arms)}
 
-\item{variables}{vector of variable names to be included in the glm Poisson model for computation of IRR (excluding arm)}
+\item{model}{model used for computation of treatment effect estimate and 95\% CI}
+
+\item{variables}{vector of variable names to be included in the model for computation of treatment effect estimate (excluding arm)}
 
 \item{mean}{a logical value whether to include mean and SD column in summary table}
 
@@ -63,7 +66,7 @@ aetable(
 
 \item{SD_dp}{number of decimal places for standard deviation of number of AEs per participant}
 
-\item{IRR_sf}{number of significant figures for IRR}
+\item{estimate_sf}{number of significant figures for treatment effect estimate}
 
 \item{CI_sf}{number of significant figures for 95\% CI}
 
@@ -82,17 +85,34 @@ flextable of AE summary by body system class and arm
 \item \strong{Proportions} (number of participants with at least one event for each body system class relative to number of participants at risk)
 \item \strong{Number of adverse events per participant}: presented as \strong{counts}, \strong{mean (SD)}
 \item \strong{Total number of events} and \strong{incidence rates} (\strong{number of events} relative to \strong{total time in follow-up})
-\item \strong{Treatment effect estimate (IRR)} and \strong{95\% confidence intervals}
+\item \strong{Treatment effect estimate} and \strong{95\% confidence intervals}
 }
 }
 \section{Treatment Effect Estimate (IRR)}{
 
-The treatment effect and its 95\% confidence interval are estimated via fitting a generalised linear model
-with Poisson function and log link with total length of follow up time as offset. Additional covariates
-besides arm can be added into the model via the argument \code{variables}.
+The treatment effect and its 95\% confidence interval are estimated via the following models below:
+\itemize{
+\item \strong{Poisson (rate)}: fitting a generalised linear model with Poisson family and log link with length of follow up time as offset
+\item \strong{Poisson (count)}: fitting a generalised linear model with Poisson family and log link with count as response
+\item \strong{Negative Binomial (rate)}: fitting a Negative Binomial model with length of follow up time as offset
+\item \strong{Negative Binomial (count)}: fitting a Negative Binomial model with count as response
+\item \strong{Binomial (logit)}: fitting a generalised linear model with Binomial family and logit link
+\item \strong{Binomial (log)}: fitting a generalised linear model with Binomial family and log link
+\item \strong{Binomial (identity)}: fitting a generalised linear model with Binomial family and identity link
+}
+
+The default model is the \code{Poisson (rate)} model.
+
+For Poisson and Negative Binomial models, the treatment effect estimate is the \strong{Incidence Rate Ratio (IRR)}.
+For Binomial (logit) model, the treatment effect estimate is the \strong{Odds Ratio (OR)}.
+For Binomial (log) model, the treatment effect estimate is the \strong{Risk Ratio (RR)}.
+For Binomial (identity) model, the treatment effect estimate is the \strong{Risk Difference (RD)}.
+
+Additional covariates besides arm can be added into the model via the argument \code{variables}.
+Note that interaction terms cannot be added to the model.
 }
 
 \examples{
 df2$aebodsys <- as.factor(df2$aebodsys)
-aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), IRR=TRUE, variables = c("variable1", "variable2"))
+aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), treatment_effect_estimate=TRUE, variables = c("variable1", "variable2"))
 }
