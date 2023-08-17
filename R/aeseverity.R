@@ -1563,7 +1563,7 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
     bold(i=1, bold=TRUE, part="header") %>%
     bg(part="header", bg="gray80") %>%
     bg(part="body", bg="white") %>%
-    fontsize(size=8, part="all")
+    fontsize(size=6.5, part="all")
 
   plot(Table2_print)
 
