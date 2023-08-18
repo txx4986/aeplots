@@ -51,7 +51,14 @@ aeseverity(
 flextable of frequencies and proportions of events by severity categories
 }
 \description{
-Table of frequencies and proportions of events by severity categories
+\code{aeseverity} is used to plot a table of AE summary by severity level and body system class for each arm using the following summary statistics:
+\itemize{
+\item \strong{N}: Frequency (number of participants with at least one event for each severity level and body system class)
+\item \strong{\%}: Proportions (number of participants with at least one event for each severity level and body system class relative to number of participants at risk)
+\item \strong{n}: Number of adverse events for each severity level and body system class
+}
+
+Note that \code{aeseverity} can only take up to 5 severity levels for the severity variable.
 }
 \examples{
 df2$aebodsys <- as.factor(df2$aebodsys)

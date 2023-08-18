@@ -45,7 +45,12 @@ aedot(
 dot plot with proportions alongside treatment effect estimates with accompanying 95\% confidence interval
 }
 \description{
-Dot plot to visualise AE and harm profiles in two-arm randomised controlled trials
+\code{aedot} creates a plot that summarises the AE and harm profiles via the following visualisations:
+\itemize{
+\item \strong{left panel}: percentage of participants who had an event in each treatment group
+\item \strong{central panel}: relative risk/ risk difference/ incidence rate ratio/ odds ratio of observing each event in the treatment group compared with the control group, along with 95\% confidence interval
+\item \strong{right panel}: data table containing number of participants with at least one event and number of events by treatment group
+}
 }
 \section{Treatment Effect Estimate}{
 

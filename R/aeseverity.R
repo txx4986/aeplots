@@ -1,5 +1,14 @@
 #' Table of frequencies and proportions of events by severity categories
 #'
+#' @description
+#' `aeseverity` is used to plot a table of AE summary by severity level and body system class for each arm using the following summary statistics:
+#'
+#' - **N**: Frequency (number of participants with at least one event for each severity level and body system class)
+#' - **%**: Proportions (number of participants with at least one event for each severity level and body system class relative to number of participants at risk)
+#' - **n**: Number of adverse events for each severity level and body system class
+#'
+#' Note that `aeseverity` can only take up to 5 severity levels for the severity variable.
+#'
 #' @param data data frame with adverse event, severity, id and arm columns
 #' @param arm_levels vector of factor levels in arm variable
 #' @param severity_levels vector of severity levels in ascending order if severity is not ordered factor

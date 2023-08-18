@@ -81,7 +81,7 @@ flextable of AE summary by body system class and arm
 \code{aetable} is used to plot a table of AE summary by body system class and arm using the following summary statistics:
 \itemize{
 \item \strong{Total number of participants at risk per arm}
-\item \strong{Frequency} (number of participants with at least one event for each event)
+\item \strong{Frequency} (number of participants with at least one event for each body system class)
 \item \strong{Proportions} (number of participants with at least one event for each body system class relative to number of participants at risk)
 \item \strong{Number of adverse events per participant}: presented as \strong{counts}, \strong{mean (SD)}
 \item \strong{Total number of events} and \strong{incidence rates} (\strong{number of events} relative to \strong{total time in follow-up})

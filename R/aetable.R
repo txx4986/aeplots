@@ -4,7 +4,7 @@
 #' `aetable` is used to plot a table of AE summary by body system class and arm using the following summary statistics:
 #'
 #' - **Total number of participants at risk per arm**
-#' - **Frequency** (number of participants with at least one event for each event)
+#' - **Frequency** (number of participants with at least one event for each body system class)
 #' - **Proportions** (number of participants with at least one event for each body system class relative to number of participants at risk)
 #' - **Number of adverse events per participant**: presented as **counts**, **mean (SD)**
 #' - **Total number of events** and **incidence rates** (**number of events** relative to **total time in follow-up**)
