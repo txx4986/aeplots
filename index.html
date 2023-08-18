@@ -75,9 +75,9 @@
 <li>
 <code>aetable</code>: Plots a table of AE summary by body system class</li>
 <li>
-<code>aeseverity</code>: Plots a table of AE summary by severity</li>
+<code>aeseverity</code>: Plots a table of AE summary by severity and body system class</li>
 <li>
-<code>aedot</code>: Plots a dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to give an overview of the harm profile</li>
+<code>aedot</code>: Plots a dot plot with proportions alongside treatment effect estimates with accompanying 95% confidence interval to give an overview of the harm profile</li>
 <li>
 <code>aestacked</code>: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity</li>
 <li>
@@ -375,7 +375,7 @@
 </tr>
 <tr class="odd">
 <td>severity</td>
-<td>Severity of adverse event</td>
+<td>Severity of adverse event (2, 3, 4 or 5 severity levels)</td>
 <td>Factor</td>
 </tr>
 <tr class="even">
@@ -390,7 +390,7 @@
 </tr>
 <tr class="even">
 <td>variable</td>
-<td>Variables to be included in generalised linear models with Poisson function and log link for estimation of IRRs and 95% CIs</td>
+<td>Variables to be included in model for estimation of treatment effect estimates and 95% CIs</td>
 <td>Factor/Character/Numeric</td>
 </tr>
 </tbody>
