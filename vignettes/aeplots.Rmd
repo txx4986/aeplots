@@ -107,9 +107,14 @@ aeseverity(df3, arm_levels=c("Intervention 1", "Intervention 2", "Placebo"), arm
 ```
 
 ## `aedot` function
-`aedot` plots a dot plot proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to visualise AE and harm profiles in two-arm randomised controlled trials.
+`aedot` plots a dot plot proportions alongside treatment effect estimates with accompanying 95% confidence interval to visualise AE and harm profiles in two-arm randomised controlled trials.
 ```{r, message=FALSE, warning=FALSE, fig.dim=c(8, 6)}
 aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
+```
+
+Similar to `aetable`, we can specify the model used to estimate the treatment effect and 95% CI via the `model` argument. The available model options are `unadjusted (RR)`, `unadjusted (RD)`, `Poisson (rate)`, `Poisson (count)`, `Negative Binomial (rate)`, `Negative Binomial (count)`, `Binomial (logit)`, `Binomial (log)` and `Binomial (identity)`.
+```{r, message=FALSE, warning=FALSE, fig.dim=c(8, 6)}
+aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention", model="unadjusted (RD)")
 ```
 
 ## `aestacked` function

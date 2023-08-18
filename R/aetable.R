@@ -10,7 +10,7 @@
 #' - **Total number of events** and **incidence rates** (**number of events** relative to **total time in follow-up**)
 #' - **Treatment effect estimate** and **95% confidence intervals**
 #'
-#' @section Treatment Effect Estimate (IRR):
+#' @section Treatment Effect Estimate:
 #' The treatment effect and its 95% confidence interval are estimated via the following models below:
 #'
 #' - **Poisson (rate)**: fitting a generalised linear model with Poisson family and log link with length of follow up time as offset

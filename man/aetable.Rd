@@ -88,7 +88,7 @@ flextable of AE summary by body system class and arm
 \item \strong{Treatment effect estimate} and \strong{95\% confidence intervals}
 }
 }
-\section{Treatment Effect Estimate (IRR)}{
+\section{Treatment Effect Estimate}{
 
 The treatment effect and its 95\% confidence interval are estimated via the following models below:
 \itemize{
