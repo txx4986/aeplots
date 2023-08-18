@@ -14,8 +14,8 @@ Please refer to the [devtools documentation](https://www.r-project.org/nosvn/pan
 Functions available in the package:
 
 -   `aetable`: Plots a table of AE summary by body system class
--   `aeseverity`: Plots a table of AE summary by severity
--   `aedot`: Plots a dot plot with proportions alongside treatment effect estimates (IRR) with accompanying 95% confidence interval to give an overview of the harm profile
+-   `aeseverity`: Plots a table of AE summary by severity and body system class
+-   `aedot`: Plots a dot plot with proportions alongside treatment effect estimates with accompanying 95% confidence interval to give an overview of the harm profile
 -   `aestacked`: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity
 -   `aebar`: Plots a bar chart to present the number of events reported per participant
 
@@ -60,7 +60,7 @@ or
 |arm|Treatment arm of participant (2, 3 or 4 arms)|Factor/Character/Numeric|
 |adverse_event|Adverse event preferred term|Character|
 |body_system_class|Body system class of adverse event|Factor|
-|severity|Severity of adverse event|Factor|
+|severity|Severity of adverse event (2, 3, 4 or 5 severity levels)|Factor|
 |date_rand|Randomisation date|Date|
 |last_visit|Date of last visit|Date|
-|variable|Variables to be included in generalised linear models with Poisson function and log link for estimation of IRRs and 95% CIs|Factor/Character/Numeric|
+|variable|Variables to be included in model for estimation of treatment effect estimates and 95% CIs|Factor/Character/Numeric|
