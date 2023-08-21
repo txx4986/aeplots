@@ -41,7 +41,7 @@ aebar <- function(data, arm_levels, id="id", arm="arm", arm_names=NULL, arm_colo
   # number of arm factor levels
   arm_number <- length(unique(dataset$arm))
   # checks if length of arm_levels equals to the number of arm factor levels
-  stopifnot("length of arm_levels needs to be eqaul to the number of levels in arm" = length(arm_levels)==arm_number)
+  stopifnot("length of arm_levels needs to be equal to the number of levels in arm" = length(arm_levels)==arm_number)
   # checks if length of arm_names equals to the number of arm factor levels
   stopifnot("length of arm_names needs to be equal to the number of levels in arm" = length(arm_names)==arm_number)
   # checks if length of arm_colours is greater than or equal to the number of levels in arm

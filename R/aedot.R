@@ -316,7 +316,7 @@ aedot <- function(data, control, intervention, body_system_class="body_system_cl
     ggtitle("") +
     ylab("Body system") +
     scale_x_continuous(name="Percentage of participants (%)") +
-    scale_y_discrete(limits=rev(levels(ByGroup$body_system_class))) +
+    scale_y_discrete(limits=rev(levels(ByGroup$body_system_class)), labels=function(x) str_wrap(x, width=20)) +
     theme(legend.position="bottom",
           legend.title=element_blank(),
           panel.background = element_blank(),
@@ -388,6 +388,6 @@ aedot <- function(data, control, intervention, body_system_class="body_system_cl
   plot(DotPlot)
 
   if (!is.null(save_image_path)){
-    ggsave(save_image_path, dpi=700, bg="white")
+    ggsave(save_image_path, dpi=700, width=12, height=10, bg="white")
   }
 }

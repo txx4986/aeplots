@@ -65,7 +65,7 @@ aestacked <- function(data, arm_levels, body_system_class="body_system_class", s
   # number of arm factor levels
   arm_number <- length(unique(dataset$arm))
   # checks if length of arm_levels equals to the number of arm factor levels
-  stopifnot("length of arm_levels needs to be eqaul to the number of levels in arm" = length(arm_levels)==arm_number)
+  stopifnot("length of arm_levels needs to be equal to the number of levels in arm" = length(arm_levels)==arm_number)
   # checks if length of arm_names equals to the number of arm factor levels
   stopifnot("length of arm_names needs to be equal to the number of levels in arm" = length(arm_names)==arm_number)
 
@@ -111,7 +111,8 @@ aestacked <- function(data, arm_levels, body_system_class="body_system_class", s
     geom_bar(position="stack", stat="identity", width=0.6, colour="black", linewidth=0.35) +
     scale_fill_manual(values=severity_colours, name="Maximum grade") +
     scale_y_continuous(limits=c(0, 101), breaks=seq(0, 100, 20), expand=c(0, 0)) +
-    facet_wrap(~factor(body_system_class, levels=ordering), ncol = 1, strip.position='left') +
+    facet_wrap(~factor(body_system_class, levels=ordering), ncol = 1, strip.position='left',
+               labeller=label_wrap_gen()) +
     coord_flip() +
     theme(
       panel.background = element_blank(),
@@ -151,6 +152,6 @@ aestacked <- function(data, arm_levels, body_system_class="body_system_class", s
   plot(stacked)
 
   if (!is.null(save_image_path)){
-    ggsave(save_image_path, dpi=700, bg="white")
+    ggsave(save_image_path, dpi=700, width=12, height=10, bg="white")
   }
 }
