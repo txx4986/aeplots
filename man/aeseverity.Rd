@@ -21,7 +21,7 @@ aeseverity(
 )
 }
 \arguments{
-\item{data}{data frame with adverse event, severity, id and arm columns}
+\item{data}{data frame with adverse_event, body_system_class, severity, id and arm columns}
 
 \item{arm_levels}{vector of factor levels in arm variable}
 

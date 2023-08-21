@@ -19,7 +19,7 @@ aedot(
 )
 }
 \arguments{
-\item{data}{data frame with adverse_event, body_system_class, id and arm columns}
+\item{data}{data frame with adverse_event, body_system_class, id and arm columns (optional: date_rand, last_visit and variables to be included in model)}
 
 \item{control}{factor level of control arm}
 

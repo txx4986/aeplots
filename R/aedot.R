@@ -30,7 +30,7 @@
 #' Additional covariates besides arm can be added into the model via the argument `variables`.
 #' Note that interaction terms cannot be added to the model.
 #'
-#' @param data data frame with adverse_event, body_system_class, id and arm columns
+#' @param data data frame with adverse_event, body_system_class, id and arm columns (optional: date_rand, last_visit and variables to be included in model)
 #' @param control factor level of control arm
 #' @param intervention factor level of intervention arm
 #' @param body_system_class name of body_system_class column

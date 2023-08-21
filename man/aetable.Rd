@@ -30,7 +30,7 @@ aetable(
 )
 }
 \arguments{
-\item{data}{data frame with adverse_event, body_system_class, id, arm, date_rand and last_visit columns}
+\item{data}{data frame with adverse_event, body_system_class, id, arm, date_rand and last_visit columns (optional: variables to be included in model)}
 
 \item{control}{factor level of control arm}
 

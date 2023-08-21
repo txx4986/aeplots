@@ -9,7 +9,7 @@
 #'
 #' Note that `aeseverity` can only take up to 5 severity levels for the severity variable.
 #'
-#' @param data data frame with adverse event, severity, id and arm columns
+#' @param data data frame with adverse_event, body_system_class, severity, id and arm columns
 #' @param arm_levels vector of factor levels in arm variable
 #' @param severity_levels vector of severity levels in ascending order if severity is not ordered factor
 #' @param body_system_class name of body_system_class column
