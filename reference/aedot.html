@@ -68,6 +68,7 @@ right panel: data table containing number of participants with at least one even
 <span>  last_visit <span class="op">=</span> <span class="st">"last_visit"</span>,</span>
 <span>  model <span class="op">=</span> <span class="st">"unadjusted (RR)"</span>,</span>
 <span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  dot_colours <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span>,</span>
 <span>  save_image_path <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -112,6 +113,10 @@ right panel: data table containing number of participants with at least one even
 
 <dt>variables</dt>
 <dd><p>vector of variable names to be included in the model for computation of treatment effect estimate (excluding arm)</p></dd>
+
+
+<dt>dot_colours</dt>
+<dd><p>vector of colours for dots on percentage of participants plot (left plot)</p></dd>
 
 
 <dt>save_image_path</dt>
