@@ -330,7 +330,7 @@ aedot <- function(data, control, intervention, body_system_class="body_system_cl
   # right is a ggplot object of the estimate and corresponding confidence interval
   right <- ggplot(BSRiskRatio, aes(y=body_system_class, x=Estimate, xmin=lowerCI, xmax=upperCI,
                                    fill=str_glue("{estimator} with 95% CI"))) +
-    ggstance::geom_pointrangeh(aes(xmin=lowerCI, xmax=upperCI), fatten=1.2, size=1) +
+    ggstance::geom_pointrangeh(aes(xmin=lowerCI, xmax=upperCI), fatten=1.5, size=1) +
     ggtitle("") +
     scale_y_discrete(limits=rev(levels(BSRiskRatio$body_system_class))) +
     theme(legend.position="bottom",
@@ -388,6 +388,6 @@ aedot <- function(data, control, intervention, body_system_class="body_system_cl
   plot(DotPlot)
 
   if (!is.null(save_image_path)){
-    ggsave(save_image_path, dpi=700, width=12, height=10, bg="white")
+    ggsave(save_image_path, dpi=700, width=10, height=8, bg="white")
   }
 }

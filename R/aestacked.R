@@ -152,6 +152,6 @@ aestacked <- function(data, arm_levels, body_system_class="body_system_class", s
   plot(stacked)
 
   if (!is.null(save_image_path)){
-    ggsave(save_image_path, dpi=700, width=12, height=10, bg="white")
+    ggsave(save_image_path, dpi=700, width=10, height=8, bg="white")
   }
 }
