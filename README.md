@@ -3,7 +3,7 @@ R package to create tables and plots for analysing adverse event data in clinica
 
 ## How to install
 You can install `aeplots` with:
-```{r}
+```
 # install.packages("devtools")
 devtools::install_github("https://github.com/txx4986/aeplots.git")
 ```
@@ -20,11 +20,11 @@ Functions available in the package:
 -   `aebar`: Plots a bar chart to present the number of events reported per participant
 
 To see more detailed documentation of each function:
-```{r}
+```
 help(aetable)
 ```
 or
-```{r}
+```
 ?aetable
 ```
 
