@@ -19,6 +19,7 @@ aetable(
   model = "Poisson (rate)",
   variables = c(),
   mean = TRUE,
+  drop_bodsys = TRUE,
   proportions_dp = 1,
   IR_dp = 1,
   mean_dp = 1,
@@ -57,6 +58,8 @@ aetable(
 \item{variables}{vector of variable names to be included in the model for computation of treatment effect estimate (excluding arm)}
 
 \item{mean}{a logical value whether to include mean and SD column in summary table}
+
+\item{drop_bodsys}{a logical value whether to drop body system class with no observations from summary table}
 
 \item{proportions_dp}{number of decimal places for proportions}
 
