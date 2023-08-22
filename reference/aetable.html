@@ -81,6 +81,7 @@ Treatment effect estimate and 95% confidence intervals
 <span>  model <span class="op">=</span> <span class="st">"Poisson (rate)"</span>,</span>
 <span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  mean <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  drop_bodsys <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  proportions_dp <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  IR_dp <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  mean_dp <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -148,6 +149,10 @@ Treatment effect estimate and 95% confidence intervals
 
 <dt>mean</dt>
 <dd><p>a logical value whether to include mean and SD column in summary table</p></dd>
+
+
+<dt>drop_bodsys</dt>
+<dd><p>a logical value whether to drop body system class with no observations from summary table</p></dd>
 
 
 <dt>proportions_dp</dt>
