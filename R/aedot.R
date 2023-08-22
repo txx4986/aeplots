@@ -40,6 +40,7 @@
 #' @param last_visit name of last_visit column
 #' @param model unadjusted relative risk/risk difference or model used for computation of treatment effect estimate and 95% CI
 #' @param variables vector of variable names to be included in the model for computation of treatment effect estimate (excluding arm)
+#' @param dot_colours vector of colours for dots on percentage of participants plot (left plot)
 #' @param save_image_path file path to save dot plot as image
 #'
 #' @return dot plot with proportions alongside treatment effect estimates with accompanying 95% confidence interval
@@ -62,7 +63,7 @@
 #' aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
 aedot <- function(data, control, intervention, body_system_class="body_system_class", id="id", arm="arm",
                   date_rand = "date_rand", last_visit = "last_visit", model="unadjusted (RR)", variables = c(),
-                  save_image_path=NULL){
+                  dot_colours = c("red", "blue"), save_image_path=NULL){
 
   # check if the model specified is either unadjusted/Poisson/Negative Binomial/Binomial
   stopifnot("Model specified is not one of unadjusted (RR), unadjusted (RD), Poisson (rate), Poisson (count), Negative Binomial (rate), Negative Binomial (count), Binomial (logit), Binomial (log) or Binomial (identity)" = (model=="unadjusted (RR)")|(model=="unadjusted (RD)")|(model=="Poisson (rate)")|(model=="Poisson (count)")|(model=="Negative Binomial (rate)")|(model=="Negative Binomial (count)")|(model=="Binomial (logit)")|model=="Binomial (log)"|(model=="Binomial (identity)"))
@@ -90,6 +91,10 @@ aedot <- function(data, control, intervention, body_system_class="body_system_cl
   # checks if control and intervention can be found in arm variable
   stopifnot("control level specified cannot be found in arm column!" = control %in% dataset$arm)
   stopifnot("intervention level specified cannot be found in arm column!" = intervention %in% dataset$arm)
+
+  # checks if dot_colours have length 2 and are different
+  stopifnot("dot_colours should be of length 2!" = length(dot_colours)==2)
+  stopifnot("colours specified in dot_colours should be different!" = dot_colours[1]!=dot_colours[2])
 
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)
@@ -312,7 +317,7 @@ aedot <- function(data, control, intervention, body_system_class="body_system_cl
   # left is ggplot object of the group-specific risks (percentage of participants experiencing each type of event)
   left <- ggplot(ByGroup, aes(x=value, y=body_system_class, fill=variable)) +
     geom_dotplot(binaxis='y', stackdir='center', dotsize=0.5) +
-    scale_fill_manual(values=c("red", "blue")) +
+    scale_fill_manual(values=dot_colours) +
     ggtitle("") +
     ylab("Body system") +
     scale_x_continuous(name="Percentage of participants (%)") +

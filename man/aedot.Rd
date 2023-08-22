@@ -15,6 +15,7 @@ aedot(
   last_visit = "last_visit",
   model = "unadjusted (RR)",
   variables = c(),
+  dot_colours = c("red", "blue"),
   save_image_path = NULL
 )
 }
@@ -38,6 +39,8 @@ aedot(
 \item{model}{unadjusted relative risk/risk difference or model used for computation of treatment effect estimate and 95\% CI}
 
 \item{variables}{vector of variable names to be included in the model for computation of treatment effect estimate (excluding arm)}
+
+\item{dot_colours}{vector of colours for dots on percentage of participants plot (left plot)}
 
 \item{save_image_path}{file path to save dot plot as image}
 }

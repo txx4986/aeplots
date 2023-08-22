@@ -117,6 +117,12 @@ Similar to `aetable`, we can specify the model used to estimate the treatment ef
 aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention", model="unadjusted (RD)")
 ```
 
+We can change the colours of the dots on the percentage of participants plot through the `dot_colours` argument.
+```{r, message=FALSE, warning=FALSE, fig.dim=c(8, 6)}
+aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention", 
+      dot_colours=c("#F4B800", "#97D800"))
+```
+
 ## `aestacked` function
 ### 2 treatment arms
 `aestacked` plots a stacked bar chart of proportions for each body system class by arm and maximum severity. If severity is not ordered, it is required to specify the levels of severity in ascending order in the argument `severity_levels`.
