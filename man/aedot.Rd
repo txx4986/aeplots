@@ -77,7 +77,7 @@ For Binomial (logit) model, the treatment effect estimate is the \strong{Odds Ra
 For Binomial (log) model, the treatment effect estimate is the \strong{Relative Risk (RR)}.
 For Binomial (identity) model, the treatment effect estimate is the \strong{Risk Difference (RD)}.
 
-The reference level for the arm variable used in the model is the control arm.
+The reference group for the treatment arm in the regression model is the control arm.
 
 Additional covariates besides arm can be added into the model via the argument \code{variables}.
 Note that interaction terms cannot be added to the model.
