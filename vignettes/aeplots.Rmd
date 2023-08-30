@@ -1,5 +1,5 @@
 ---
-title: "aeplots"
+title: "Adverse Event Data"
 output: 
   rmarkdown::html_vignette:
     toc: true
@@ -180,13 +180,13 @@ aebar(df3, arm_levels=c("Intervention 1","Intervention 2", "Placebo"), arm_names
 We can save tables as docx by specifying the filepath in the `save_docx_path` argument.
 ```{r, fig.dim=c(8, 6)}
 aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"),
-        treatment_effect_estimate=TRUE, variables = c("variable1", "variable2"), save_docx_path="table.docx")
+        treatment_effect_estimate=TRUE, variables = c("variable1", "variable2"), save_docx_path="aetable.docx")
 ```
 
 ### Image
 We can save tables and plots as images by specifying the filepath in the `save_image_path` argument.
 ```{r, fig.dim=c(8, 6)}
 aebar(df3, arm_levels=c("Intervention 1","Intervention 2", "Placebo"), arm_names=c("Drug A","Drug B", "No Drug"),
-      facets=TRUE, save_image_path="image.png")
+      facets=TRUE, save_image_path="aeimage.png")
 ```
 

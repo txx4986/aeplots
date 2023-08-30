@@ -44,6 +44,9 @@
 #' @importFrom purrr possibly
 #'
 #' @export
+#'
+#' @examples
+#' labtable(lab2, control="Placebo", intervention_levels=c("Intervention"))
 labtable <- function(data, control, intervention_levels, lab_test="lab_test", visit="visit", id="id", arm="arm",
                      aval="aval", treatment_effect_estimate=TRUE, model_formula="aval ~ arm + (1|id)",
                      mean=TRUE, median=TRUE, n_missing=TRUE, control_name=NULL, intervention_names=NULL,

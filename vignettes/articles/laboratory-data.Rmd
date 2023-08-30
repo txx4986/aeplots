@@ -1,5 +1,5 @@
 ---
-title: "laboratory data"
+title: "Laboratory Data"
 ---
 
 ```{r, include = FALSE}
@@ -9,16 +9,81 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r, include=FALSE}
+library(printr)
+```
+
+## Introduction
+The article documents how to use the functions in `aeplots` to analyse laboratory data in clinical trials.
+```{r setup, message=FALSE}
 library(aeplots)
 ```
 
+## Input data
+### 2 treatment arms
+To generate tables and plots to summarise laboratory data in clinical trials, the R package requires the input dataset in data frame format. A sample dataset with two treatment arms is shown below:
 ```{r}
 data(lab2)
 head(lab2, 10)
 ```
 
+We would need to convert the visit column to ordered factor.
 ```{r}
+lab2$visit <- ordered(lab2$visit, c("Week 0", "Week 4", "Week 8", "Week 12", "Week 16", "Week 20", "Week 24"))
+```
+
+Note that for all the functions below, you would need to specify the column names corresponding to each variable needed unless you rename the column names of your dataset to the default column names as specified in the sample dataset of the documentation. Do refer to the detailed documentation of each function by typing:
+```{r, results="hide"}
+help(labtable)
+```
+
+### More than 2 treatment arms
+The function `labtable` can take up to 4 treatment arms. A sample dataset with 3 treatment arms:
+```{r}
+data(lab3)
+tail(lab3, 10)
+```
+
+## `labtable` function
+### 2 treatment arms
+`labtable` plots a table that summarises laboratory values with continuous outcomes for baseline and each post-baseline timepoint by treatment arms. It contains the mean & standard deviation (SD), median & interquartile range (IQR), number of missing observations and treatment effect estimate with its 95% confidence interval (CI).
+```{r, warning=FALSE, message=FALSE}
 labtable(lab2, control="Placebo", intervention_levels=c("Intervention"))
 ```
 
+We can specify the linear mixed model used to estimate the treatment effect and 95% CI via the `model_formula` argument. The default model is `aval ~ arm + (1|id)`.
+```{r, warning=FALSE, message=FALSE}
+labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), model_formula="aval ~ arm + base + strat + time + (1|id) + (1|region)")
+```
+
+We can specify the number of decimal places for the mean, SD, median and IQR columns as well as the number of significant figures for the treatment effect estimate and 95% CI.
+```{r, warning=FALSE, message=FALSE}
+labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), mean_dp=2, SD_dp=2, median_dp=2, IQR_dp=2,
+         estimate_sf=4, CI_sf=4)
+```
+
+We can choose to drop either the Treatment effect estimate (95% CI), Mean (SD), Median (IQR) or Number of missing n by specifying `treatment_effect_estimate=FALSE`, `mean=FALSE`, `median=FALSE` or `n_missing=FALSE`.
+```{r, warning=FALSE, message=FALSE}
+labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), treatment_effect_estimate=FALSE,
+         median=FALSE, n_missing=FALSE)
+```
+
+### More than 2 treatment arms
+`labtable` does not include the treatment effect estimates and their 95% CIs for datasets with more than 2 treatment arms. To change the labels of control and interventions in the table, specify the label for control in the argument `control_name` and specify the intervention labels in the argument `intervention_names`. Note that intervention_names should be specified using the same order as the interventions specified in intervention_levels.
+```{r}
+labtable(lab3, control="Placebo", control_name="No Drug", 
+         intervention_levels=c("Intervention 1", "Intervention 2"), intervention_names=c("Drug A", "Drug B"))
+```
+
+## Saving tables and plots
+### Docx
+We can save tables as docx by specifying the filepath in the `save_docx_path` argument.
+```{r, warning=FALSE, message=FALSE}
+labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), save_docx_path="labtable.docx")
+```
+
+### Image
+We can save tables and plots as images by specifying the filepath in the `save_image_path` argument.
+```{r, warning=FALSE, message=FALSE}
+labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), save_image_path="labimage.png")
+```

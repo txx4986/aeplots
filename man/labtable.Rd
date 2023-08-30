@@ -89,3 +89,6 @@ flextable of laboratory values summary for baseline and each post-baseline timep
 \item \strong{Treatment effect estimate (95\% CI)}
 }
 }
+\examples{
+labtable(lab2, control="Placebo", intervention_levels=c("Intervention"))
+}
