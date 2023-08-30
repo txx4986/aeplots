@@ -9,6 +9,6 @@ reference:
   - starts_with("ae")
   - starts_with("df")
 - title: Laboratory Data
-  desc: Functions to summarise laboratory data and sample laboraty measurements datasets
+  desc: Functions to summarise laboratory data and sample laboratory measurements datasets
 - contents:
   - starts_with("lab")
