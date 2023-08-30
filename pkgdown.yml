@@ -2,9 +2,9 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  aeplots: aeplots.html
+  adverse-event-data: adverse-event-data.html
   laboratory-data: laboratory-data.html
-last_built: 2023-08-30T15:43Z
+last_built: 2023-08-30T15:52Z
 urls:
   reference: https://txx4986.github.io/aeplots/reference
   article: https://txx4986.github.io/aeplots/articles
