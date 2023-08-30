@@ -1,13 +1,14 @@
 url: https://txx4986.github.io/aeplots/
 template:
   bootstrap: 5
-  reference:
-  - title: Adverse Event Data
-    desc: Functions to summarise adverse event data and sample adverse event datasets
-  - contents:
-    - starts_with("ae")
-    - starts_with("df")
-  - title: Laboratory Data
-    desc: Functions to summarise laboratory data and sample laboraty measurements datasets
-  - contents:
-    - starts_with("lab")
+
+reference:
+- title: Adverse Event Data
+  desc: Functions to summarise adverse event data and sample adverse event datasets
+- contents:
+  - starts_with("ae")
+  - starts_with("df")
+- title: Laboratory Data
+  desc: Functions to summarise laboratory data and sample laboraty measurements datasets
+- contents:
+  - starts_with("lab")
