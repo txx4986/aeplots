@@ -1,0 +1,24 @@
+---
+title: "laboratory data"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(aeplots)
+```
+
+```{r}
+data(lab2)
+head(lab2, 10)
+```
+
+```{r}
+labtable(lab2, control="Placebo", intervention_levels=c("Intervention"))
+```
+

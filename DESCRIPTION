@@ -27,7 +27,8 @@ Imports:
   printr,
   devtools,
   ggstance,
-  MASS
+  MASS,
+  lme4
 Suggests: 
     knitr,
     rmarkdown

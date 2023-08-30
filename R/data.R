@@ -41,3 +41,51 @@
 #'    \item{last_visit}{Date of last visit}
 #' }
 "df4"
+
+#' @title Sample laboratory values with continuous outcomes dataset with 2 treatment arms
+#'
+#' @format A data frame with 37831 rows and 9 variables:
+#' \describe{
+#'    \item{id}{Participant's id}
+#'    \item{arm}{Treatment arm: Placebo & Intervention}
+#'    \item{visit}{Timepoint of measurement}
+#'    \item{lab_test}{Laboratory test}
+#'    \item{base}{Baseline value of measurement}
+#'    \item{aval}{Measurement value}
+#'    \item{region}{Participant's region}
+#'    \item{strat}{Stratification variable}
+#'    \item{Time}{Time of measurement}
+#' }
+"lab2"
+
+#' @title Sample laboratory values with continuous outcomes dataset with 3 treatment arms
+#'
+#' @format A data frame with 37831 rows and 9 variables:
+#' \describe{
+#'    \item{id}{Participant's id}
+#'    \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2}
+#'    \item{visit}{Timepoint of measurement}
+#'    \item{lab_test}{Laboratory test}
+#'    \item{base}{Baseline value of measurement}
+#'    \item{aval}{Measurement value}
+#'    \item{region}{Participant's region}
+#'    \item{strat}{Stratification variable}
+#'    \item{Time}{Time of measurement}
+#' }
+"lab3"
+
+#' @title Sample laboratory values with continuous outcomes dataset with 3 treatment arms
+#'
+#' @format A data frame with 37831 rows and 9 variables:
+#' \describe{
+#'    \item{id}{Participant's id}
+#'    \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2, Intervention 3}
+#'    \item{visit}{Timepoint of measurement}
+#'    \item{lab_test}{Laboratory test}
+#'    \item{base}{Baseline value of measurement}
+#'    \item{aval}{Measurement value}
+#'    \item{region}{Participant's region}
+#'    \item{strat}{Stratification variable}
+#'    \item{Time}{Time of measurement}
+#' }
+"lab4"
