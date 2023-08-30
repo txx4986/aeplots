@@ -44,7 +44,7 @@
 
 #' @title Sample laboratory values with continuous outcomes dataset with 2 treatment arms
 #'
-#' @format A data frame with 37831 rows and 9 variables:
+#' @format A data frame with 2580 rows and 9 variables:
 #' \describe{
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo & Intervention}
@@ -60,7 +60,7 @@
 
 #' @title Sample laboratory values with continuous outcomes dataset with 3 treatment arms
 #'
-#' @format A data frame with 37831 rows and 9 variables:
+#' @format A data frame with 2580 rows and 9 variables:
 #' \describe{
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2}
@@ -76,7 +76,7 @@
 
 #' @title Sample laboratory values with continuous outcomes dataset with 3 treatment arms
 #'
-#' @format A data frame with 37831 rows and 9 variables:
+#' @format A data frame with 2580 rows and 9 variables:
 #' \describe{
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2, Intervention 3}
