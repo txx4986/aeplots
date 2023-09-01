@@ -72,7 +72,7 @@
 <p>Please refer to the <a href="https://www.r-project.org/nosvn/pandoc/devtools.html" class="external-link">devtools documentation</a> for instructions on how to set up a working development environment and install <code>devtools</code> depending on your platform.</p>
 </div>
 <div class="section level2">
-<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+<h2 id="adverse-event-data">Adverse Event Data<a class="anchor" aria-label="anchor" href="#adverse-event-data"></a>
 </h2>
 <p>Functions available in the package:</p>
 <ul>
@@ -91,10 +91,9 @@
 <pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">aetable</span><span class="op">)</span></span></code></pre>
 <p>or</p>
 <pre><code><span><span class="op">?</span><span class="va">aetable</span></span></code></pre>
-</div>
-<div class="section level2">
-<h2 id="sample-dataset">Sample dataset<a class="anchor" aria-label="anchor" href="#sample-dataset"></a>
-</h2>
+<div class="section level3">
+<h3 id="sample-dataset">Sample dataset<a class="anchor" aria-label="anchor" href="#sample-dataset"></a>
+</h3>
 <table style="width:100%;" class="table">
 <colgroup>
 <col width="11%">
@@ -341,10 +340,11 @@
 </tr>
 </tbody>
 </table>
+<p>Note that for each participant who did not experience any adverse events, a row should be included in the input dataset stating his/her <code>id</code>, <code>arm</code>, <code>date_rand</code>, <code>last_visit</code> and <code>variables</code> to be included in the model. <code>adverse_event</code>, <code>body_system_class</code> and <code>severity</code> column should be specified as <code>NA</code>. For example: |id|arm|adverse_event|body_system_class|severity|date_rand|last_visit|variable1|variable2| |—|—|—|—|—|—|—|—|—| |2032|Intervention|NA|NA|NA|2015-05-22|2016-04-22|2|1500|</p>
 </div>
-<div class="section level2">
-<h2 id="variable-description-for-sample-dataset">Variable description for sample dataset<a class="anchor" aria-label="anchor" href="#variable-description-for-sample-dataset"></a>
-</h2>
+<div class="section level3">
+<h3 id="variable-description-for-sample-dataset">Variable description for sample dataset<a class="anchor" aria-label="anchor" href="#variable-description-for-sample-dataset"></a>
+</h3>
 <table class="table">
 <colgroup>
 <col width="33%">
@@ -399,6 +399,296 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="section level2">
+<h2 id="laboratory-data">Laboratory Data<a class="anchor" aria-label="anchor" href="#laboratory-data"></a>
+</h2>
+<p>Functions available in the package:</p>
+<ul>
+<li>
+<code>labtable</code>: Plots a table that summarises laboratory values with continuous outcomes for baseline and each post-baseline timepoint by treatment arm</li>
+</ul>
+<p>To see more detailed documentation of each function:</p>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">labtable</span><span class="op">)</span></span></code></pre>
+<p>or</p>
+<pre><code><span><span class="op">?</span><span class="va">labtable</span></span></code></pre>
+<div class="section level3">
+<h3 id="sample-dataset-1">Sample dataset<a class="anchor" aria-label="anchor" href="#sample-dataset-1"></a>
+</h3>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th>id</th>
+<th>arm</th>
+<th>visit</th>
+<th>lab_test</th>
+<th>base</th>
+<th>aval</th>
+<th>region</th>
+<th>strat</th>
+<th>time</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Placebo</td>
+<td>Week 0</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>55.626891</td>
+<td>55.626891</td>
+<td>Europe</td>
+<td>&gt;=1 year</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Placebo</td>
+<td>Week 4</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>55.626891</td>
+<td>11.948207</td>
+<td>Europe</td>
+<td>&gt;=1 year</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>Placebo</td>
+<td>Week 8</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>55.626891</td>
+<td>79.998432</td>
+<td>Europe</td>
+<td>&gt;=1 year</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Placebo</td>
+<td>Week 0</td>
+<td>Lymphocytes (GI/L)</td>
+<td>5.646724</td>
+<td>5.646724</td>
+<td>Europe</td>
+<td>&gt;=1 year</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>Placebo</td>
+<td>Week 4</td>
+<td>Lymphocytes (GI/L)</td>
+<td>5.646724</td>
+<td>1.900644</td>
+<td>Europe</td>
+<td>&gt;=1 year</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Placebo</td>
+<td>Week 8</td>
+<td>Lymphocytes (GI/L)</td>
+<td>5.646724</td>
+<td>3.525286</td>
+<td>Europe</td>
+<td>&gt;=1 year</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Intervention</td>
+<td>Week 0</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>85.6607224</td>
+<td>85.6607224</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Intervention</td>
+<td>Week 4</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>85.6607224</td>
+<td>13.0007082</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Intervention</td>
+<td>Week 8</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>85.6607224</td>
+<td>41.6314992</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Intervention</td>
+<td>Week 0</td>
+<td>Lymphocytes (GI/L)</td>
+<td>1.4738713</td>
+<td>1.4738713</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Intervention</td>
+<td>Week 4</td>
+<td>Lymphocytes (GI/L)</td>
+<td>1.4738713</td>
+<td>4.8144682</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Intervention</td>
+<td>Week 8</td>
+<td>Lymphocytes (GI/L)</td>
+<td>1.4738713</td>
+<td>4.2066078</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Placebo</td>
+<td>Week 0</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>12.6528213</td>
+<td>12.6528213</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Placebo</td>
+<td>Week 4</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>12.6528213</td>
+<td>69.3338961</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Placebo</td>
+<td>Week 8</td>
+<td>Alanine Aminotransferase (IU/L)</td>
+<td>12.6528213</td>
+<td>20.6919330</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Placebo</td>
+<td>Week 0</td>
+<td>Lymphocytes (GI/L)</td>
+<td>1.1591932</td>
+<td>1.1591932</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Placebo</td>
+<td>Week 4</td>
+<td>Lymphocytes (GI/L)</td>
+<td>1.1591932</td>
+<td>3.0689368</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Placebo</td>
+<td>Week 8</td>
+<td>Lymphocytes (GI/L)</td>
+<td>1.1591932</td>
+<td>5.2134919</td>
+<td>Other</td>
+<td>&gt;=1 year</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="variable-description-for-sample-dataset-1">Variable description for sample dataset<a class="anchor" aria-label="anchor" href="#variable-description-for-sample-dataset-1"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Variable name</th>
+<th>Variable description</th>
+<th>Variable type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>id</td>
+<td>Participant ID</td>
+<td>Factor/Character/Numeric</td>
+</tr>
+<tr class="even">
+<td>arm</td>
+<td>Treatment arm of participant (2, 3 or 4 arms)</td>
+<td>Factor/Character/Numeric</td>
+</tr>
+<tr class="odd">
+<td>visit</td>
+<td>Timepoint of laboratory test taken</td>
+<td>Ordered factor</td>
+</tr>
+<tr class="even">
+<td>lab_test</td>
+<td>Laboratory test</td>
+<td>Factor/Character</td>
+</tr>
+<tr class="odd">
+<td>aval</td>
+<td>Laboratory measurement value</td>
+<td>Numerica</td>
+</tr>
+<tr class="even">
+<td>base / strat / region / time</td>
+<td>Variables to be included in model for estimation of treatment effect estimates and 95% CIs</td>
+<td>Factor/Character/Numeric</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
