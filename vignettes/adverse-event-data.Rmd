@@ -18,6 +18,9 @@ knitr::opts_chunk$set(
 
 ```{r, include=FALSE}
 library(printr)
+library(dplyr)
+library(tidyverse)
+library(tidyr)
 ```
 
 ## Introduction
@@ -32,6 +35,13 @@ To generate tables and plots to summarise adverse events in clinical trials, the
 ```{r}
 data(df2)
 head(df2, 10)
+```
+
+Note that for each participant who did not experience any adverse events, a row should be included in the input dataset stating his/her `id`, `arm`, `date_rand`, `last_visit` and `variables` to be included in the model. `adverse_event`, `body_system_class` and `severity` column should be specified as `NA`. For example:
+```{r}
+tail(df2 %>% 
+       add_row(id=2110, arm="Intervention", ae_pt=NA, aebodsys=NA, severity=NA, date_rand=ymd("2015-05-22"),
+               last_visit=ymd("2016-04-22"), variable1=2, variable2=1500), 1)
 ```
 
 We would need to convert the body_system_class and severity columns to factors.
