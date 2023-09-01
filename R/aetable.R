@@ -167,7 +167,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
       # drop Total_Time, SD, IR and Proportions from table
       -c(Total_Time, SD, IR, Proportions)) %>%
     pivot_wider(
-      names_from = arm, values_from = c(Frequency, Events, Mean))
+      names_from = arm, values_from = c(Frequency, Events, Mean)) %>%
+    filter(!is.na(body_system_class))
 
   # exclude IRR column if there are more than 2 arms in the table
   if (arm_number > 2){

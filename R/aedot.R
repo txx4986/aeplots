@@ -138,7 +138,8 @@ aedot <- function(data, control, intervention, body_system_class="body_system_cl
       logupperCIRR = logRR + crit_value * stderrRR,
       lowerCIRR = exp(loglowerCIRR),
       upperCIRR = exp(logupperCIRR)
-    )
+    ) %>%
+    filter(!is.na(body_system_class))
 
   if (model=="unadjusted (RR)"){
     estimator <- "Relative risk"

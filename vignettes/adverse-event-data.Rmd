@@ -155,24 +155,24 @@ aestacked(df3, body_system_class="aebodsys", arm_levels=c("Intervention 1","Inte
 ### 2 treatment arms
 `aebar` plots a bar chart for number of events reported per participant.
 ```{r, fig.dim=c(8, 6)}
-aebar(df2, arm_levels=c("Intervention","Placebo"), facets=FALSE)
+aebar(df2, arm_levels=c("Intervention","Placebo"), adverse_event="ae_pt", facets=FALSE)
 ```
 
 We can change the colour representing each treatment arm by specifying a vector of colour codes in the `arm_colours` argument according to the order of arm levels specified in the arm_levels argument.
 ```{r, fig.dim=c(8, 6)}
-aebar(df2, arm_levels=c("Intervention","Placebo"), arm_colours=c("#FFB55A", "#B2E061"), facets=FALSE)
+aebar(df2, arm_levels=c("Intervention","Placebo"), adverse_event="ae_pt", arm_colours=c("#FFB55A", "#B2E061"), facets=FALSE)
 ```
 
 ### More than 2 treatment arms
 ```{r, fig.dim=c(8, 6)}
 aebar(df3, arm_levels=c("Intervention 1","Intervention 2", "Placebo"), arm_names=c("Drug A","Drug B", "No Drug"),
-      facets=FALSE)
+      adverse_event="ae_pt", facets=FALSE)
 ```
 
 We can plot a bar chart for each treatment arm in separate facets by specifying `facets=TRUE`.
 ```{r, fig.dim=c(8, 6)}
 aebar(df3, arm_levels=c("Intervention 1","Intervention 2", "Placebo"), arm_names=c("Drug A","Drug B", "No Drug"),
-      facets=TRUE)
+      adverse_event="ae_pt", facets=TRUE)
 ```
 
 ## Saving tables and plots
@@ -187,6 +187,6 @@ aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_level
 We can save tables and plots as images by specifying the filepath in the `save_image_path` argument.
 ```{r, fig.dim=c(8, 6)}
 aebar(df3, arm_levels=c("Intervention 1","Intervention 2", "Placebo"), arm_names=c("Drug A","Drug B", "No Drug"),
-      facets=TRUE, save_image_path="aeimage.png")
+      adverse_event="ae_pt", facets=TRUE, save_image_path="aeimage.png")
 ```
 

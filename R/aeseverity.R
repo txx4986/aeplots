@@ -118,7 +118,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
         case_when(arm=="A1" ~ scales::percent(Frequency / N1, 10^(-proportions_dp)),
                   arm=="A2" ~ scales::percent(Frequency / N2, 10^(-proportions_dp)),
                   arm=="A3" ~ scales::percent(Frequency / N3, 10^(-proportions_dp)),
-                  arm=="A4" ~ scales::percent(Frequency / N4, 10^(-proportions_dp))))
+                  arm=="A4" ~ scales::percent(Frequency / N4, 10^(-proportions_dp)))) %>%
+    filter(!is.na(body_system_class))
 
   #to produce nice table
   name1 <- "N" %p% subsc("1")

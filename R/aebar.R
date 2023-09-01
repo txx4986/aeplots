@@ -4,6 +4,7 @@
 #' @param arm_levels vector of factor levels in arm variable
 #' @param id name of id column
 #' @param arm name of arm column
+#' @param adverse_event name of adverse_event column
 #' @param arm_names vector of names for each arm in arm variable
 #' @param arm_colours vector of colours for each arm
 #' @param facets a logical value whether to plot bar chart with facets
@@ -20,12 +21,12 @@
 #' @export
 #'
 #' @examples
-#' aebar(df2, arm_levels=c("Intervention","Placebo"), facets=FALSE)
-aebar <- function(data, arm_levels, id="id", arm="arm", arm_names=NULL, arm_colours=NULL, facets=TRUE,
-                  save_image_path=NULL){
+#' aebar(df2, arm_levels=c("Intervention","Placebo"), adverse_event="ae_pt", facets=FALSE)
+aebar <- function(data, arm_levels, id="id", arm="arm", adverse_event="adverse_event", arm_names=NULL,
+                  arm_colours=NULL, facets=TRUE, save_image_path=NULL){
   # change the column names
   dataset <- data %>%
-    rename("id" = id, "arm" = arm)
+    rename("id" = id, "arm" = arm, "adverse_event" = adverse_event)
 
   if (is.null(arm_names)){
     arm_names <- arm_levels
@@ -64,6 +65,7 @@ aebar <- function(data, arm_levels, id="id", arm="arm", arm_names=NULL, arm_colo
   options(dplyr.summarise.inform = FALSE)
 
   Table5 <- dataset %>%
+    filter(!is.na(adverse_event)) %>%
     group_by(id, arm) %>%
     # count total number of adverse events of each participant
     count() %>%

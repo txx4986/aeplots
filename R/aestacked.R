@@ -97,7 +97,8 @@ aestacked <- function(data, arm_levels, body_system_class="body_system_class", s
       Percentage = case_when(arm=="A1" ~ round(Frequency / N1 * 100, 1),
                              arm=="A2" ~ round(Frequency / N2 * 100, 1),
                              arm=="A3" ~ round(Frequency / N3 * 100, 1),
-                             arm=="A4" ~ round(Frequency / N4 * 100, 1)))
+                             arm=="A4" ~ round(Frequency / N4 * 100, 1))) %>%
+    filter(!is.na(body_system_class))
 
   # order by length of bar for arm1
   ordering <- (Table4 %>%

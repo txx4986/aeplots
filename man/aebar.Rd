@@ -9,6 +9,7 @@ aebar(
   arm_levels,
   id = "id",
   arm = "arm",
+  adverse_event = "adverse_event",
   arm_names = NULL,
   arm_colours = NULL,
   facets = TRUE,
@@ -23,6 +24,8 @@ aebar(
 \item{id}{name of id column}
 
 \item{arm}{name of arm column}
+
+\item{adverse_event}{name of adverse_event column}
 
 \item{arm_names}{vector of names for each arm in arm variable}
 
@@ -39,5 +42,5 @@ Bar chart presenting the number of events reported per participant
 Bar chart for number of events reported per participant
 }
 \examples{
-aebar(df2, arm_levels=c("Intervention","Placebo"), facets=FALSE)
+aebar(df2, arm_levels=c("Intervention","Placebo"), adverse_event="ae_pt", facets=FALSE)
 }
