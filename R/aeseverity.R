@@ -70,7 +70,7 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
   # checks if length of severity_names equals to the number of severity factor levels
   stopifnot("length of severity_names needs to be equal to the number of levels in severity!" = length(severity_names)==severity_number)
   # checks if severity number is 2, 3, 4 or 5
-  stopifnot("aeseverity can only take 2, 3, 4 or 5 severity levels!" = (severity_number==2|severity_number==3|severity_number==4|severity_number=5))
+  stopifnot("aeseverity can only take 2, 3, 4 or 5 severity levels!" = (severity_number==2|severity_number==3|severity_number==4|severity_number==5))
 
   # recode severity factor
   dataset$severity <- as.character(dataset$severity)
