@@ -531,14 +531,14 @@ colour codes corresponding to each severity level in the
 <p><code>aebar</code> plots a bar chart for number of events reported
 per participant.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/aebar.html">aebar</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>,<span class="st">"Placebo"</span><span class="op">)</span>, facets<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/aebar.html">aebar</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>,<span class="st">"Placebo"</span><span class="op">)</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, facets<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="adverse-event-data_files/figure-html/unnamed-chunk-22-1.png" width="768"></p>
 <p>We can change the colour representing each treatment arm by
 specifying a vector of colour codes in the <code>arm_colours</code>
 argument according to the order of arm levels specified in the
 arm_levels argument.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/aebar.html">aebar</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>,<span class="st">"Placebo"</span><span class="op">)</span>, arm_colours<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#FFB55A"</span>, <span class="st">"#B2E061"</span><span class="op">)</span>, facets<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/aebar.html">aebar</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>,<span class="st">"Placebo"</span><span class="op">)</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, arm_colours<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#FFB55A"</span>, <span class="st">"#B2E061"</span><span class="op">)</span>, facets<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="adverse-event-data_files/figure-html/unnamed-chunk-23-1.png" width="768"></p>
 </div>
 <div class="section level3">
@@ -546,13 +546,13 @@ arm_levels argument.</p>
 </h3>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/aebar.html">aebar</a></span><span class="op">(</span><span class="va">df3</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention 1"</span>,<span class="st">"Intervention 2"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, arm_names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Drug A"</span>,<span class="st">"Drug B"</span>, <span class="st">"No Drug"</span><span class="op">)</span>,</span>
-<span>      facets<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span>      adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, facets<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="adverse-event-data_files/figure-html/unnamed-chunk-24-1.png" width="768"></p>
 <p>We can plot a bar chart for each treatment arm in separate facets by
 specifying <code>facets=TRUE</code>.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/aebar.html">aebar</a></span><span class="op">(</span><span class="va">df3</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention 1"</span>,<span class="st">"Intervention 2"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, arm_names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Drug A"</span>,<span class="st">"Drug B"</span>, <span class="st">"No Drug"</span><span class="op">)</span>,</span>
-<span>      facets<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span>      adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, facets<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="adverse-event-data_files/figure-html/unnamed-chunk-25-1.png" width="768"></p>
 </div>
 </div>
@@ -576,7 +576,7 @@ specifying <code>facets=TRUE</code>.</p>
 the <code>save_image_path</code> argument.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/aebar.html">aebar</a></span><span class="op">(</span><span class="va">df3</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention 1"</span>,<span class="st">"Intervention 2"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, arm_names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Drug A"</span>,<span class="st">"Drug B"</span>, <span class="st">"No Drug"</span><span class="op">)</span>,</span>
-<span>      facets<span class="op">=</span><span class="cn">TRUE</span>, save_image_path<span class="op">=</span><span class="st">"aeimage.png"</span><span class="op">)</span></span>
+<span>      adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, facets<span class="op">=</span><span class="cn">TRUE</span>, save_image_path<span class="op">=</span><span class="st">"aeimage.png"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Saving 8 x 6 in image</span></span></code></pre></div>
 <p><img src="adverse-event-data_files/figure-html/unnamed-chunk-27-1.png" width="768"></p>
 </div>
