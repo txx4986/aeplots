@@ -54,11 +54,13 @@ or
 |2014|Intervention|Headache|Neuruological|Mild|2015-10-16|2016-01-19|3|389.012|
 
 Note that for each participant who did not experience any adverse events, a row should be included in the input dataset stating his/her `id`, `arm`, `date_rand`, `last_visit` and `variables` to be included in the model. `adverse_event`, `body_system_class` and `severity` column should be specified as `NA`. For example:
+
 |id|arm|adverse_event|body_system_class|severity|date_rand|last_visit|variable1|variable2|
 |---|---|---|---|---|---|---|---|---|
 |2032|Intervention|NA|NA|NA|2015-05-22|2016-04-22|2|1500|
 
 ### Variable description for sample dataset
+
 |Variable name|Variable description|Variable type|
 |---|---|---|
 |id|Participant ID|Factor/Character/Numeric|
@@ -108,6 +110,7 @@ or
 |3|Placebo|Week 8|Lymphocytes (GI/L)|1.1591932|5.2134919|Other|>=1 year|8|
 
 ### Variable description for sample dataset
+
 |Variable name|Variable description|Variable type|
 |---|---|---|
 |id|Participant ID|Factor/Character/Numeric|
