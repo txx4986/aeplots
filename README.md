@@ -10,7 +10,7 @@ devtools::install_github("https://github.com/txx4986/aeplots.git")
 
 Please refer to the [devtools documentation](https://www.r-project.org/nosvn/pandoc/devtools.html) for instructions on how to set up a working development environment and install `devtools` depending on your platform.
 
-## Overview
+## Adverse Event Data
 Functions available in the package:
 
 -   `aetable`: Plots a table of AE summary by body system class
@@ -28,7 +28,7 @@ or
 ?aetable
 ```
 
-## Sample dataset
+### Sample dataset
 
 |id|arm|adverse_event|body_system_class|severity|date_rand|last_visit|variable1|variable2|
 |---|---|---|---|---|---|---|---|---|
@@ -53,7 +53,12 @@ or
 |2014|Intervention|Headache|Neuruological|Mild|2015-10-16|2016-01-19|3|389.012|
 |2014|Intervention|Headache|Neuruological|Mild|2015-10-16|2016-01-19|3|389.012|
 
-## Variable description for sample dataset
+Note that for each participant who did not experience any adverse events, a row should be included in the input dataset stating his/her `id`, `arm`, `date_rand`, `last_visit` and `variables` to be included in the model. `adverse_event`, `body_system_class` and `severity` column should be specified as `NA`. For example:
+|id|arm|adverse_event|body_system_class|severity|date_rand|last_visit|variable1|variable2|
+|---|---|---|---|---|---|---|---|---|
+|2032|Intervention|NA|NA|NA|2015-05-22|2016-04-22|2|1500|
+
+### Variable description for sample dataset
 |Variable name|Variable description|Variable type|
 |---|---|---|
 |id|Participant ID|Factor/Character/Numeric|
@@ -64,3 +69,51 @@ or
 |date_rand|Randomisation date|Date|
 |last_visit|Date of last visit|Date|
 |variable|Variables to be included in model for estimation of treatment effect estimates and 95% CIs|Factor/Character/Numeric|
+
+## Laboratory Data
+Functions available in the package:
+
+-   `labtable`: Plots a table that summarises laboratory values with continuous outcomes for baseline and each post-baseline timepoint by treatment arm
+
+To see more detailed documentation of each function:
+```
+help(labtable)
+```
+or
+```
+?labtable
+```
+
+### Sample dataset
+
+|id|arm|visit|lab_test|base|aval|region|strat|time|
+|---|---|---|---|---|---|---|---|---|
+|1|Placebo|Week 0|Alanine Aminotransferase (IU/L)|55.626891|55.626891|Europe|>=1 year|0|
+|1|Placebo|Week 4|Alanine Aminotransferase (IU/L)|55.626891|11.948207|Europe|>=1 year|4|
+|1|Placebo|Week 8|Alanine Aminotransferase (IU/L)|55.626891|79.998432|Europe|>=1 year|8|
+|1|Placebo|Week 0|Lymphocytes (GI/L)|5.646724|5.646724|Europe|>=1 year|0|
+|1|Placebo|Week 4|Lymphocytes (GI/L)|5.646724|1.900644|Europe|>=1 year|4|
+|1|Placebo|Week 8|Lymphocytes (GI/L)|5.646724|3.525286|Europe|>=1 year|8|
+|2|Intervention|Week 0|Alanine Aminotransferase (IU/L)|85.6607224|85.6607224|Other|>=1 year|0|
+|2|Intervention|Week 4|Alanine Aminotransferase (IU/L)|85.6607224|13.0007082|Other|>=1 year|4|
+|2|Intervention|Week 8|Alanine Aminotransferase (IU/L)|85.6607224|41.6314992|Other|>=1 year|8|
+|2|Intervention|Week 0|Lymphocytes (GI/L)|1.4738713|1.4738713|Other|>=1 year|0|
+|2|Intervention|Week 4|Lymphocytes (GI/L)|1.4738713|4.8144682|Other|>=1 year|4|
+|2|Intervention|Week 8|Lymphocytes (GI/L)|1.4738713|4.2066078|Other|>=1 year|8|
+|3|Placebo|Week 0|Alanine Aminotransferase (IU/L)|12.6528213|12.6528213|Other|>=1 year|0|
+|3|Placebo|Week 4|Alanine Aminotransferase (IU/L)|12.6528213|69.3338961|Other|>=1 year|4|
+|3|Placebo|Week 8|Alanine Aminotransferase (IU/L)|12.6528213|20.6919330|Other|>=1 year|8|
+|3|Placebo|Week 0|Lymphocytes (GI/L)|1.1591932|1.1591932|Other|>=1 year|0|
+|3|Placebo|Week 4|Lymphocytes (GI/L)|1.1591932|3.0689368|Other|>=1 year|4|
+|3|Placebo|Week 8|Lymphocytes (GI/L)|1.1591932|5.2134919|Other|>=1 year|8|
+
+### Variable description for sample dataset
+|Variable name|Variable description|Variable type|
+|---|---|---|
+|id|Participant ID|Factor/Character/Numeric|
+|arm|Treatment arm of participant (2, 3 or 4 arms)|Factor/Character/Numeric|
+|visit|Timepoint of laboratory test taken|Ordered factor|
+|lab_test|Laboratory test|Factor/Character|
+|aval|Laboratory measurement value|Numerica|
+|base / strat / region / time|Variables to be included in model for estimation of treatment effect estimates and 95% CIs|Factor/Character/Numeric|
+
