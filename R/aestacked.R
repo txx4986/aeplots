@@ -68,6 +68,8 @@ aestacked <- function(data, arm_levels, body_system_class="body_system_class", s
   stopifnot("length of arm_levels needs to be equal to the number of levels in arm" = length(arm_levels)==arm_number)
   # checks if length of arm_names equals to the number of arm factor levels
   stopifnot("length of arm_names needs to be equal to the number of levels in arm" = length(arm_names)==arm_number)
+  # checks if arm number is 2, 3 or 4
+  stopifnot("aestacked can only take 2, 3 or 4 arms!" = (arm_number==2|arm_number==3|arm_number==4))
 
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)

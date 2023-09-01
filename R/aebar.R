@@ -47,6 +47,8 @@ aebar <- function(data, arm_levels, id="id", arm="arm", adverse_event="adverse_e
   stopifnot("length of arm_names needs to be equal to the number of levels in arm" = length(arm_names)==arm_number)
   # checks if length of arm_colours is greater than or equal to the number of levels in arm
   stopifnot("length of arm_colours needs to be greater than or equal to number of levels in arm!" = length(arm_colours)>=arm_number)
+  # checks if arm number is 2, 3 or 4
+  stopifnot("aebar can only take 2, 3 or 4 arms!" = (arm_number==2|arm_number==3|arm_number==4))
 
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)

@@ -114,6 +114,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
   arm_number <- length(unique(dataset$arm))
   # checks if arm_number equals to the number of arms specified
   stopifnot("total number of arms specified do not corresponed to the number of unique arms in arm column!" = (length(control) + length(intervention_levels)) == arm_number)
+  # checks if arm number is 2, 3 or 4
+  stopifnot("aetable can only take 2, 3 or 4 arms!" = (arm_number==2|arm_number==3|arm_number==4))
 
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)

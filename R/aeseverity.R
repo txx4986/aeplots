@@ -69,6 +69,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
   stopifnot("length of severity_levels needs to be equal to the number of levels in severity!" = length(severity_levels)==severity_number)
   # checks if length of severity_names equals to the number of severity factor levels
   stopifnot("length of severity_names needs to be equal to the number of levels in severity!" = length(severity_names)==severity_number)
+  # checks if severity number is 2, 3, 4 or 5
+  stopifnot("aeseverity can only take 2, 3, 4 or 5 severity levels!" = (severity_number==2|severity_number==3|severity_number==4|severity_number=5))
 
   # recode severity factor
   dataset$severity <- as.character(dataset$severity)
@@ -92,6 +94,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
   stopifnot("length of arm_levels needs to be equal to the number of levels in arm!" = length(arm_levels)==arm_number)
   # checks if length of arm_names equals to the number of arm factor levels
   stopifnot("length of arm_names needs to be equal to the number of levels in arm!" = length(arm_names)==arm_number)
+  # checks if arm number is 2, 3 or 4
+  stopifnot("aeseverity can only take 2, 3 or 4 arms!" = (arm_number==2|arm_number==3|arm_number==4))
 
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)
