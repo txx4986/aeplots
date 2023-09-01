@@ -58,6 +58,7 @@ Note that for each participant who did not experience any adverse events, a row 
 |id|arm|adverse_event|body_system_class|severity|date_rand|last_visit|variable1|variable2|
 |---|---|---|---|---|---|---|---|---|
 |2032|Intervention|NA|NA|NA|2015-05-22|2016-04-22|2|1500|
+|2033|Placebo|NA|NA|NA|2015-04-20|2016-03-20|1|777|
 
 ### Variable description for sample dataset
 
