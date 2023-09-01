@@ -89,6 +89,13 @@ flextable of laboratory values summary for baseline and each post-baseline timep
 \item \strong{Treatment effect estimate (95\% CI)}
 }
 }
+\section{Treatment Effect Estimate}{
+
+The treatment effect and its 95\% confidence interval is estimated via a linear mixed model with laboratory measurement as response.
+The formula of the model can be specified through the \code{model_formula} argument.
+The default model is \code{aval ~ arm + (1|id)}.
+}
+
 \examples{
 labtable(lab2, control="Placebo", intervention_levels=c("Intervention"))
 }

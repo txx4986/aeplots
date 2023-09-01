@@ -8,6 +8,11 @@
 #' - **Number of missing n**
 #' - **Treatment effect estimate (95% CI)**
 #'
+#' @section Treatment Effect Estimate:
+#' The treatment effect and its 95% confidence interval is estimated via a linear mixed model with laboratory measurement as response.
+#' The formula of the model can be specified through the `model_formula` argument.
+#' The default model is `aval ~ arm + (1|id)`.
+#'
 #' @param data dataframe with lab_test, visit, id, arm and aval columns (optional: variables to be included in the model)
 #' @param control factor level of control arm
 #' @param intervention_levels vector of factor levels for interventions
