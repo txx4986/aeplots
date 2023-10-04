@@ -118,6 +118,6 @@ or
 |arm|Treatment arm of participant (2, 3 or 4 arms)|Factor/Character/Numeric|
 |visit|Timepoint of laboratory test taken|Ordered factor|
 |lab_test|Laboratory test|Factor/Character|
-|aval|Laboratory measurement value|Numerica|
+|aval|Laboratory measurement value|Numeric|
 |base / strat / region / time|Variables to be included in model for estimation of treatment effect estimates and 95% CIs|Factor/Character/Numeric|
 
