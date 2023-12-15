@@ -138,7 +138,7 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
       mutate(arm=relevel(arm, ref="C"))
 
     lmer_func <- function(x){
-      fit <- lmer(as.formula(model_formula), data=df_reg %>% filter(lab_test==x), REML=FALSE)
+      fit <- lme4::lmer(as.formula(model_formula), data=df_reg %>% filter(lab_test==x), REML=FALSE)
       return(list(Estimate=fixef(fit)[["armI1"]],
                   lower=confint(profile(fit), level=0.95)["armI1", "2.5 %"],
                   upper=confint(profile(fit), level=0.95)["armI1", "97.5 %"]))
