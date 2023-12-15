@@ -80,6 +80,12 @@ aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_level
         treatment_effect_estimate=TRUE, model="Binomial (logit)", variables = c("variable1", "variable2"))
 ```
 
+We can specify IR per number of person via the `IR_per_person` argument. The default is IR per 100 person.
+```{r, fig.dim=c(8, 6)}
+aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"),
+        IR_per_person=1000)
+```
+
 We can specify the number of decimal places for the proportions, IR, mean and SD columns as well as the number of significant figures for the treatment effect estimate and 95% CI.
 ```{r, fig.dim=c(8, 6)}
 aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"),

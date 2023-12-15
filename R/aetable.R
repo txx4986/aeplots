@@ -48,6 +48,7 @@
 #' @param variables vector of variable names to be included in the model for computation of treatment effect estimate (excluding arm)
 #' @param mean a logical value whether to include mean and SD column in summary table
 #' @param drop_bodsys a logical value whether to drop body system class with no observations from summary table
+#' @param IR_per_person incidence rate per number of person
 #' @param proportions_dp number of decimal places for proportions
 #' @param IR_dp number of decimal places for incidence rate
 #' @param mean_dp number of decimal places for mean number of AEs per participant
@@ -77,8 +78,8 @@
 aetable <- function(data, control, intervention_levels, body_system_class = "body_system_class", id = "id",
                     arm = "arm", date_rand = "date_rand", last_visit = "last_visit", control_name=NULL,
                     intervention_names=NULL, treatment_effect_estimate = TRUE, model="Poisson (rate)",
-                    variables = c(), mean = TRUE, drop_bodsys=TRUE, proportions_dp = 1, IR_dp = 1, mean_dp = 1,
-                    SD_dp = 1, estimate_sf = 3, CI_sf = 3, save_image_path=NULL, save_docx_path=NULL){
+                    variables = c(), mean = TRUE, drop_bodsys=TRUE, IR_per_person=100, proportions_dp = 1, IR_dp = 1,
+                    mean_dp = 1, SD_dp = 1, estimate_sf = 3, CI_sf = 3, save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("body_system_class" = body_system_class, "id" = id, "arm" = arm, "date_rand" = date_rand,
@@ -139,21 +140,22 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
     group_by(body_system_class, id, arm, follow_up_time) %>%
     # count total number of adverse events of each participant for each body system class
     count() %>%
-    group_by(body_system_class, arm, .drop=drop_bodsys) %>%
+    group_by(arm) %>%
+    # total length of follow up time for each arm
+    mutate(Total_Time = sum(follow_up_time)) %>%
+    group_by(body_system_class, arm, Total_Time, .drop=drop_bodsys) %>%
     summarise(
       # number of participants with at least one adverse event for each body system class and arm
       Frequency = length(unique(id)),
       # total number of adverse events for each body system class and arm
       Events = sum(n),
-      # total length of follow up time for each body system class and arm
-      Total_Time = sum(follow_up_time),
       # mean number of adverse events for each participant for each body system class and arm
       Mean = round(mean(n), mean_dp),
       # standard deviation of number of adverse events for each participant for each body system class and arm
       SD = round(sd(n), SD_dp)) %>%
     mutate(
       # IR = Events / Total_Time
-      IR = scales::percent(Events / Total_Time, 10^(-IR_dp)),
+      IR = round(Events / Total_Time * IR_per_person, IR_dp),
       # Proportions = Frequency / N
       Proportions =
         case_when(arm=="C" ~ scales::percent(Frequency / N0, 10^(-proportions_dp)),
@@ -492,7 +494,7 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
   } else{
     if (arm_number==2){
       if (treatment_effect_estimate==TRUE){
-        Table1_print <- Table1_IRR %>%
+        Table1_print <- Table1_treatment %>%
           select(body_system_class, Frequency_I1, Events_I1, Frequency_C, Events_C, Estimate, CI) %>%
           flextable() %>%
           add_header(
