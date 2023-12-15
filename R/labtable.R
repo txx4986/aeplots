@@ -239,8 +239,6 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
     bg(part="header", bg="gray80") %>%
     bg(part="body", bg="white")
 
-  return(Table_lab_print)
-
   if (!is.null(save_image_path)){
     save_as_image(Table_lab_print, path=save_image_path)
   }
@@ -248,5 +246,7 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
   if(!is.null(save_docx_path)){
     save_as_docx(Table_lab_print, path=save_docx_path)
   }
+
+  return(Table_lab_print)
 
 }
