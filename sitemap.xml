@@ -1,66 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://txx4986.github.io/aeplots/404.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/articles/adverse-event-data.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/articles/laboratory-data.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/index.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/aebar.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/aedot.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/aeseverity.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/aestacked.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/aetable.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/df2.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/df3.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/df4.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/lab2.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/lab3.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/lab4.html</loc>
-  </url>
-  <url>
-    <loc>https://txx4986.github.io/aeplots/reference/labtable.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://txx4986.github.io/aeplots/404.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/LICENSE-text.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/LICENSE.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/articles/adverse-event-data.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/articles/index.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/articles/laboratory-data.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/authors.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/index.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/aebar.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/aedot.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/aeseverity.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/aestacked.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/aetable.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/df2.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/df3.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/df4.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/index.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/lab2.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/lab3.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/lab4.html</loc></url>
+<url><loc>https://txx4986.github.io/aeplots/reference/labtable.html</loc></url>
 </urlset>
+
