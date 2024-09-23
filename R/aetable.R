@@ -136,16 +136,43 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
     # follow up time is computed as difference between randomisation date and last visit date (units=weeks)
     mutate(follow_up_time = as.numeric(difftime(last_visit, date_rand, units="weeks")))
 
+  # total follow up time of all participants for each arm
+  total_time_df <- dataset %>%
+    group_by(arm, id) %>%
+    summarise(max_follow_up_time=max(follow_up_time)) %>%
+    group_by(arm) %>%
+    summarise(total_time=sum(max_follow_up_time))
+
+  total_time0 <- total_time_df[total_time_df$arm=="C",]$total_time
+  total_time1 <- total_time_df[total_time_df$arm=="I1",]$total_time
+  if (arm_number > 2){
+    total_time2 <- total_time_df[total_time_df$arm=="I2",]$total_time
+  } else{
+    total_time2 <- 0
+  }
+  if (arm_number==4){
+    total_time3 <- total_time_df[total_time_df$arm=="I3",]$total_time
+  } else{
+    total_time3 <- 0
+  }
+
   Table1 <- dataset %>%
-    group_by(body_system_class, id, arm, follow_up_time) %>%
+    mutate(
+      total_time =
+        case_when(arm=="C" ~ total_time0,
+                  arm=="I1" ~ total_time1,
+                  arm=="I2" ~ total_time2,
+                  arm=="I3" ~ total_time3)
+    ) %>%
+    group_by(body_system_class, id, arm, total_time) %>%
     # count total number of adverse events of each participant for each body system class
     count() %>%
-    group_by(arm) %>%
-    # total length of follow up time for each arm
-    mutate(Total_Time = sum(follow_up_time)) %>%
-    group_by(body_system_class) %>%
-    complete(arm, fill=list(n=0)) %>%
-    group_by(body_system_class, arm, Total_Time, .drop=drop_bodsys) %>%
+    # group_by(body_system_class) %>%
+    # complete(arm, fill=list(n=0)) %>%
+    #group_by(arm) %>%
+    # # total length of follow up time for each arm
+    # mutate(Total_Time = sum(follow_up_time)) %>%
+    group_by(body_system_class, arm, total_time, .drop=drop_bodsys) %>%
     summarise(
       # number of participants with at least one adverse event for each body system class and arm
       Frequency = length(unique(na.omit(id))),
@@ -157,7 +184,7 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
       SD = round(sd(n), SD_dp)) %>%
     mutate(
       # IR = Events / Total_Time
-      IR = round(Events / Total_Time * IR_per_person, IR_dp),
+      IR = round(Events / total_time * IR_per_person, IR_dp),
       # Proportions = Frequency / N
       Proportions =
         case_when(arm=="C" ~ scales::percent(Frequency / N0, 10^(-proportions_dp)),
@@ -170,11 +197,11 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
       Events = str_glue("{Events} ({IR})"),
       Mean = str_glue("{Mean} ({SD})")) %>%
     select(
-      # drop Total_Time, SD, IR and Proportions from table
-      -c(Total_Time, SD, IR, Proportions)) %>%
+      # drop total_time, SD, IR and Proportions from table
+      !c(total_time, SD, IR, Proportions)) %>%
     pivot_wider(
-      names_from = arm, values_from = c(Frequency, Events, Mean)) %>%
-    filter(!is.na(body_system_class))
+      names_from = arm, values_from = c(Frequency, Events, Mean))
+  #filter(!is.na(body_system_class))
 
   # exclude IRR column if there are more than 2 arms in the table
   if (arm_number > 2){
@@ -439,7 +466,7 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
         autofit() %>%
         width(j=1, width=1.1) %>%
         width(j=c(2:10), width=0.75) %>%
-        vline(j=c(1:6), border=border, part="all") %>%
+        vline(j=c(1:9), border=border, part="all") %>%
         fix_border_issues() %>%
         bold(i=1, bold=TRUE, part="header") %>%
         bg(part="header", bg="gray80") %>%
