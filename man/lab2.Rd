@@ -15,7 +15,7 @@ A data frame with 2580 rows and 9 variables:
 \item{aval}{Measurement value}
 \item{region}{Participant's region}
 \item{strat}{Stratification variable}
-\item{Time}{Time of measurement}
+\item{time}{Time of measurement}
 }
 }
 \usage{
