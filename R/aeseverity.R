@@ -116,7 +116,7 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
   Table2 <- dataset %>%
     group_by(body_system_class, severity, arm) %>%
     summarise(
-      Frequency=length(unique(id)), Events = sum(!is.na(id))) %>%
+      Frequency=length(unique(na.omit(id))), Events = sum(!is.na(id))) %>%
     mutate(
       Proportions =
         case_when(arm=="A1" ~ scales::percent(Frequency / N1, 10^(-proportions_dp)),
@@ -173,10 +173,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:13), width=0.5) %>%
-          vline(j=c(1, 7), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 10), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 8, 9, 10, 11, 12), border=border, part="body")
+          vline(j=c(1:12), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==3){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -217,10 +215,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:19), width=0.5) %>%
-          vline(j=c(1, 10), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 13, 16), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18), border=border, part="body")
+          vline(j=c(1:18), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==4){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -269,12 +265,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:25), width=0.5) %>%
-          vline(j=c(1, 13), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 10, 16, 19, 22), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24), border=border,
-                part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24),
-                border=border, part="body")
+          vline(j=c(1:24), border=border, part="all") %>%
+          fix_border_issues()
       } else {
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -331,12 +323,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:31), width=0.5) %>%
-          vline(j=c(1, 16), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 10, 13, 19, 22, 25, 28), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30), border=border,
-                part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
-                    28, 29, 30), border=border, part="body")
+          vline(j=c(1:30), border=border, part="all") %>%
+          fix_border_issues()
       }
 
     } else if (arm_number==3){
@@ -385,10 +373,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:19), width=0.5) %>%
-          vline(j=c(1, 7, 13), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 10, 16), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18), border=border, part="body")
+          vline(j=c(1:18), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==3){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -442,12 +428,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:28), width=0.5) %>%
-          vline(j=c(1, 10, 19), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 13, 16, 22, 25), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27), border=border,
-                part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27),
-                border=border, part="body")
+          vline(j=c(1:27), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==4){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -514,12 +496,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:37), width=0.5) %>%
-          vline(j=c(1, 13, 25), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 10, 16, 19, 22, 28, 31, 34), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35,
-                         36), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 28,
-                    29, 30, 31, 32, 33, 34, 35, 36), border=border, part="body")
+          vline(j=c(1:36), border=border, part="all") %>%
+          fix_border_issues()
       } else {
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -599,12 +577,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:46), width=0.5) %>%
-          vline(j=c(1, 16, 31), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 10, 13, 19, 22, 25, 28, 34, 37, 40, 43), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35, 36,
-                         38, 39, 41, 42, 44, 45), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
-                    28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40), border=border, part="body")
+          vline(j=c(1:45), border=border, part="all") %>%
+          fix_border_issues()
       }
 
     } else {
@@ -662,12 +636,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:25), width=0.5) %>%
-          vline(j=c(1, 7, 13, 19), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 10, 16, 22), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24), border=border,
-                part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24), border=border,
-                part="body")
+          vline(j=c(1:24), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==3){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -735,13 +705,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:37), width=0.5) %>%
-          vline(j=c(1, 10, 19, 28), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 13, 16, 22, 25, 31, 34), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35,
-                         36), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 29,
-                    30, 31, 32, 33, 34, 35, 36), border=border,
-                part="body")
+          vline(j=c(1:36), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==4){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -826,13 +791,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:49), width=0.5) %>%
-          vline(j=c(1, 13, 25, 37), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 10, 16, 19, 22, 28, 31, 34, 40, 43, 46), border=border, part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35, 36,
-                         38, 39, 41, 42, 44, 45, 47, 48), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 28,
-                    29, 30, 31, 32, 33, 34, 35, 36, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48), border=border,
-                part="body")
+          vline(j=c(1:48), border=border, part="all") %>%
+          fix_border_issues()
       } else {
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Events_A1_S1, Frequency_A1_S2,
@@ -934,15 +894,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:61), width=0.5) %>%
-          vline(j=c(1, 16, 31, 46), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(4, 7, 10, 13, 19, 22, 25, 28, 34, 37, 40, 43, 49, 52, 55, 58), border=border,
-                part="header") %>%
-          vline(i=3, j=c(2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35, 36,
-                         38, 39, 41, 42, 44, 45, 47, 48, 50, 51, 53, 54, 56, 57, 59, 60), border=border,
-                part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
-                    28, 29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47, 48, 49, 50, 51, 52,
-                    53, 54, 55, 56, 57, 58, 59, 60), border=border, part="body")
+          vline(j=c(1:60), border=border, part="all") %>%
+          fix_border_issues()
       }
     }
   }else{
@@ -980,10 +933,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:9), width=0.5) %>%
-          vline(j=c(1, 5), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 7), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 6, 7, 8), border=border, part="body")
+          vline(j=c(1:8), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==3){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1016,10 +967,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:13), width=0.5) %>%
-          vline(j=c(1, 7), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 9, 11), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 8, 9, 10, 11, 12), border=border, part="body")
+          vline(j=c(1:12), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==4){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1058,10 +1007,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:17), width=0.5) %>%
-          vline(j=c(1, 9), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 7, 11, 13, 15), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16), border=border, part="body")
+          vline(j=c(1:16), border=border, part="all") %>%
+          fix_border_issues()
       } else {
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1106,10 +1053,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:21), width=0.5) %>%
-          vline(j=c(1, 11), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 7, 9, 13, 15, 17, 19), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16, 18, 20), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20), border=border, part="body")
+          vline(j=c(1:20), border=border, part="all") %>%
+          fix_border_issues()
       }
 
     } else if (arm_number==3){
@@ -1149,10 +1094,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:13), width=0.5) %>%
-          vline(j=c(1, 5, 9), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 7, 11), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 6, 7, 8, 10, 11, 12), border=border, part="body")
+          vline(j=c(1:12), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==3){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1193,10 +1136,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:19), width=0.5) %>%
-          vline(j=c(1, 7, 13), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 9, 11, 15, 17), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16, 18), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18), border=border, part="body")
+          vline(j=c(1:18), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==4){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1246,11 +1187,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:25), width=0.5) %>%
-          vline(j=c(1, 9, 17), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 7, 11, 13, 15, 19, 21, 23), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24), border=border,
-                part="body")
+          vline(j=c(1:24), border=border, part="all") %>%
+          fix_border_issues()
       } else {
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1309,12 +1247,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:31), width=0.5) %>%
-          vline(j=c(1, 11, 21), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 7, 9, 13, 15, 17, 19, 23, 25, 27, 29), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30), border=border,
-                part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28,
-                    29, 30), border=border, part="body")
+          vline(j=c(1:30), border=border, part="all") %>%
+          fix_border_issues()
       }
 
     } else {
@@ -1361,10 +1295,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:17), width=0.5) %>%
-          vline(j=c(1, 5, 9, 13), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 7, 11, 15), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15, 16), border=border, part="body")
+          vline(j=c(1:16), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==3){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1415,11 +1347,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:25), width=0.5) %>%
-          vline(j=c(1, 7, 13, 19), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 9, 11, 15, 17, 21, 23), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24), border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24), border=border,
-                part="body")
+          vline(j=c(1:24), border=border, part="all") %>%
+          fix_border_issues()
       } else if (severity_number==4){
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1482,12 +1411,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:33), width=0.5) %>%
-          vline(j=c(1, 9, 17, 25), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 7, 11, 13, 15, 19, 21, 23, 27, 29, 31), border=border, part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32), border=border,
-                part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 26, 27, 28, 29,
-                    30, 31, 32), border=border, part="body")
+          vline(j=c(1:32), border=border, part="all") %>%
+          fix_border_issues()
       } else {
         Table2_print <- Table2_print %>%
           select(body_system_class, Frequency_A1_S1, Proportions_A1_S1, Frequency_A1_S2, Proportions_A1_S2,
@@ -1562,13 +1487,8 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:41), width=0.5) %>%
-          vline(j=c(1, 11, 21, 31), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(3, 5, 7, 9, 13, 15, 17, 19, 23, 25, 27, 29, 33, 35, 37, 39), border=border,
-                part="header") %>%
-          vline(i=3, j=c(2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40),
-                border=border, part="header") %>%
-          vline(j=c(2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28,
-                    29, 30, 32, 33, 34, 35, 36, 37, 38, 39, 40), border=border, part="body")
+          vline(j=c(1:40), border=border, part="all") %>%
+          fix_border_issues()
       }
     }
   }
@@ -1579,7 +1499,7 @@ aeseverity <- function(data, arm_levels, severity_levels=NULL, body_system_class
     bg(part="body", bg="white") %>%
     fontsize(size=6.5, part="all")
 
-  plot(Table2_print)
+  plot(Table2_print, scaling="full")
 
   if (!is.null(save_image_path)){
     save_as_image(Table2_print, path=save_image_path)
