@@ -54,7 +54,7 @@
 #'    \item{aval}{Measurement value}
 #'    \item{region}{Participant's region}
 #'    \item{strat}{Stratification variable}
-#'    \item{Time}{Time of measurement}
+#'    \item{time}{Time of measurement}
 #' }
 "lab2"
 
@@ -70,7 +70,7 @@
 #'    \item{aval}{Measurement value}
 #'    \item{region}{Participant's region}
 #'    \item{strat}{Stratification variable}
-#'    \item{Time}{Time of measurement}
+#'    \item{time}{Time of measurement}
 #' }
 "lab3"
 
@@ -86,6 +86,6 @@
 #'    \item{aval}{Measurement value}
 #'    \item{region}{Participant's region}
 #'    \item{strat}{Stratification variable}
-#'    \item{Time}{Time of measurement}
+#'    \item{time}{Time of measurement}
 #' }
 "lab4"
