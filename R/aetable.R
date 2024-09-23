@@ -143,10 +143,12 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
     group_by(arm) %>%
     # total length of follow up time for each arm
     mutate(Total_Time = sum(follow_up_time)) %>%
+    group_by(body_system_class) %>%
+    complete(arm, fill=list(n=0)) %>%
     group_by(body_system_class, arm, Total_Time, .drop=drop_bodsys) %>%
     summarise(
       # number of participants with at least one adverse event for each body system class and arm
-      Frequency = length(unique(id)),
+      Frequency = length(unique(na.omit(id))),
       # total number of adverse events for each body system class and arm
       Events = sum(n),
       # mean number of adverse events for each participant for each body system class and arm
@@ -372,10 +374,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
           autofit() %>%
           width(j=c(1, 9), width=1.1) %>%
           width(j=c(2:8), width=0.75) %>%
-          vline(j=c(1, 4, 7, 8), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(2, 5), border=border, part="header") %>%
-          vline(i=3, j=c(3, 6), border=border, part="header") %>%
-          vline(j=c(2, 3, 5, 6), border=border, part="body") %>%
+          vline(j=c(1:8), border=border, part="all") %>%
+          fix_border_issues() %>%
           bold(i=1, bold=TRUE, part="header") %>%
           bg(part="header", bg="gray80") %>%
           bg(part="body", bg="white") %>%
@@ -403,10 +403,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:7), width=0.75) %>%
-          vline(j=c(1, 4), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(2, 5), border=border, part="header") %>%
-          vline(i=3, j=c(3, 6), border=border, part="header") %>%
-          vline(j=c(2, 3, 5, 6), border=border, part="body") %>%
+          vline(j=c(1:6), border=border, part="all") %>%
+          fix_border_issues() %>%
           bold(i=1, bold=TRUE, part="header") %>%
           bg(part="header", bg="gray80") %>%
           bg(part="body", bg="white") %>%
@@ -441,10 +439,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
         autofit() %>%
         width(j=1, width=1.1) %>%
         width(j=c(2:10), width=0.75) %>%
-        vline(j=c(1, 4, 7), border=border, part="all") %>%
-        vline(i=c(2, 3), j=c(2, 5, 8), border=border, part="header") %>%
-        vline(i=3, j=c(3, 6, 9), border=border, part="header") %>%
-        vline(j=c(2, 3, 5, 6, 8, 9), border=border, part="body") %>%
+        vline(j=c(1:6), border=border, part="all") %>%
+        fix_border_issues() %>%
         bold(i=1, bold=TRUE, part="header") %>%
         bg(part="header", bg="gray80") %>%
         bg(part="body", bg="white") %>%
@@ -482,10 +478,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
         autofit() %>%
         width(j=1, width=1.1) %>%
         width(j=c(2:13), width=0.75) %>%
-        vline(j=c(1, 4, 7, 10), border=border, part="all") %>%
-        vline(i=c(2, 3), j=c(2, 5, 8, 11), border=border, part="header") %>%
-        vline(i=3, j=c(3, 6, 9, 12), border=border, part="header") %>%
-        vline(j=c(2, 3, 5, 6, 8, 9, 11, 12), border=border, part="body") %>%
+        vline(j=c(1:12), border=border, part="all") %>%
+        fix_border_issues() %>%
         bold(i=1, bold=TRUE, part="header") %>%
         bg(part="header", bg="gray80") %>%
         bg(part="body", bg="white") %>%
@@ -517,9 +511,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
           autofit() %>%
           width(j=c(1, 7), width=1.1) %>%
           width(j=c(2:6), width=0.75) %>%
-          vline(j=c(1, 3, 5, 6), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(2, 4), border=border, part="header") %>%
-          vline(j=c(2, 4), border=border, part="body") %>%
+          vline(j=c(1:6), border=border, part="all") %>%
+          fix_border_issues() %>%
           bold(i=1, bold=TRUE, part="header") %>%
           bg(part="header", bg="gray80") %>%
           bg(part="body", bg="white") %>%
@@ -544,9 +537,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
           autofit() %>%
           width(j=1, width=1.1) %>%
           width(j=c(2:5), width=0.75) %>%
-          vline(j=c(1, 3), border=border, part="all") %>%
-          vline(i=c(2, 3), j=c(2, 4), border=border, part="header") %>%
-          vline(j=c(2, 4), border=border, part="body") %>%
+          vline(j=c(1:4), border=border, part="all") %>%
+          fix_border_issues() %>%
           bold(i=1, bold=TRUE, part="header") %>%
           bg(part="header", bg="gray80") %>%
           bg(part="body", bg="white") %>%
@@ -575,9 +567,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
         autofit() %>%
         width(j=1, width=1.1) %>%
         width(j=c(2:7), width=0.75) %>%
-        vline(j=c(1, 3, 5), border=border, part="all") %>%
-        vline(i=c(2, 3), j=c(2, 4, 6), border=border, part="header") %>%
-        vline(j=c(2, 4, 6), border=border, part="body") %>%
+        vline(j=c(1:6), border=border, part="all") %>%
+        fix_border_issues() %>%
         bold(i=1, bold=TRUE, part="header") %>%
         bg(part="header", bg="gray80") %>%
         bg(part="body", bg="white") %>%
@@ -608,9 +599,8 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
         autofit() %>%
         width(j=1, width=1.1) %>%
         width(j=c(2:9), width=0.75) %>%
-        vline(j=c(1, 3, 5, 7), border=border, part="all") %>%
-        vline(i=c(2, 3), j=c(2, 4, 6, 8), border=border, part="header") %>%
-        vline(j=c(2, 4, 6, 8), border=border, part="body") %>%
+        vline(j=c(1:8), border=border, part="all") %>%
+        fix_border_issues() %>%
         bold(i=1, bold=TRUE, part="header") %>%
         bg(part="header", bg="gray80") %>%
         bg(part="body", bg="white") %>%
@@ -618,7 +608,7 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
     }
   }
 
-  plot(Table1_print)
+  plot(Table1_print, scaling="full")
 
   if (!is.null(save_image_path)){
     save_as_image(Table1_print, path=save_image_path)
