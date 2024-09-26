@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   adverse-event-data: adverse-event-data.html
   articles/laboratory-data: laboratory-data.html
-last_built: 2024-09-23T16:14Z
+last_built: 2024-09-26T15:39Z
 urls:
   reference: https://txx4986.github.io/aeplots/reference
   article: https://txx4986.github.io/aeplots/articles
