@@ -73,6 +73,9 @@
 #' @export
 #'
 #' @examples
+#' library(extrafont)
+#' font_import(prompt=FALSE)
+#' loadfonts(device="postscript", quiet=TRUE)
 #' df2$aebodsys <- as.factor(df2$aebodsys)
 #' aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), treatment_effect_estimate=TRUE, variables = c("variable1", "variable2"))
 aetable <- function(data, control, intervention_levels, body_system_class = "body_system_class", id = "id",
@@ -363,7 +366,6 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
   }
 
   #to produce nice table
-  set_flextable_defaults(font.family="Arial")
   name1 <- "N" %p% subsc("1")
   name2 <- "N" %p% subsc("2")
   name3 <- "N" %p% subsc("3")
