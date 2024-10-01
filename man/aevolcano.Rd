@@ -15,7 +15,7 @@ aevolcano(
   last_visit = "last_visit",
   model = "unadjusted (RD)",
   variables = c(),
-  bubble_colours = c("blue", "red"),
+  bubble_colours = c("#2b3bff", "#e14b31"),
   p_value_cutoff = 0.1,
   save_image_path = NULL
 )

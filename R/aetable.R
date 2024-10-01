@@ -363,6 +363,7 @@ aetable <- function(data, control, intervention_levels, body_system_class = "bod
   }
 
   #to produce nice table
+  set_flextable_defaults(font.family="Arial")
   name1 <- "N" %p% subsc("1")
   name2 <- "N" %p% subsc("2")
   name3 <- "N" %p% subsc("3")
