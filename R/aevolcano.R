@@ -69,7 +69,7 @@
 #' aevolcano(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
 aevolcano <- function(data, control, intervention, body_system_class="body_system_class", id="id", arm="arm",
                       date_rand = "date_rand", last_visit = "last_visit", model="unadjusted (RD)", variables = c(),
-                      bubble_colours = c("blue", "red"), p_value_cutoff = 0.1, save_image_path=NULL){
+                      bubble_colours = c("#2b3bff", "#e14b31"), p_value_cutoff = 0.1, save_image_path=NULL){
 
   # check if the model specified is either unadjusted/Poisson/Negative Binomial/Binomial
   stopifnot("Model specified is not one of unadjusted (RD), unadjusted (RR), Poisson (rate), Poisson (count), Negative Binomial (rate), Negative Binomial (count), Binomial (logit), Binomial (log) or Binomial (identity)" = (model=="unadjusted (RR)")|(model=="unadjusted (RD)")|(model=="unadjusted (OR)")|(model=="unadjusted (IRR)")|(model=="Poisson (rate)")|(model=="Poisson (count)")|(model=="Negative Binomial (rate)")|(model=="Negative Binomial (count)")|(model=="Binomial (logit)")|model=="Binomial (log)"|(model=="Binomial (identity)"))
