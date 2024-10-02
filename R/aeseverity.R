@@ -35,6 +35,8 @@
 #' @export
 #'
 #' @examples
+#' library(flextable)
+#' set_flextable_defaults(font.family="sans")
 #' df2$aebodsys <- as.factor(df2$aebodsys)
 #' df2$severity <- ordered(df2$severity, c("Mild", "Moderate", "Severe"))
 #' aeseverity(df2, arm_levels=c("Intervention","Placebo"), body_system_class="aebodsys", proportions_dp=2)
