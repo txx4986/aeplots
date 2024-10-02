@@ -121,9 +121,7 @@ Note that interaction terms cannot be added to the model.
 }
 
 \examples{
-library(extrafont)
-font_import(prompt=FALSE)
-loadfonts(device="postscript", quiet=TRUE)
+set_flextable_defaults(font.family="sans")
 df2$aebodsys <- as.factor(df2$aebodsys)
 aetable(df2, body_system_class="aebodsys", control="Placebo", intervention_levels=c("Intervention"), treatment_effect_estimate=TRUE, variables = c("variable1", "variable2"))
 }
