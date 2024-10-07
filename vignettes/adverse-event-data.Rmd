@@ -197,7 +197,7 @@ aebar(df3, arm_levels=c("Intervention 1","Intervention 2", "Placebo"), arm_names
 aevolcano(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
 ```
 
-We can specify the model used to estimate the treatment effect and 95% CI via the `model` argument. The available model options are `unadjusted (RD)`, `unadjusted (RR)`, `unadjusted (OR)`, `unadjusted (IRR)`, `Poisson (rate)`, `Poisson (count)`, `Negative Binomial (rate)`, `Negative Binomial (count)`, `Binomial (logit)`, `Binomial (log)` and `Binomial (identity)`. The default model is `unadjusted (RD)`.
+We can specify the model used to estimate the treatment effect via the `model` argument. The available model options are `unadjusted (RD)`, `unadjusted (RR)`, `unadjusted (OR)`, `unadjusted (IRR)`, `Poisson (rate)`, `Poisson (count)`, `Negative Binomial (rate)`, `Negative Binomial (count)`, `Binomial (logit)`, `Binomial (log)` and `Binomial (identity)`. The default model is `unadjusted (RD)`.
 ```{r, fig.dim=c(8, 6)}
 aevolcano(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention", model="Binomial (logit)",
           variables=c("variable1", "variable2"))
