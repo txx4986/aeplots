@@ -136,7 +136,7 @@ aeseverity(df3, arm_levels=c("Intervention 1", "Intervention 2", "Placebo"),
 aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
 ```
 
-Similar to `aetable`, we can specify the model used to estimate the treatment effect and 95% CI via the `model` argument. The available model options are `unadjusted (RR)`, `unadjusted (RD)`, `Poisson (rate)`, `Poisson (count)`, `Negative Binomial (rate)`, `Negative Binomial (count)`, `Binomial (logit)`, `Binomial (log)` and `Binomial (identity)`.
+Similar to `aetable`, we can specify the model used to estimate the treatment effect and 95% CI via the `model` argument. The available model options are `unadjusted (RR)`, `unadjusted (RD)`, `Poisson (rate)`, `Poisson (count)`, `Negative Binomial (rate)`, `Negative Binomial (count)`, `Binomial (logit)`, `Binomial (log)` and `Binomial (identity)`. The default model is `unadjusted (RR)`.
 ```{r, message=FALSE, warning=FALSE, fig.dim=c(8, 6)}
 aedot(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention", model="unadjusted (RD)")
 ```
@@ -189,6 +189,28 @@ We can plot a bar chart for each treatment arm in separate facets by specifying 
 ```{r, fig.dim=c(8, 6)}
 aebar(df3, arm_levels=c("Intervention 1","Intervention 2", "Placebo"), arm_names=c("Drug A","Drug B", "No Drug"),
       adverse_event="ae_pt", facets=TRUE)
+```
+
+## `aevolcano` function
+`aevolcano` plots a volcano plot of treatment effect estimate against the p-value on the -log10 scale. 
+```{r, fig.dim=c(8, 6)}
+aevolcano(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention")
+```
+
+We can specify the model used to estimate the treatment effect and 95% CI via the `model` argument. The available model options are `unadjusted (RD)`, `unadjusted (RR)`, `unadjusted (OR)`, `unadjusted (IRR)`, `Poisson (rate)`, `Poisson (count)`, `Negative Binomial (rate)`, `Negative Binomial (count)`, `Binomial (logit)`, `Binomial (log)` and `Binomial (identity)`. The default model is `unadjusted (RD)`.
+```{r, fig.dim=c(8, 6)}
+aevolcano(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention", model="Binomial (logit)",
+          variables=c("variable1", "variable2"))
+```
+
+Labels are added to events with p-values less than 0.1 on default. We can change the p-value cutoff for which labels are added to events through the `p_value_cutoff` argument.
+```{r, fig.dim=c(8, 6)}
+aevolcano(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention", p_value_cutoff=0.05)
+```
+
+The default colours for the bubbles are blue and red, with blue indicating greater risk in the control arm and red indicating greater risk in the intervention arm. We can change the colour of bubbles through the `bubble_colours` argument, specifying the colour indicating greater risk in the control arm first, followed by the colour indicating greater risk in the intervention arm.
+```{r, fig.dim=c(8, 6)}
+aevolcano(df2, body_system_class="aebodsys", control="Placebo", intervention="Intervention", bubble_colours = c("#B2E061", "#FFB55A"))
 ```
 
 ## Saving tables and plots
