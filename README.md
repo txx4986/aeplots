@@ -31,7 +31,7 @@ or
 ### Sample dataset
 
 |id|arm|adverse_event|body_system_class|severity|date_rand|date_ae|last_visit|variable1|variable2|
-|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|---|
 |2001|Placebo|Cold|Respiratory|Moderate|2015-10-28|2016-04-24|2016-08-31|2|910.785|
 |2001|Placebo|Anemia|Blood and lymphatic|Severe|2015-10-28|2015-11-11|2016-08-31|2|910.785|
 |2001|Placebo|Anemia|Blood and lymphatic|Moderate|2015-10-28|2016-05-10|2016-08-31|2|910.785|
