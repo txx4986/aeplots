@@ -56,7 +56,7 @@ or
 Note that for each participant who did not experience any adverse events, a row should be included in the input dataset stating his/her `id`, `arm`, `date_rand`, `last_visit` and `variables` to be included in the model. `adverse_event`, `body_system_class`, `severity` and `date_ae` column should be specified as `NA`. For example:
 
 |id|arm|adverse_event|body_system_class|severity|date_rand|date_ae|last_visit|variable1|variable2|
-|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|---|
 |2032|Intervention|NA|NA|NA|2015-05-22|NA|2016-04-22|2|1500|
 |2033|Placebo|NA|NA|NA|2015-04-20|NA|2016-03-20|1|777|
 
