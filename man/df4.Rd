@@ -13,6 +13,7 @@ A data frame with 370 rows and 7 variables:
 \item{aebodsys}{Body system class}
 \item{severity}{Severity}
 \item{date_rand}{Date of randomisation}
+\item{date_ae}{Date of adverse event}
 \item{last_visit}{Date of last visit}
 }
 }

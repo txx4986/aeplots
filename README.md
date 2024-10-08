@@ -30,35 +30,35 @@ or
 
 ### Sample dataset
 
-|id|arm|adverse_event|body_system_class|severity|date_rand|last_visit|variable1|variable2|
+|id|arm|adverse_event|body_system_class|severity|date_rand|date_ae|last_visit|variable1|variable2|
 |---|---|---|---|---|---|---|---|---|
-|2001|Placebo|Cold|Respiratory|Moderate|2015-10-28|2016-08-31|2|910.785|
-|2001|Placebo|Anemia|Blood and lymphatic|Severe|2015-10-28|2016-08-31|2|910.785|
-|2001|Placebo|Anemia|Blood and lymphatic|Moderate|2015-10-28|2016-08-31|2|910.785|
-|2001|Placebo|Leukocytosis|Blood and lymphatic|Severe|2015-10-28|2016-08-31|2|910.785|
-|2001|Placebo|Nausea|Gastrointestinal|Severe|2015-10-28|2016-08-31|2|910.785|
-|2002|Intervention|Other|Blood and lymphatic|Moderate|2015-08-18|2016-07-29|2|736.752|
-|2002|Intervention|Toothache|Other|Moderate|2015-08-18|2016-07-29|2|736.752|
-|2002|Intervention|Accident|Other|Moderate|2015-08-18|2016-07-29|2|736.752|
-|2004|Placebo|Cystitis|Renal and urinary|Mild|2015-04-26|2016-08-11|1|307.814|
-|2004|Placebo|Vomiting|Gastrointestinal|Severe|2015-04-26|2016-08-11|1|307.814|
-|2004|Placebo|Vomiting|Gastrointestinal|Mild|2015-04-26|2016-08-11|1|307.814|
-|2004|Placebo|Vomiting|Gastrointestinal|Mild|2015-04-26|2016-08-11|1|307.814|
-|2004|Placebo|Anemia|Blood and lymphatic|Moderate|2015-04-26|2016-08-11|1|307.814|
-|2004|Placebo|Dry skin|Dermatological|Moderate|2015-04-26|2016-08-11|1|307.814|
-|2008|Intervention|Other|Blood and lymphatic|Moderate|2015-12-04|2016-04-28|4|380.890|
-|2008|Intervention|Anemia|Blood and lymphatic|Mild|2015-12-04|2016-04-28|4|380.890|
-|2008|Intervention|Anemia|Blood and lymphatic|Mild|2015-12-04|2016-04-28|4|380.890|
-|2008|Intervention|Nausea|Gastrointestinal|Moderate|2015-12-04|2016-04-28|4|380.890|
-|2014|Intervention|Headache|Neuruological|Mild|2015-10-16|2016-01-19|3|389.012|
-|2014|Intervention|Headache|Neuruological|Mild|2015-10-16|2016-01-19|3|389.012|
+|2001|Placebo|Cold|Respiratory|Moderate|2015-10-28|2016-04-24|2016-08-31|2|910.785|
+|2001|Placebo|Anemia|Blood and lymphatic|Severe|2015-10-28|2015-11-11|2016-08-31|2|910.785|
+|2001|Placebo|Anemia|Blood and lymphatic|Moderate|2015-10-28|2016-05-10|2016-08-31|2|910.785|
+|2001|Placebo|Leukocytosis|Blood and lymphatic|Severe|2015-10-28|2016-08-29|2016-08-31|2|910.785|
+|2001|Placebo|Nausea|Gastrointestinal|Severe|2015-10-28|2016-02-23|2016-08-31|2|910.785|
+|2002|Intervention|Other|Blood and lymphatic|Moderate|2015-08-18|2015-11-17|2016-07-29|2|736.752|
+|2002|Intervention|Toothache|Other|Moderate|2015-08-18|2016-04-30|2016-07-29|2|736.752|
+|2002|Intervention|Accident|Other|Moderate|2015-08-18|2016-03-02|2016-07-29|2|736.752|
+|2004|Placebo|Cystitis|Renal and urinary|Mild|2015-04-26|2015-07-06|2016-08-11|1|307.814|
+|2004|Placebo|Vomiting|Gastrointestinal|Severe|2015-04-26|2016-06-20|2016-08-11|1|307.814|
+|2004|Placebo|Vomiting|Gastrointestinal|Mild|2015-04-26|2016-03-19|2016-08-11|1|307.814|
+|2004|Placebo|Vomiting|Gastrointestinal|Mild|2015-04-26|2015-08-21|2016-08-11|1|307.814|
+|2004|Placebo|Anemia|Blood and lymphatic|Moderate|2015-04-26|2016-07-26|2016-08-11|1|307.814|
+|2004|Placebo|Dry skin|Dermatological|Moderate|2015-04-26|2016-03-26|2016-08-11|1|307.814|
+|2008|Intervention|Other|Blood and lymphatic|Moderate|2015-12-04|2016-01-07|2016-04-28|4|380.890|
+|2008|Intervention|Anemia|Blood and lymphatic|Mild|2015-12-04|2016-02-11|2016-04-28|4|380.890|
+|2008|Intervention|Anemia|Blood and lymphatic|Mild|2015-12-04|2016-02-05|2016-04-28|4|380.890|
+|2008|Intervention|Nausea|Gastrointestinal|Moderate|2015-12-04|2016-04-19|2016-04-28|4|380.890|
+|2014|Intervention|Headache|Neuruological|Mild|2015-10-16|2016-01-18|2016-01-19|3|389.012|
+|2014|Intervention|Headache|Neuruological|Mild|2015-10-16|2015-12-27|2016-01-19|3|389.012|
 
-Note that for each participant who did not experience any adverse events, a row should be included in the input dataset stating his/her `id`, `arm`, `date_rand`, `last_visit` and `variables` to be included in the model. `adverse_event`, `body_system_class` and `severity` column should be specified as `NA`. For example:
+Note that for each participant who did not experience any adverse events, a row should be included in the input dataset stating his/her `id`, `arm`, `date_rand`, `last_visit` and `variables` to be included in the model. `adverse_event`, `body_system_class`, `severity` and `date_ae` column should be specified as `NA`. For example:
 
-|id|arm|adverse_event|body_system_class|severity|date_rand|last_visit|variable1|variable2|
+|id|arm|adverse_event|body_system_class|severity|date_rand|date_ae|last_visit|variable1|variable2|
 |---|---|---|---|---|---|---|---|---|
-|2032|Intervention|NA|NA|NA|2015-05-22|2016-04-22|2|1500|
-|2033|Placebo|NA|NA|NA|2015-04-20|2016-03-20|1|777|
+|2032|Intervention|NA|NA|NA|2015-05-22|NA|2016-04-22|2|1500|
+|2033|Placebo|NA|NA|NA|2015-04-20|NA|2016-03-20|1|777|
 
 ### Variable description for sample dataset
 
@@ -70,6 +70,7 @@ Note that for each participant who did not experience any adverse events, a row 
 |body_system_class|Body system class of adverse event|Factor|
 |severity|Severity of adverse event (2, 3, 4 or 5 severity levels)|Factor|
 |date_rand|Randomisation date|Date|
+|date_ae|Date of adverse event|Date|
 |last_visit|Date of last visit|Date|
 |variable|Variables to be included in model for estimation of treatment effect estimates and 95% CIs|Factor/Character/Numeric|
 

@@ -8,9 +8,10 @@
 #'    \item{aebodsys}{Body system class}
 #'    \item{severity}{Severity}
 #'    \item{date_rand}{Date of randomisation}
+#'    \item{date_ae}{Date of adverse event}
 #'    \item{last_visit}{Date of last visit}
-#'    \item{variable1}{Variable 1 to be included in Poisson regression}
-#'    \item{variable2}{Variable 2 to be included in Poisson regression}
+#'    \item{variable1}{Variable 1 to be included in treatment effect estimation}
+#'    \item{variable2}{Variable 2 to be included in treatment effect estimation}
 #' }
 "df2"
 
@@ -24,6 +25,7 @@
 #'    \item{aebodsys}{Body system class}
 #'    \item{severity}{Severity}
 #'    \item{date_rand}{Date of randomisation}
+#'    \item{date_ae}{Date of adverse event}
 #'    \item{last_visit}{Date of last visit}
 #' }
 "df3"
@@ -38,6 +40,7 @@
 #'    \item{aebodsys}{Body system class}
 #'    \item{severity}{Severity}
 #'    \item{date_rand}{Date of randomisation}
+#'    \item{date_ae}{Date of adverse event}
 #'    \item{last_visit}{Date of last visit}
 #' }
 "df4"
