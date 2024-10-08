@@ -5,7 +5,7 @@
 \alias{df3}
 \title{Sample adverse event dataset with 3 treatment arms}
 \format{
-A data frame with 370 rows and 7 variables:
+A data frame with 370 rows and 8 variables:
 \describe{
 \item{id}{Participant's id}
 \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2}

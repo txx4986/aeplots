@@ -18,6 +18,7 @@ Functions available in the package:
 -   `aedot`: Plots a dot plot with proportions alongside treatment effect estimates with accompanying 95% confidence interval to give an overview of the harm profile
 -   `aestacked`: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity
 -   `aebar`: Plots a bar chart to present the number of events reported per participant
+-   `aevolcano`: Plots a volcano plot of treatment effect estimate against -log10(p-value)
 
 To see more detailed documentation of each function:
 ```
