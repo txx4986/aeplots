@@ -225,10 +225,17 @@ We can plot the MCF for adverse events of specific organ systems or specific adv
 # this plots the MCF for adverse events of a specific body system class (i.e. Gastrointestinal)
 aemcf(df2, arm_levels=c("Intervention", "Placebo"), subset= body_system_class=="Gastrointestinal", adverse_event="ae_pt",
       body_system_class="aebodsys")
+```
 
+```{r, fig.dim=c(8, 6)}
 # this plots the MCF for a specific adverse event (i.e. Anemia)
 aemcf(df2, arm_levels=c("Intervention", "Placebo"), subset= adverse_event=="Anemia", adverse_event="ae_pt",
       body_system_class="aebodsys")
+```
+
+We can change the time units to either seconds, minutes, hours, days, weeks, months or years through the `time_units` argument.
+```{r, fig.dim=c(8, 6)}
+aemcf(df2, arm_levels=c("Intervention", "Placebo"), adverse_event="ae_pt", body_system_class="aebodsys", time_units="weeks")
 ```
 
 We can choose to not plot the 95% confidence intervals by specifying `conf.int=FALSE`.
