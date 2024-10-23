@@ -30,7 +30,7 @@
 #' @import reda
 #' @import ggsurvfit
 #' @import lubridate
-#' @import patchwork
+#' @importFrom patchwork wrap_plots
 #'
 #' @export
 #'
@@ -55,7 +55,7 @@ aemcf <- function(data, arm_levels, subset, adverse_event="adverse_event", body_
   }
 
   if (is.null(arm_colours)){
-    arm_colours <- c("#00BFC4", "#F8766D", "#7CAE00", "#C77CFF")
+    arm_colours <- c("#F8766D", "#00BFC4", "#7CAE00", "#C77CFF")
   }
 
   # checks if arm_levels can be found in arm variable
@@ -83,6 +83,7 @@ aemcf <- function(data, arm_levels, subset, adverse_event="adverse_event", body_
   dataset$arm[which(dataset$arm==arm_levels[4])] <- "A4"
   dataset$arm <- as.factor(dataset$arm)
 
+  # calculates time till AE occurred and follow-up time by time units specified
   if (time_units=="months"|time_units=="years"){
     dataset <- dataset %>%
       mutate(id=as.factor(id)) %>%
@@ -105,6 +106,7 @@ aemcf <- function(data, arm_levels, subset, adverse_event="adverse_event", body_
     dataset <- dataset[subIdx, ]
   }
 
+  # create time to event table grouped by arm
   df <- dataset %>%
     select(c(id, ae_time)) %>%
     merge(lookup, by="id", all.y=TRUE) %>%
@@ -115,15 +117,16 @@ aemcf <- function(data, arm_levels, subset, adverse_event="adverse_event", body_
     group_by(id) %>%
     arrange(time, .by_group = TRUE)
 
+  # calculate MCF estimates and 95% confidence intervals
   dfmcf <- mcf(Recur(time, id, event)~arm, data=df)
 
-  x_ticks <- ggplot_build(plot(dfmcf))$layout$panel_params[[1]]$x$breaks
-
+  # get next time point to plot confidence intervals using geom_rect
   mcf_table <- dfmcf@MCF %>%
     group_by(arm) %>%
     mutate(next_time=lead(time)) %>%
     mutate(next_time=ifelse(is.na(next_time), time, next_time))
 
+  # plot MCF
   mcf_plot <-ggplot(mcf_table, aes(x=time, y=MCF, color=arm)) +
     geom_step(size=0.75) +
     labs(y="Mean cumulative number of events per participant", x=str_glue("Time ({str_to_title(time_units)})")) +
@@ -143,13 +146,20 @@ aemcf <- function(data, arm_levels, subset, adverse_event="adverse_event", body_
       axis.text=element_text(color='black')
     )
 
+  # plot 95% confidence intervals if conf.int==TRUE
   if (conf.int==TRUE){
+
     mcf_plot <- mcf_plot +
       geom_rect(aes(xmin=time, xmax=next_time, ymin=lower, ymax=upper, fill=arm), alpha=0.2, linetype=0) +
       scale_fill_manual(values=arm_colours, labels=arm_names)
   }
 
+  # plot risk table if risk_table==TRUE
   if (risk_table==TRUE){
+    # obtain breaks for x-axis
+    x_ticks <- ggplot_build(plot(dfmcf))$layout$panel_params[[1]]$x$breaks
+
+    # fill in number at risk for x_ticks
     risk_table <- mcf_table %>%
       select(arm, time, numRisk) %>%
       group_by(arm) %>%
@@ -158,6 +168,7 @@ aemcf <- function(data, arm_levels, subset, adverse_event="adverse_event", body_
       fill(numRisk, .direction="up") %>%
       filter(time %in% x_ticks)
 
+    # plot risk table
     gg_risktable <- risk_table |>
       ggplot(aes(x=time, y=arm, label=numRisk)) +
       scale_y_discrete(limits=rev, labels=rev(arm_names)) +
@@ -178,6 +189,7 @@ aemcf <- function(data, arm_levels, subset, adverse_event="adverse_event", body_
 
     pdf(NULL)
 
+    # combine MCF plot and risk table
     gg_combined <- ggsurvfit_align_plots(list(mcf_plot, gg_risktable))
 
     MCFplot <- patchwork::wrap_plots(gg_combined[[1]], gg_combined[[2]], ncol=1, heights=c(1, 0.2))
