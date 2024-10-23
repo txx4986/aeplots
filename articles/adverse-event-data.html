@@ -394,6 +394,61 @@ indicating greater risk in the intervention arm.</p>
 <p><img src="adverse-event-data_files/figure-html/unnamed-chunk-31-1.png" width="768"></p>
 </div>
 <div class="section level2">
+<h2 id="aemcf-function">
+<code>aemcf</code> function<a class="anchor" aria-label="anchor" href="#aemcf-function"></a>
+</h2>
+<div class="section level3">
+<h3 id="treatment-arms-5">2 treatment arms<a class="anchor" aria-label="anchor" href="#treatment-arms-5"></a>
+</h3>
+<p><code>aemcf</code> plots the mean cumulative function (MCF) with
+accompanying 95% confidence interval for harm outcomes by treatment arm
+with embedded table of number of participants at risk.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/aemcf.html">aemcf</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, body_system_class<span class="op">=</span><span class="st">"aebodsys"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-32-1.png" width="768"></p>
+<p>We can plot the MCF for adverse events of specific organ systems or
+specific adverse events by specifying the conditions through the
+<code>subset</code> argument.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># this plots the MCF for adverse events of a specific body system class (i.e. Gastrointestinal)</span></span>
+<span><span class="fu"><a href="../reference/aemcf.html">aemcf</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, subset<span class="op">=</span> <span class="va">body_system_class</span><span class="op">==</span><span class="st">"Gastrointestinal"</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>,</span>
+<span>      body_system_class<span class="op">=</span><span class="st">"aebodsys"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-33-1.png" width="768"></p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># this plots the MCF for a specific adverse event (i.e. Anemia)</span></span>
+<span><span class="fu"><a href="../reference/aemcf.html">aemcf</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, subset<span class="op">=</span> <span class="va">adverse_event</span><span class="op">==</span><span class="st">"Anemia"</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>,</span>
+<span>      body_system_class<span class="op">=</span><span class="st">"aebodsys"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-33-2.png" width="768"></p>
+<p>We can choose to not plot the 95% confidence intervals by specifying
+<code>conf.int=FALSE</code>.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/aemcf.html">aemcf</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, body_system_class<span class="op">=</span><span class="st">"aebodsys"</span>, conf.int<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-34-1.png" width="768"></p>
+<p>We can choose to drop the risk table by specifying
+<code>risk_table=FALSE</code>.</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/aemcf.html">aemcf</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, body_system_class<span class="op">=</span><span class="st">"aebodsys"</span>, risk_table<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-35-1.png" width="768"></p>
+<p>We can change the colour representing each treatment arm by
+specifying a vector of colour codes in the <code>arm_colours</code>
+argument according to the order of arm levels specified in the
+arm_levels argument.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/aemcf.html">aemcf</a></span><span class="op">(</span><span class="va">df2</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, body_system_class<span class="op">=</span><span class="st">"aebodsys"</span>, </span>
+<span>      arm_colours<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#C77CFF"</span>, <span class="st">"#7CAE00"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-36-1.png" width="768"></p>
+</div>
+<div class="section level3">
+<h3 id="more-than-2-treatment-arms-5">More than 2 treatment arms<a class="anchor" aria-label="anchor" href="#more-than-2-treatment-arms-5"></a>
+</h3>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/aemcf.html">aemcf</a></span><span class="op">(</span><span class="va">df3</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention 1"</span>, <span class="st">"Intervention 2"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, </span>
+<span>      subset<span class="op">=</span> <span class="va">body_system_class</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Blood and lymphatic"</span>, <span class="st">"Respiratory"</span><span class="op">)</span>, adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, body_system_class<span class="op">=</span><span class="st">"aebodsys"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-37-1.png" width="768"></p>
+</div>
+</div>
+<div class="section level2">
 <h2 id="saving-tables-and-plots">Saving tables and plots<a class="anchor" aria-label="anchor" href="#saving-tables-and-plots"></a>
 </h2>
 <div class="section level3">
@@ -401,20 +456,20 @@ indicating greater risk in the intervention arm.</p>
 </h3>
 <p>We can save tables as docx by specifying the filepath in the
 <code>save_docx_path</code> argument.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/aetable.html">aetable</a></span><span class="op">(</span><span class="va">df2</span>, body_system_class<span class="op">=</span><span class="st">"aebodsys"</span>, control<span class="op">=</span><span class="st">"Placebo"</span>, intervention_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention"</span><span class="op">)</span>,</span>
 <span>        treatment_effect_estimate<span class="op">=</span><span class="cn">TRUE</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"variable1"</span>, <span class="st">"variable2"</span><span class="op">)</span>, save_docx_path<span class="op">=</span><span class="st">"aetable.docx"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-32-1.png" width="768"></p>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-38-1.png" width="768"></p>
 </div>
 <div class="section level3">
 <h3 id="image">Image<a class="anchor" aria-label="anchor" href="#image"></a>
 </h3>
 <p>We can save tables and plots as images by specifying the filepath in
 the <code>save_image_path</code> argument.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/aebar.html">aebar</a></span><span class="op">(</span><span class="va">df3</span>, arm_levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intervention 1"</span>,<span class="st">"Intervention 2"</span>, <span class="st">"Placebo"</span><span class="op">)</span>, arm_names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Drug A"</span>,<span class="st">"Drug B"</span>, <span class="st">"No Drug"</span><span class="op">)</span>,</span>
 <span>      adverse_event<span class="op">=</span><span class="st">"ae_pt"</span>, facets<span class="op">=</span><span class="cn">TRUE</span>, save_image_path<span class="op">=</span><span class="st">"aeimage.png"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-33-1.png" width="768"></p>
+<p><img src="adverse-event-data_files/figure-html/unnamed-chunk-39-1.png" width="768"></p>
 <pre><code><span><span class="co">#&gt; Saving 8 x 6 in image</span></span></code></pre>
 </div>
 </div>
