@@ -28,7 +28,10 @@ Imports:
   devtools,
   ggstance,
   MASS,
-  lme4
+  lme4,
+  ggsurvfit,
+  reda,
+  patchwork
 Suggests: 
     knitr,
     rmarkdown
