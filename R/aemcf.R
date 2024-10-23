@@ -208,6 +208,6 @@ aemcf <- function(data, arm_levels, subset, adverse_event="adverse_event", body_
   }
 
   if (!is.null(save_image_path)){
-    ggsave(save_image_path, dpi=700, bg="white")
+    suppressMessages(ggsave(save_image_path, dpi=700, bg="white"))
   }
 }
