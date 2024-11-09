@@ -93,12 +93,12 @@ or
 
 |id|arm|visit|lab_test|base|aval|lower|upper|region|strat|time|
 |---|---|---|---|---|---|---|---|---|---|---|
-|1|Placebo|Week 0|Lymphocytes (GI/L)|2.57|2.57|0.85|4.1|Europe|>=1 year|0|
-|1|Placebo|Week 4|Lymphocytes (GI/L)|2.57|1,87|0.85|4.1|Europe|>=1 year|4|
-|1|Placebo|Week 8|Lymphocytes (GI/L)|2.57|3.14|0.85|4.1|Europe|>=1 year|8|
-|1|Placebo|Week 0|Potassium (mmol/L)|3.89|3.89|3.50|5.3|Europe|>=1 year|0|
-|1|Placebo|Week 4|Potassium (mmol/L)|3.89|3.90|3.50|5.3|Europe|>=1 year|4|
-|1|Placebo|Week 8|Potassium (mmol/L)|3.89|3.89|3.50|5.3|Europe|>=1 year|8|
+|1|Placebo|Week 0|Lymphocytes (GI/L)|2.57|2.57|0.85|4.1|Europe|< 1 year|0|
+|1|Placebo|Week 4|Lymphocytes (GI/L)|2.57|1.87|0.85|4.1|Europe|< 1 year|4|
+|1|Placebo|Week 8|Lymphocytes (GI/L)|2.57|3.14|0.85|4.1|Europe|< 1 year|8|
+|1|Placebo|Week 0|Potassium (mmol/L)|3.89|3.89|3.50|5.3|Europe|< 1 year|0|
+|1|Placebo|Week 4|Potassium (mmol/L)|3.89|3.90|3.50|5.3|Europe|< 1 year|4|
+|1|Placebo|Week 8|Potassium (mmol/L)|3.89|3.89|3.50|5.3|Europe|< 1 year|8|
 |2|Intervention|Week 0|Lymphocytes (GI/L)|2.31|2.31|0.85|4.1|Other|>=1 year|0|
 |2|Intervention|Week 4|Lymphocytes (GI/L)|2.31|2.54|0.85|4.1|Other|>=1 year|4|
 |2|Intervention|Week 8|Lymphocytes (GI/L)|2.31|1.07|0.85|4.1|Other|>=1 year|8|
