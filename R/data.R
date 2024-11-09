@@ -47,7 +47,7 @@
 
 #' @title Sample laboratory values with continuous outcomes dataset with 2 treatment arms
 #'
-#' @format A data frame with 2580 rows and 9 variables:
+#' @format A data frame with 2579 rows and 11 variables:
 #' \describe{
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo & Intervention}
@@ -55,6 +55,8 @@
 #'    \item{lab_test}{Laboratory test}
 #'    \item{base}{Baseline value of measurement}
 #'    \item{aval}{Measurement value}
+#'    \item{lower}{Lower limit of normal range}
+#'    \item{upper}{Upper limit of normal range}
 #'    \item{region}{Participant's region}
 #'    \item{strat}{Stratification variable}
 #'    \item{time}{Time of measurement}
@@ -63,7 +65,7 @@
 
 #' @title Sample laboratory values with continuous outcomes dataset with 3 treatment arms
 #'
-#' @format A data frame with 2580 rows and 9 variables:
+#' @format A data frame with 2579 rows and 11 variables:
 #' \describe{
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2}
@@ -71,15 +73,17 @@
 #'    \item{lab_test}{Laboratory test}
 #'    \item{base}{Baseline value of measurement}
 #'    \item{aval}{Measurement value}
+#'    \item{lower}{Lower limit of normal range}
+#'    \item{upper}{Upper limit of normal range}
 #'    \item{region}{Participant's region}
 #'    \item{strat}{Stratification variable}
 #'    \item{time}{Time of measurement}
 #' }
 "lab3"
 
-#' @title Sample laboratory values with continuous outcomes dataset with 3 treatment arms
+#' @title Sample laboratory values with continuous outcomes dataset with 4 treatment arms
 #'
-#' @format A data frame with 2580 rows and 9 variables:
+#' @format A data frame with 2579 rows and 11 variables:
 #' \describe{
 #'    \item{id}{Participant's id}
 #'    \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2, Intervention 3}
@@ -87,6 +91,8 @@
 #'    \item{lab_test}{Laboratory test}
 #'    \item{base}{Baseline value of measurement}
 #'    \item{aval}{Measurement value}
+#'    \item{lower}{Lower limit of normal range}
+#'    \item{upper}{Upper limit of normal range}
 #'    \item{region}{Participant's region}
 #'    \item{strat}{Stratification variable}
 #'    \item{time}{Time of measurement}

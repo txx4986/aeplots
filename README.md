@@ -91,26 +91,26 @@ or
 
 ### Sample dataset
 
-|id|arm|visit|lab_test|base|aval|region|strat|time|
-|---|---|---|---|---|---|---|---|---|
-|1|Placebo|Week 0|Alanine Aminotransferase (IU/L)|55.626891|55.626891|Europe|>=1 year|0|
-|1|Placebo|Week 4|Alanine Aminotransferase (IU/L)|55.626891|11.948207|Europe|>=1 year|4|
-|1|Placebo|Week 8|Alanine Aminotransferase (IU/L)|55.626891|79.998432|Europe|>=1 year|8|
-|1|Placebo|Week 0|Lymphocytes (GI/L)|5.646724|5.646724|Europe|>=1 year|0|
-|1|Placebo|Week 4|Lymphocytes (GI/L)|5.646724|1.900644|Europe|>=1 year|4|
-|1|Placebo|Week 8|Lymphocytes (GI/L)|5.646724|3.525286|Europe|>=1 year|8|
-|2|Intervention|Week 0|Alanine Aminotransferase (IU/L)|85.6607224|85.6607224|Other|>=1 year|0|
-|2|Intervention|Week 4|Alanine Aminotransferase (IU/L)|85.6607224|13.0007082|Other|>=1 year|4|
-|2|Intervention|Week 8|Alanine Aminotransferase (IU/L)|85.6607224|41.6314992|Other|>=1 year|8|
-|2|Intervention|Week 0|Lymphocytes (GI/L)|1.4738713|1.4738713|Other|>=1 year|0|
-|2|Intervention|Week 4|Lymphocytes (GI/L)|1.4738713|4.8144682|Other|>=1 year|4|
-|2|Intervention|Week 8|Lymphocytes (GI/L)|1.4738713|4.2066078|Other|>=1 year|8|
-|3|Placebo|Week 0|Alanine Aminotransferase (IU/L)|12.6528213|12.6528213|Other|>=1 year|0|
-|3|Placebo|Week 4|Alanine Aminotransferase (IU/L)|12.6528213|69.3338961|Other|>=1 year|4|
-|3|Placebo|Week 8|Alanine Aminotransferase (IU/L)|12.6528213|20.6919330|Other|>=1 year|8|
-|3|Placebo|Week 0|Lymphocytes (GI/L)|1.1591932|1.1591932|Other|>=1 year|0|
-|3|Placebo|Week 4|Lymphocytes (GI/L)|1.1591932|3.0689368|Other|>=1 year|4|
-|3|Placebo|Week 8|Lymphocytes (GI/L)|1.1591932|5.2134919|Other|>=1 year|8|
+|id|arm|visit|lab_test|base|aval|lower|upper|region|strat|time|
+|---|---|---|---|---|---|---|---|---|---|---|
+|1|Placebo|Week 0|Lymphocytes (GI/L)|2.57|2.57|0.85|4.1|Europe|>=1 year|0|
+|1|Placebo|Week 4|Lymphocytes (GI/L)|2.57|1,87|0.85|4.1|Europe|>=1 year|4|
+|1|Placebo|Week 8|Lymphocytes (GI/L)|2.57|3.14|0.85|4.1|Europe|>=1 year|8|
+|1|Placebo|Week 0|Potassium (mmol/L)|3.89|3.89|3.50|5.3|Europe|>=1 year|0|
+|1|Placebo|Week 4|Potassium (mmol/L)|3.89|3.90|3.50|5.3|Europe|>=1 year|4|
+|1|Placebo|Week 8|Potassium (mmol/L)|3.89|3.89|3.50|5.3|Europe|>=1 year|8|
+|2|Intervention|Week 0|Lymphocytes (GI/L)|2.31|2.31|0.85|4.1|Other|>=1 year|0|
+|2|Intervention|Week 4|Lymphocytes (GI/L)|2.31|2.54|0.85|4.1|Other|>=1 year|4|
+|2|Intervention|Week 8|Lymphocytes (GI/L)|2.31|1.07|0.85|4.1|Other|>=1 year|8|
+|2|Intervention|Week 0|Potassium (mmol/L)|4.08|4.08|3.50|5.3|Other|>=1 year|0|
+|2|Intervention|Week 4|Potassium (mmol/L)|4.08|3.97|3.50|5.3|Other|>=1 year|4|
+|2|Intervention|Week 8|Potassium (mmol/L)|4.08|3.92|3.50|5.3|Other|>=1 year|8|
+|3|Placebo|Week 0|Lymphocytes (GI/L)|2.50|2.50|0.85|4.1|Other|>=1 year|0|
+|3|Placebo|Week 4|Lymphocytes (GI/L)|2.50|3.25|0.85|4.1|Other|>=1 year|4|
+|3|Placebo|Week 8|Lymphocytes (GI/L)|2.50|3.17|0.85|4.1|Other|>=1 year|8|
+|3|Placebo|Week 0|Potassium (mmol/L)|4.08|4.08|3.50|5.3|Other|>=1 year|0|
+|3|Placebo|Week 4|Potassium (mmol/L)|4.08|4.12|3.50|5.3|Other|>=1 year|4|
+|3|Placebo|Week 8|Potassium (mmol/L)|4.08|4.38|3.50|5.3|Other|>=1 year|8|
 
 ### Variable description for sample dataset
 
@@ -121,5 +121,7 @@ or
 |visit|Timepoint of laboratory test taken|Ordered factor|
 |lab_test|Laboratory test|Factor/Character|
 |aval|Laboratory measurement value|Numeric|
+|lower|Lower limit of normal range|Numeric|
+|upper|Upper limit of normal range|Numeric|
 |base / strat / region / time|Variables to be included in model for estimation of treatment effect estimates and 95% CIs|Factor/Character/Numeric|
 
