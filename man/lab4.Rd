@@ -3,9 +3,9 @@
 \docType{data}
 \name{lab4}
 \alias{lab4}
-\title{Sample laboratory values with continuous outcomes dataset with 3 treatment arms}
+\title{Sample laboratory values with continuous outcomes dataset with 4 treatment arms}
 \format{
-A data frame with 2580 rows and 9 variables:
+A data frame with 2579 rows and 11 variables:
 \describe{
 \item{id}{Participant's id}
 \item{arm}{Treatment arm: Placebo, Intervention 1, Intervention 2, Intervention 3}
@@ -13,6 +13,8 @@ A data frame with 2580 rows and 9 variables:
 \item{lab_test}{Laboratory test}
 \item{base}{Baseline value of measurement}
 \item{aval}{Measurement value}
+\item{lower}{Lower limit of normal range}
+\item{upper}{Upper limit of normal range}
 \item{region}{Participant's region}
 \item{strat}{Stratification variable}
 \item{time}{Time of measurement}
@@ -22,6 +24,6 @@ A data frame with 2580 rows and 9 variables:
 lab4
 }
 \description{
-Sample laboratory values with continuous outcomes dataset with 3 treatment arms
+Sample laboratory values with continuous outcomes dataset with 4 treatment arms
 }
 \keyword{datasets}

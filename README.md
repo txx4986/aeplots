@@ -15,10 +15,11 @@ Functions available in the package:
 
 -   `aetable`: Plots a table of AE summary by body system class
 -   `aeseverity`: Plots a table of AE summary by severity and body system class
--   `aedot`: Plots a dot plot with proportions alongside treatment effect estimates with accompanying 95% confidence interval to give an overview of the harm profile
+-   `aedot`: Plots a dot plot with proportions alongside treatment effect estimates with accompanying 95% confidence interval
 -   `aestacked`: Plots a stacked bar chart to present the proportions of participants with each event by arm and by maximum severity
 -   `aebar`: Plots a bar chart to present the number of events reported per participant
 -   `aevolcano`: Plots a volcano plot of treatment effect estimate against -log10(p-value)
+-   `aemcf`: Plots the mean cumulative function of AE with risk table
 
 To see more detailed documentation of each function:
 ```
