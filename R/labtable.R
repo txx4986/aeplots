@@ -5,7 +5,7 @@
 #'
 #' - **Mean (SD)**
 #' - **Median (IQR)**
-#' - **Number of missing n**
+#' - **Number of missing**
 #' - **Treatment effect estimate (95% CI)**
 #'
 #' @section Treatment Effect Estimate:
@@ -28,6 +28,7 @@
 #' @param n_missing a logical value whether to include number of missing n row in summary table
 #' @param control_name name of control arm
 #' @param intervention_names vector of names for interventions
+#' @param IQR_format format of IQR: to be presented as single "iqr" value or as 25th and 75th "percentile"
 #' @param mean_dp number of decimal places for mean
 #' @param SD_dp number of decimal places for standard deviation
 #' @param median_dp number of decimal places for median
@@ -55,8 +56,8 @@
 labtable <- function(data, control, intervention_levels, lab_test="lab_test", visit="visit", id="id", arm="arm",
                      aval="aval", treatment_effect_estimate=TRUE, model_formula="aval ~ arm + (1|id)",
                      mean=TRUE, median=TRUE, n_missing=TRUE, control_name=NULL, intervention_names=NULL,
-                     mean_dp=1, SD_dp=1, median_dp=1, IQR_dp=1, estimate_sf=3, CI_sf=3, save_image_path=NULL,
-                     save_docx_path=NULL){
+                     IQR_format=c("iqr", "percentile"), mean_dp=1, SD_dp=1, median_dp=1, IQR_dp=1, estimate_sf=3, CI_sf=3,
+                     save_image_path=NULL, save_docx_path=NULL){
   # change the column names
   dataset <- data %>%
     rename("lab_test" = lab_test, "visit"=visit, "id"=id, "arm"=arm, "aval"=aval)
@@ -92,6 +93,9 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
   # checks if arm_number equals to the number of arms specified
   stopifnot("total number of arms specified do not corresponed to the number of unique arms in arm column!" = (length(control) + length(intervention_levels)) == arm_number)
 
+  # check IQR format is either "iqr" or "percentile", default to "iqr" if none specified
+  IQR_format <- match.arg(IQR_format)
+
   # recode arm factor
   dataset$arm <- as.character(dataset$arm)
   dataset$arm[which(dataset$arm==control)] <- "C"
@@ -114,7 +118,8 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
       mean = round(mean(aval), mean_dp),
       sd = round(sd(aval), SD_dp),
       median = round(median(aval), median_dp),
-      IQR = round(IQR(aval, type=2), IQR_dp),
+      IQR = ifelse(IQR_format=="iqr", round(IQR(aval, type=2), IQR_dp),
+                   str_glue("{round(quantile(aval, probs=0.25), IQR_dp)}, {round(quantile(aval, probs=0.75), IQR_dp)}")),
       n_obs = sum(!is.na(aval))
     ) %>%
     ungroup() %>%
@@ -122,7 +127,7 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
     mutate(
       `Mean (SD)` = str_glue("{mean} ({sd})"),
       `Median (IQR)` = str_glue("{median} ({IQR})"),
-      `Number of missing n` = as.character(case_when(arm=="C" ~ N0, arm=="I1" ~ N1, arm=="I2" ~ N2, arm=="I3" ~ N3) - n_obs)
+      `Number of missing` = as.character(case_when(arm=="C" ~ N0, arm=="I1" ~ N1, arm=="I2" ~ N2, arm=="I3" ~ N3) - n_obs)
     ) %>%
     select(-c(mean, sd, median, IQR, n_obs)) %>%
     pivot_longer(cols=!c(lab_test, visit, arm), names_to="summary_statistics", values_to="value") %>%
@@ -182,7 +187,7 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
   }
 
   if (n_missing==FALSE){
-    Table_lab <- Table_lab %>% filter(summary_statistics!="Number of missing n")
+    Table_lab <- Table_lab %>% filter(summary_statistics!="Number of missing")
   }
 
   if (arm_number==2){
@@ -190,10 +195,10 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
       Table_lab_print <- Table_lab %>%
         select(lab_test, visit, summary_statistics, I1, C, Estimate) %>%
         flextable() %>%
-        set_header_labels(lab_test="", visit="", summary_statistics="",
+        set_header_labels(lab_test="Lab Measure", visit="", summary_statistics="",
                           I1=str_glue("{intervention_names[1]} ({name1}={N1})"),
                           C=str_glue("{control_name} ({name2}={N0})"),
-                          Estimate="Treatment effect estimate (95% CI)") %>%
+                          Estimate="Treatment effect estimate\n(Intervention vs Control, 95% CI)") %>%
         merge_v(j=6) %>%
         flextable::align(align="center", j=c(2:6), part="all") %>%
         vline(j=c(1, 3, 4, 5), part="all")
@@ -201,7 +206,7 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
       Table_lab_print <- Table_lab %>%
         select(lab_test, visit, summary_statistics, I1, C) %>%
         flextable() %>%
-        set_header_labels(lab_test="", visit="", summary_statistics="",
+        set_header_labels(lab_test="Lab Measure", visit="", summary_statistics="",
                           I1=str_glue("{intervention_names[1]} ({name1}={N1})"),
                           C=str_glue("{control_name} ({name2}={N0})")) %>%
         flextable::align(align="center", j=c(2:5), part="all") %>%
@@ -211,7 +216,7 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
     Table_lab_print <- Table_lab %>%
       select(lab_test, visit, summary_statistics, I1, I2, C) %>%
       flextable() %>%
-      set_header_labels(lab_test="", visit="", summary_statistics="",
+      set_header_labels(lab_test="Lab Measure", visit="", summary_statistics="",
                         I1=str_glue("{intervention_names[1]} ({name1}={N1})"),
                         I2=str_glue("{intervention_names[2]} ({name2}={N2})"),
                         C=str_glue("{control_name} ({name3}={N0})")) %>%
@@ -221,7 +226,7 @@ labtable <- function(data, control, intervention_levels, lab_test="lab_test", vi
     Table_lab_print <- Table_lab %>%
       select(lab_test, visit, summary_statistics, I1, I2, I3, C) %>%
       flextable() %>%
-      set_header_labels(lab_test="", visit="", summary_statistics="",
+      set_header_labels(lab_test="Lab Measure", visit="", summary_statistics="",
                         I1=str_glue("{intervention_names[1]} ({name1}={N1})"),
                         I2=str_glue("{intervention_names[2]} ({name2}={N2})"),
                         I3=str_glue("{intervention_names[3]} ({name3}={N3})"),
