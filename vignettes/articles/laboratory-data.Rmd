@@ -59,10 +59,10 @@ We can specify the linear mixed model used to estimate the treatment effect and 
 labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), model_formula="aval ~ arm + base + strat + time + (1|id) + (1|region)")
 ```
 
-We can specify the number of decimal places for the mean, SD, median and IQR columns as well as the number of significant figures for the treatment effect estimate and 95% CI.
+We can specify the number of decimal places for the mean, SD, median and IQR columns as well as the number of significant figures for the treatment effect estimate and 95% CI. We can also specify whether to present IQR as a single "iqr" value or as 25th and 75th "percentile" through the `IQR_format` argument.
 ```{r, warning=FALSE, message=FALSE}
-labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), mean_dp=2, SD_dp=2, median_dp=2, IQR_dp=2,
-         estimate_sf=4, CI_sf=4)
+labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), IQR_format="percentile", mean_dp=2, SD_dp=2, median_dp=2, 
+         IQR_dp=2, estimate_sf=4, CI_sf=4)
 ```
 
 We can choose to drop either the Treatment effect estimate (95% CI), Mean (SD), Median (IQR) or Number of missing n by specifying `treatment_effect_estimate=FALSE`, `mean=FALSE`, `median=FALSE` or `n_missing=FALSE`.

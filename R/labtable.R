@@ -6,7 +6,7 @@
 #' - **Mean (SD)**
 #' - **Median (IQR)**
 #' - **Number of missing**
-#' - **Treatment effect estimate (95% CI)**
+#' - **Treatment effect estimate (Intervention vs Control, 95% CI)**
 #'
 #' @section Treatment Effect Estimate:
 #' The treatment effect and its 95% confidence interval is estimated via a linear mixed model with laboratory measurement as response.

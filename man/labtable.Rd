@@ -20,6 +20,7 @@ labtable(
   n_missing = TRUE,
   control_name = NULL,
   intervention_names = NULL,
+  IQR_format = c("iqr", "percentile"),
   mean_dp = 1,
   SD_dp = 1,
   median_dp = 1,
@@ -61,6 +62,8 @@ labtable(
 
 \item{intervention_names}{vector of names for interventions}
 
+\item{IQR_format}{format of IQR: to be presented as single "iqr" value or as 25th and 75th "percentile"}
+
 \item{mean_dp}{number of decimal places for mean}
 
 \item{SD_dp}{number of decimal places for standard deviation}
@@ -85,8 +88,8 @@ flextable of laboratory values summary for baseline and each post-baseline timep
 \itemize{
 \item \strong{Mean (SD)}
 \item \strong{Median (IQR)}
-\item \strong{Number of missing n}
-\item \strong{Treatment effect estimate (95\% CI)}
+\item \strong{Number of missing}
+\item \strong{Treatment effect estimate (Intervention vs Control, 95\% CI)}
 }
 }
 \section{Treatment Effect Estimate}{
