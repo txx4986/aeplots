@@ -121,6 +121,7 @@ or
 |arm|Treatment arm of participant (2, 3 or 4 arms)|Factor/Character/Numeric|
 |visit|Timepoint of laboratory test taken|Ordered factor|
 |lab_test|Laboratory test|Factor/Character|
+|base|Baseline laboratory measurement value|Numeric|
 |aval|Laboratory measurement value|Numeric|
 |lower|Lower limit of normal range|Numeric|
 |upper|Upper limit of normal range|Numeric|
