@@ -30,7 +30,7 @@
 #' @import tidyr
 #' @import tidyverse
 #' @import ggplot2
-#' @import ggpubr
+#' @importFrom ggpubr ggarrange
 #' @import ggrepel
 #' @import stringr
 #'

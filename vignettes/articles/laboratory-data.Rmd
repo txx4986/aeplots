@@ -1,5 +1,6 @@
 ---
 title: "Laboratory Data"
+output: pdf_document
 ---
 
 ```{r, include = FALSE}
@@ -78,6 +79,44 @@ labtable(lab3, control="Placebo", control_name="No Drug",
          intervention_levels=c("Intervention 1", "Intervention 2"), intervention_names=c("Drug A", "Drug B"))
 ```
 
+## `labscatter` function
+### 2 treatment arms
+`labscatter` generates a scaterplot matrix to visualise multiple continuous harm outcomes by treatment group. Specify the laboratory tests of interest using the `lab_test_list` argument. For each test, indicate whether the threshold represents an upper or lower limit using the `limit_list` argument, and provide the corresponding cutoff values for the dashed reference lines using the `cutoff_list` argument. 
+```{r, fig.dim=c(8, 6)}
+labscatter(lab2, arm_levels=c("Placebo", "Intervention"), 
+           lab_test_list=c("Lymphocytes (GI/L)", "Monocytes (GI/L)", "Potassium (mmol/L)"), limit_list=c("upper", "upper", "lower"), 
+           cutoff_list=c(4.1, 1.1, 3.5))
+```
+
+If the dataset contains lower and upper limits of the laboratory measurements, the threshold lines can be drawn directly from the `lower` and `upper` columns by specifying their column names in the `lower` and `upper`arguments. In this case, the `cutoff_list` argument does not need to be specified.
+```{r, fig.dim=c(8, 6), warning=FALSE}
+labscatter(lab2, arm_levels=c("Placebo", "Intervention"), 
+           lab_test_list=c("Monocytes (GI/L)", "Monocytes (GI/L)", "Potassium (mmol/L)", "Potassium (mmol/L)"), 
+           limit_list=c("upper", "lower", "upper", "lower"), 
+           lower="lower", upper="upper")
+```
+
+Instead of plotting the baseline value against the maximum/minimum post-baseline laboratory measurement value, the plot can be configured to use the final follow-up visit value by setting `last_visit=TRUE`.
+```{r, fig.dim=c(8, 6)}
+labscatter(lab2, arm_levels=c("Placebo", "Intervention"), 
+           lab_test_list=c("Lymphocytes (GI/L)", "Monocytes (GI/L)", "Potassium (mmol/L)"), limit_list=c("upper", "upper", "lower"), 
+           cutoff_list=c(4.1, 1.1, 3.5), last_visit=TRUE)
+```
+
+We can change the colour representing each treatment arm by specifying a vector of colour codes in the `arm_colours` argument according to the order of arm levels specified in the arm_levels argument.
+```{r, fig.dim=c(8, 6)}
+labscatter(lab2, arm_levels=c("Placebo", "Intervention"), 
+           lab_test_list=c("Lymphocytes (GI/L)", "Monocytes (GI/L)", "Potassium (mmol/L)"), limit_list=c("upper", "upper", "lower"), 
+           cutoff_list=c(4.1, 1.1, 3.5), arm_colours=c("#6AA84f", "#F1C232"))
+```
+
+### More than 2 treatment arms
+```{r, fig.dim=c(8, 6)}
+labscatter(lab3, arm_levels=c("Placebo", "Intervention 1", "Intervention 2"), 
+           lab_test_list=c("Lymphocytes (GI/L)", "Monocytes (GI/L)", "Potassium (mmol/L)"), limit_list=c("upper", "upper", "lower"), 
+           cutoff_list=c(4.1, 1.1, 3.5))
+```
+
 ## Saving tables and plots
 ### Docx
 We can save tables as docx by specifying the filepath in the `save_docx_path` argument.
@@ -88,5 +127,7 @@ labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), save_do
 ### Image
 We can save tables and plots as images by specifying the filepath in the `save_image_path` argument.
 ```{r, warning=FALSE, message=FALSE}
-labtable(lab2, control="Placebo", intervention_levels=c("Intervention"), save_image_path="labimage.png")
+labscatter(lab2, arm_levels=c("Placebo", "Intervention"), 
+           lab_test_list=c("Lymphocytes (GI/L)", "Monocytes (GI/L)", "Potassium (mmol/L)"), limit_list=c("upper", "upper", "lower"), 
+           cutoff_list=c(4.1, 1.1, 3.5), save_image_path="labimage.png")
 ```
