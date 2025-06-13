@@ -3,14 +3,14 @@
 #' @description
 #' `labscatter` generates a scatterplot matrix to visualise multiple continuous harm outcomes by treatment group.
 #'  For each specified laboratory test, the function plots individual participants' baseline values against their maximum or minimum post-baseline values, or optionally their final visit value.
-#'  Dashed lines represent the boundary between normal and abnormal thresholds, which can be defined using the \code{cutoff_list} argument or drawn from the the \code{lower} and \code{upper} columns in the dataset.
+#'  Dashed lines represent the boundary between normal and abnormal thresholds, which can be defined using the `cutoff_list` argument or drawn from the the `lower` and `upper` columns in the dataset.
 #'  Outliers beyond these thresholds are labelled with participant IDs.
 #'
 #' @param data dataframe with lab_test, visit, id, arm, base and aval columns (optional: lower and upper limit columns)
 #' @param arm_levels vector of factor levels in arm variable
 #' @param lab_test_list a character vector of laboratory test names to be included in the scatterplot matrix
-#' @param limit_list a character vector specifying the direction of the cutoff for each laboratory test in \code{lab_test_list}; each element should be either \code{"upper"} or \code{"lower"}
-#' @param cutoff_list a numeric vector of cutoff values (upper or lower) for each laboratory test in \code{lab_test_list}
+#' @param limit_list a character vector specifying the direction of the cutoff for each laboratory test in `lab_test_list`; each element should be either `"upper"` or `"lower"`
+#' @param cutoff_list a numeric vector of cutoff values (upper or lower) for each laboratory test in `lab_test_list`
 #' @param lab_test name of lab_test column
 #' @param visit name of visit column
 #' @param id name of id column
@@ -225,6 +225,6 @@ labscatter <- function(data, arm_levels, lab_test_list, limit_list, cutoff_list,
   plot(scatter_plot_matrix)
 
   if (!is.null(save_image_path)){
-    suppressMessages(ggsave(save_image_path, dpi=700, bg="white"))
+    suppressMessages(ggsave(save_image_path, dpi=600, width=10, height=8, bg="white"))
   }
 }
