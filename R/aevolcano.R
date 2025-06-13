@@ -371,6 +371,6 @@ aevolcano <- function(data, control, intervention, body_system_class="body_syste
   plot(volcano_plot)
 
   if (!is.null(save_image_path)){
-    suppressMessages(ggsave(save_image_path, dpi=700, width=10, height=8, bg="white"))
+    suppressMessages(ggsave(save_image_path, dpi=600, width=10, height=8, bg="white"))
   }
 }

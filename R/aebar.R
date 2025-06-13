@@ -156,6 +156,6 @@ aebar <- function(data, arm_levels, id="id", arm="arm", adverse_event="adverse_e
   plot(bar)
 
   if (!is.null(save_image_path)){
-    suppressMessages(ggsave(save_image_path, dpi=700, bg="white"))
+    suppressMessages(ggsave(save_image_path, dpi=600, bg="white"))
   }
 }
