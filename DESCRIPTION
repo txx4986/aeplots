@@ -4,7 +4,6 @@ Title: Create Tables and Plots for Analysing Adverse Event Data in Clinical Tria
 Version: 0.1.0
 Authors@R: person("Xiao Xuan", "Tan", email="txx4986@gmail.com", role=c("aut", "cre")) 
 Description: You provide the data, tell 'aeplots' to plot summary tables, dot plots, bar charts etc.
-    Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -31,7 +30,8 @@ Imports:
   lme4,
   ggsurvfit,
   reda,
-  patchwork
+  patchwork,
+  ggrepel
 Suggests: 
     knitr,
     rmarkdown
